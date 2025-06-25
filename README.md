@@ -67,4 +67,4 @@ Uma aplicação web para praticar construção de frases em inglês por meio de 
 
 ## 📄 Licença
 
-MIT © 2025 Igarapé Digital
+GNU 2.1 © 2025 Igarapé Digital
