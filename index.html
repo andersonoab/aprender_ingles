@@ -1,4 +1,300 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>Lousa da Fluência</title><link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet"/><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/artyom.js@1.0.6/build/artyom.window.min.js"></script><style>:root{--blue-1:#007bff;--blue-2:#00b1e0;--orange:#ff6b00;--grey-bg:#f5f5f5;--grey-txt:#555}*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Roboto',sans-serif;background:#fff;color:#333;min-height:100vh;display:flex;flex-direction:column}header{background:linear-gradient(135deg,var(--blue-1)0%,var(--blue-2)100%);color:#fff;text-align:center;padding:60px 20px 80px;position:relative}header h1{font-size:2.4rem;font-weight:800}header svg.wave{position:absolute;left:0;bottom:-1px;width:100%;height:60px}.container{flex:1;display:flex;flex-wrap:wrap;padding:40px 20px;gap:30px;justify-content:center}.main{flex:1 1 600px;max-width:800px;text-align:center}.board{background:var(--grey-bg);border:2px solid var(--blue-1);border-radius:10px;padding:32px;margin-bottom:24px;box-shadow:0 6px 14px rgba(0,0,0,0.08);width:100%}.board p{font-size:1.2rem;margin-bottom:18px;color:#333}.dropzone{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;min-height:64px}.slot{position:relative;flex:1 1 120px;max-width:150px;min-width:80px;padding:12px;border:2px dashed var(--blue-1);border-radius:6px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:0.9rem;color:#333;user-select:none;word-wrap:break-word}.slot .hint-icon{position:absolute;top:4px;right:6px;font-size:.85rem;color:var(--blue-1);cursor:pointer}#word-bank{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:12px}.word{flex:1 1 100px;max-width:150px;padding:8px 16px;background:#fff;border:2px solid var(--blue-1);color:var(--blue-1);border-radius:6px;font-size:0.85rem;cursor:grab;user-select:none;transition:.2s;text-align:center;word-wrap:break-word}.word.incorrect{border-color:#e53935;color:#e53935}#controls{margin-bottom:24px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}input[type="file"]{display:none}.btn{padding:10px 20px;font-size:1rem;font-weight:500;border:none;border-radius:6px;cursor:pointer;transition:.2s;flex:1 1 auto;min-width:120px}.btn-primary{background:var(--blue-1);color:#fff}.btn-primary:hover{background:var(--blue-2)}#controls .tooltip{position:relative;display:inline-block;margin-left:6px;font-size:1rem;color:#fff;cursor:help}#controls .tooltip .tooltiptext{visibility:hidden;width:200px;background:#333;color:#fff;text-align:center;padding:6px;border-radius:6px;position:absolute;bottom:125%;left:50%;transform:translateX(-50%);opacity:0;transition:opacity .2s;font-size:0.85rem;line-height:1.2;z-index:10}#controls .tooltip:hover .tooltiptext{visibility:visible;opacity:1}#controls #nextBtn .icon-next{background:#fff!important;border-radius:50%;padding:4px;display:inline-flex;align-items:center;justify-content:center;margin-left:6px}#controls #nextBtn .icon-next svg{width:16px;height:16px;fill:var(--blue-1)}#audio-controls{margin:28px 0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}.btn-orange{background:var(--orange);color:#fff}.btn-orange:hover{filter:brightness(1.1)}.feedback{display:none;margin-top:24px;text-align:left;background:#fff;border-left:6px solid var(--orange);padding:18px;border-radius:8px}.feedback div{font-weight:700;font-size:1.1rem;color:var(--blue-1);margin:6px 0}#sidebar{flex:0 0 280px;max-width:300px;background:var(--grey-bg);padding:24px;border-left:4px solid var(--blue-1);overflow-y:auto}#sidebar h2{font-size:1.3rem;color:var(--blue-1);margin-bottom:12px}#score{font-size:1.1rem;font-weight:500;margin-bottom:18px;color:#333}#history{list-style:none;max-height:300px;overflow-y:auto}#history li{font-size:.9rem;color:var(--grey-txt);margin-bottom:8px}footer{text-align:center;padding:20px 10px;font-size:.9rem;color:var(--blue-1);background:#fff}</style></head><body><header><h1>Lousa da Fluência</h1><svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C400,60 1040,0 1440,30 L1440,60 L0,60 Z" fill="#fff"/></svg></header><div class="container"><div class="main"><div id="controls"><label class="btn btn-primary" for="fileInput">Escolher arquivo<span class="tooltip">❔<span class="tooltiptext">Clique aqui para selecionar um arquivo .txt com as frases</span></span></label><input type="file" id="fileInput" accept=".txt"/><button id="nextBtn" class="btn btn-primary" style="display:none">Próxima Frase<span class="icon-next" aria-hidden="true"><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><polygon points="4,3 10,8 4,13"/><polygon points="7,3 13,8 7,13"/></svg></span></button><button id="clearBtn" class="btn btn-primary" style="display:none">Limpar Histórico</button></div><div class="board"><p>Arraste as palavras para os quadrados:</p><div id="slots" class="dropzone"></div></div><div id="word-bank"></div><div id="audio-controls"><button id="playAudioEn" class="btn btn-orange">🔊 Ouvir em Inglês</button><button id="playAudioPt" class="btn btn-orange">🔊 Ouvir em Português</button></div><div id="feedback" class="feedback"><div id="sentenceEn"></div><div id="sentencePt"></div></div></div><aside id="sidebar"><h2>Histórico</h2><div id="score">Acertos: 0</div><ul id="history"></ul><button id="savePdfBtn" class="btn btn-primary" style="width:100%;margin-top:10px">Salvar Histórico em PDF</button></aside></div><footer>© 2025 Igarapé Digital – Todos os direitos reservados</footer><script>const artyom=new Artyom();artyom.initialize({lang:"en-GB",listen:false,speed:1});let sentences=[],currentIndex=0,textEn="",textPt="",currentWords=[],dragged=null,history=[];function renderSidebar(){document.getElementById("score").textContent="Acertos: "+history.length;const ul=document.getElementById("history");ul.innerHTML="";history.slice().reverse().forEach(item=>{const li=document.createElement("li");li.textContent=`${item.en} — ${item.correct?"✅":"❌"}`;ul.appendChild(li);});}function saveHistory(en,correct){history.push({en,correct});sessionStorage.setItem("history",JSON.stringify(history));renderSidebar();}function clearHistory(){history=[];sessionStorage.removeItem("history");renderSidebar();}function loadSentence(idx){textEn=sentences[idx].en;textPt=sentences[idx].pt;currentWords=textEn.split(" ");setupBoard();document.getElementById("feedback").style.display="none";}function setupBoard(){const slots=document.getElementById("slots"),bank=document.getElementById("word-bank");slots.innerHTML="";bank.innerHTML="";const translations=sentences[currentIndex].pt.split(" ");currentWords.forEach((_,i)=>{const slot=document.createElement("div");slot.className="slot";slot.dataset.index=i;slot.dataset.translation=translations[i]||"";const hint=document.createElement("span");hint.className="hint-icon";hint.textContent="🛈";hint.title=slot.dataset.translation;hint.onclick=e=>e.stopPropagation()||alert(`PT: ${slot.dataset.translation}`);slot.appendChild(hint);slot.ondragover=e=>e.preventDefault();slot.ondrop=()=>{
- const correctWord=currentWords[slot.dataset.index];if(!dragged)return;if(dragged.textContent===correctWord){if(slot.querySelector(".word"))bank.appendChild(slot.querySelector(".word"));slot.appendChild(dragged);checkComplete()}else{dragged.classList.add("incorrect");setTimeout(()=>dragged.classList.remove("incorrect"),500)}};slots.appendChild(slot)});[...currentWords].sort(()=>0.5-Math.random()).forEach(w=>{const el=document.createElement("div");el.className="word";el.textContent=w;el.draggable=true;el.ondragstart=()=>dragged=el;bank.appendChild(el)});}function checkComplete(){const slots=[...document.querySelectorAll(".slot")];if(slots.every(s=>s.textContent.replace("🛈","").trim()!=="")){const ans=slots.map(s=>s.textContent.replace("🛈","").trim()).join(" ");const correct=ans===textEn;saveHistory(textEn,correct);if(correct){document.getElementById("sentenceEn").textContent="EN: "+textEn;document.getElementById("sentencePt").textContent="PT: "+textPt;document.getElementById("feedback").style.display="block";artyom.say(textEn,{lang:"en-US",rate:1})}document.getElementById("nextBtn").style.display="inline-block";document.getElementById("nextBtn").focus()}};document.getElementById("nextBtn").onclick=function(){let skip=0;do{currentIndex=(currentIndex+1)%sentences.length;skip++}while(history.find(h=>h.en===sentences[currentIndex].en)&&skip<=sentences.length);if(skip>sentences.length){alert("Você completou todas as frases. Carregue outro arquivo para reiniciar.")}else{loadSentence(currentIndex);artyom.say(textEn,{lang:"en-US",rate:1})}};document.getElementById("clearBtn").onclick=clearHistory;document.getElementById("savePdfBtn").onclick=()=>{
- const{jsPDF}=window.jspdf;const doc=new jsPDF({unit:"pt",format:"a4"});let y=40;doc.setFontSize(16);doc.text("Histórico de Frases",40,y);y+=30;history.forEach((h,i)=>{const line=`${i+1}. ${h.en} – ${h.correct?"✓":"x"}`;doc.setFontSize(12);doc.text(line,40,y);y+=20;if(y>780){doc.addPage();y=40}});doc.save("historico_frases.pdf")};document.getElementById("playAudioEn").onclick=()=>artyom.say(textEn,{lang:"en-US",rate:1});document.getElementById("playAudioPt").onclick=()=>artyom.say(textPt,{lang:"pt-BR",rate:1.2});document.getElementById("fileInput").onchange=function(){if(!this.files.length)return;const reader=new FileReader();reader.onload=e=>{sentences=e.target.result.trim().split(/\r?\n/).map(l=>{const[en,pt]=l.split("|");return{en:en.trim(),pt:pt.trim()}});sentences.sort(()=>0.5-Math.random());sessionStorage.setItem("dict",JSON.stringify(sentences));history=[];sessionStorage.removeItem("history");loadSentence(currentIndex=0);document.getElementById("nextBtn").style.display=sentences.length>1?"inline-block":"none";document.getElementById("clearBtn").style.display="inline-block"};reader.readAsText(this.files[0],"UTF-8")};window.onload=()=>{const saved=JSON.parse(sessionStorage.getItem("dict")||"[]"),hist=JSON.parse(sessionStorage.getItem("history")||"[]");if(saved.length){sentences=saved;history=hist;loadSentence(currentIndex=0);document.getElementById("nextBtn").style.display=sentences.length>1?"inline-block":"none";document.getElementById("clearBtn").style.display="inline-block"}renderSidebar()};</script></body></html>
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lousa da Fluência</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root { --blue-1:#007bff; --blue-2:#00b1e0; --orange:#ff6b00; --grey-bg:#f5f5f5; --grey-txt:#555;}
+    * { box-sizing: border-box; margin:0; padding:0;}
+    body { font-family:'Roboto',sans-serif; background:#fff; color:#333; min-height:100vh; display:flex; flex-direction:column;}
+    header { background:linear-gradient(135deg,var(--blue-1) 0%,var(--blue-2)100%); color:#fff; text-align:center; padding:60px 20px 80px; position:relative;}
+    header h1 { font-size:2.4rem; font-weight:800; }
+    header svg.wave { position:absolute; left:0; bottom:-1px; width:100%; height:60px;}
+    .container { flex:1; display:flex; flex-wrap:wrap; padding:40px 20px; gap:30px; justify-content:center;}
+    .main { flex:1 1 600px; max-width:800px; text-align:center;}
+    .board { background:var(--grey-bg); border:2px solid var(--blue-1); border-radius:10px; padding:32px; margin-bottom:24px; box-shadow:0 6px 14px rgba(0,0,0,0.08); width:100%;}
+    .board p { font-size:1.2rem; margin-bottom:18px; color:#333;}
+    .dropzone { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; min-height:64px; }
+    .slot { position:relative; flex:1 1 120px; max-width:150px; min-width:80px; padding:12px; border:2px dashed var(--blue-1); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:#333; user-select:none; word-wrap:break-word;}
+    .slot .hint-icon { position:absolute; top:4px; right:6px; font-size:.85rem; color:var(--blue-1); cursor:pointer;}
+    #word-bank { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px;}
+    .word { flex:1 1 100px; max-width:150px; padding:8px 16px; background:#fff; border:2px solid var(--blue-1); color:var(--blue-1); border-radius:6px; font-size:0.85rem; cursor:grab; user-select:none; transition:.2s; text-align:center; word-wrap:break-word;}
+    .word.incorrect { border-color:#e53935; color:#e53935;}
+    #controls { margin-bottom:24px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+    input[type="file"] { display:none;}
+    .btn { padding:10px 20px; font-size:1rem; font-weight:500; border:none; border-radius:6px; cursor:pointer; transition:.2s; flex:1 1 auto; min-width:120px;}
+    .btn-primary { background:var(--blue-1); color:#fff;}
+    .btn-primary:hover { background:var(--blue-2);}
+    #controls .tooltip { position:relative; display:inline-block; margin-left:6px; font-size:1rem; color:#fff; cursor:help;}
+    #controls .tooltip .tooltiptext { visibility:hidden; width:200px; background:#333; color:#fff; text-align:center; padding:6px; border-radius:6px; position:absolute; bottom:125%; left:50%; transform:translateX(-50%); opacity:0; transition:opacity .2s; font-size:0.85rem; line-height:1.2; z-index:10;}
+    #controls .tooltip:hover .tooltiptext { visibility:visible; opacity:1;}
+    #controls #nextBtn .icon-next { background:#fff!important; border-radius:50%; padding:4px; display:inline-flex; align-items:center; justify-content:center; margin-left:6px;}
+    #controls #nextBtn .icon-next svg { width:16px; height:16px; fill:var(--blue-1);}
+    #audio-controls { margin:28px 0; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+    .btn-orange { background:var(--orange); color:#fff;}
+    .btn-orange:hover { filter:brightness(1.1);}
+    .feedback { display:none; margin-top:24px; text-align:left; background:#fff; border-left:6px solid var(--orange); padding:18px; border-radius:8px;}
+    .feedback div { font-weight:700; font-size:1.1rem; color:var(--blue-1); margin:6px 0;}
+    #sidebar { flex:0 0 280px; max-width:300px; background:var(--grey-bg); padding:24px; border-left:4px solid var(--blue-1); overflow-y:auto;}
+    #sidebar h2 { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px;}
+    #score { font-size:1.1rem; font-weight:500; margin-bottom:18px; color:#333;}
+    #history { list-style:none; max-height:300px; overflow-y:auto;}
+    #history li { font-size:.9rem; color:var(--grey-txt); margin-bottom:8px;}
+    footer { text-align:center; padding:20px 10px; font-size:.9rem; color:var(--blue-1); background:#fff;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Lousa da Fluência</h1>
+    <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C400,60 1040,0 1440,30 L1440,60 L0,60 Z" fill="#fff"/></svg>
+  </header>
+  <div class="container">
+    <div class="main">
+      <div id="controls">
+        <label class="btn btn-primary" for="fileInput">
+          Escolher arquivo
+          <span class="tooltip">❔
+            <span class="tooltiptext">Clique aqui para selecionar um arquivo .txt com frases em inglês (uma por linha)</span>
+          </span>
+        </label>
+        <input type="file" id="fileInput" accept=".txt"/>
+        <button id="nextBtn" class="btn btn-primary" style="display:none;">
+          Próxima Frase
+          <span class="icon-next" aria-hidden="true">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="4,3 10,8 4,13"/><polygon points="7,3 13,8 7,13"/>
+            </svg>
+          </span>
+        </button>
+        <button id="clearBtn" class="btn btn-primary" style="display:none;">Limpar Histórico</button>
+      </div>
+      <div class="board">
+        <p>Arraste as palavras para os quadrados:</p>
+        <div class="dropzone" id="slots"></div>
+      </div>
+      <div id="word-bank"></div>
+      <div id="audio-controls">
+        <button id="playAudioEn" class="btn btn-orange" style="display:none;">🔊 Ouvir em Inglês</button>
+        <button id="revealBtn" class="btn btn-orange" style="display:none;">👁️ Revelar Tradução</button>
+        <button id="playAudioPt" class="btn btn-orange" style="display:none;">🔊 Ouvir em Português</button>
+      </div>
+      <div class="feedback" id="feedback">
+        <div id="sentenceEn"></div>
+        <div id="sentencePt"></div>
+      </div>
+    </div>
+    <aside id="sidebar">
+      <h2>Histórico</h2>
+      <div id="score">Frases vistas: 0</div>
+      <ul id="history"></ul>
+      <button id="savePdfBtn" class="btn btn-primary" style="width:100%; margin-top:10px;">Salvar Histórico em PDF</button>
+    </aside>
+  </div>
+  <footer>© 2025 Igarapé Digital – Todos os direitos reservados</footer>
+  <script>
+    let sentences=[], currentIndex=0, currentWords=[], dragged=null;
+    let history=[], translationCache={};
+    let textEn="", textPt="";
+
+    function renderSidebar(){
+      document.getElementById("score").textContent = "Frases vistas: " + history.length;
+      const ul = document.getElementById("history");
+      ul.innerHTML = "";
+      history.slice().reverse().forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.en} | ${item.pt?item.pt:""}`;
+        ul.appendChild(li);
+      });
+    }
+
+    function saveHistory(en, pt){
+      history.push({en,pt});
+      sessionStorage.setItem("history",JSON.stringify(history));
+      renderSidebar();
+    }
+
+    function clearHistory(){
+      history=[]; sessionStorage.removeItem("history");
+      renderSidebar();
+    }
+
+    function speakEN(txt){
+      const synth = window.speechSynthesis;
+      if(!synth) return;
+      const utter = new SpeechSynthesisUtterance(txt);
+      utter.lang = 'en-US';
+      utter.rate = 1;
+      synth.speak(utter);
+    }
+
+    function speakPT(txt){
+      const synth = window.speechSynthesis;
+      if(!synth) return;
+      const utter = new SpeechSynthesisUtterance(txt);
+      utter.lang = 'pt-BR';
+      utter.rate = 1.1;
+      synth.speak(utter);
+    }
+
+    function loadSentence(idx){
+      textEn = sentences[idx];
+      textPt = "";
+      currentWords = textEn.split(" ");
+      setupBoard();
+      document.getElementById("feedback").style.display="none";
+      document.getElementById("revealBtn").style.display="inline-block";
+      document.getElementById("playAudioEn").style.display="inline-block";
+      document.getElementById("playAudioPt").style.display="none";
+      document.getElementById("sentencePt").textContent = "";
+      // Falar inglês ao carregar nova frase
+      setTimeout(()=>speakEN(textEn), 300);
+    }
+
+    function setupBoard(){
+      const slots=document.getElementById("slots"), bank=document.getElementById("word-bank");
+      slots.innerHTML=""; bank.innerHTML="";
+      currentWords.forEach((_,i)=>{
+        const slot=document.createElement("div"); slot.className="slot";
+        slot.dataset.index=i;
+        const hint=document.createElement("span"); hint.className="hint-icon";
+        hint.textContent="🛈";
+        hint.title="Dica: Palavra correta nesta posição";
+        hint.onclick=e=>e.stopPropagation();
+        slot.appendChild(hint);
+        slot.ondragover=e=>e.preventDefault();
+        slot.ondrop=()=>{
+          if(!dragged) return;
+          const correctWord=currentWords[slot.dataset.index];
+          if(dragged.textContent===correctWord){
+            if(slot.querySelector(".word")) bank.appendChild(slot.querySelector(".word"));
+            slot.appendChild(dragged); checkComplete();
+          } else {
+            dragged.classList.add("incorrect");
+            setTimeout(()=>dragged.classList.remove("incorrect"),500);
+          }
+        };
+        slots.appendChild(slot);
+      });
+      [...currentWords].sort(()=>0.5-Math.random()).forEach(w=>{
+        const el=document.createElement("div"); el.className="word";
+        el.textContent=w; el.draggable=true; el.ondragstart=()=>dragged=el;
+        bank.appendChild(el);
+      });
+    }
+
+    function checkComplete(){
+      const slots=[...document.querySelectorAll(".slot")];
+      if(slots.every(s=>s.querySelector(".word"))){
+        const ans=slots.map(s=>s.querySelector(".word").textContent).join(" ");
+        const correct = ans===textEn;
+        document.getElementById("sentenceEn").textContent="EN: "+textEn;
+        if(correct){
+          document.getElementById("feedback").style.display="block";
+          document.getElementById("revealBtn").style.display="inline-block";
+          document.getElementById("playAudioEn").style.display="inline-block";
+          // Falar inglês ao completar corretamente
+          speakEN(textEn);
+        }
+        document.getElementById("nextBtn").style.display="inline-block";
+        document.getElementById("nextBtn").focus();
+      }
+    }
+
+    document.getElementById("nextBtn").onclick = function(){
+      let skip=0;
+      do {
+        currentIndex=(currentIndex+1)%sentences.length;
+        skip++;
+      } while(history.find(h=>h.en===sentences[currentIndex])&&skip<=sentences.length);
+      if(skip>sentences.length){
+        alert("Você completou todas as frases. Carregue outro arquivo para reiniciar.");
+      } else {
+        loadSentence(currentIndex);
+      }
+    };
+
+    document.getElementById("clearBtn").onclick=clearHistory;
+
+    document.getElementById("savePdfBtn").onclick=()=>{
+      const {jsPDF}=window.jspdf;
+      const doc=new jsPDF({unit:"pt",format:"a4"});
+      let y=40; doc.setFontSize(16); doc.text("Histórico de Frases",40,y); y+=30;
+      history.forEach((h,i)=>{
+        const line=`${i+1}. ${h.en} | ${h.pt||""}`;
+        doc.setFontSize(12); doc.text(line,40,y); y+=20;
+        if(y>780){doc.addPage();y=40;}
+      });
+      doc.save("historico_frases.pdf");
+    };
+
+    document.getElementById("playAudioEn").onclick=()=>{
+      speakEN(textEn);
+    };
+
+    document.getElementById("playAudioPt").onclick=()=>{
+      speakPT(textPt);
+    };
+
+    document.getElementById("revealBtn").onclick=async()=>{
+      if(!textEn) return;
+      document.getElementById("revealBtn").disabled = true;
+      let pt = translationCache[textEn];
+      if(!pt){
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(textEn)}`;
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+          pt = data[0][0][0];
+          translationCache[textEn] = pt;
+        } catch (e) {
+          pt = "Tradução indisponível";
+        }
+      }
+      textPt = pt;
+      document.getElementById("sentencePt").textContent = "PT: "+pt;
+      document.getElementById("sentencePt").style.display = "block";
+      document.getElementById("playAudioPt").style.display = "inline-block";
+      saveHistory(textEn, pt);
+      document.getElementById("revealBtn").disabled = false;
+    };
+
+    document.getElementById("fileInput").onchange=function(){
+      if(!this.files.length)return;
+      const reader=new FileReader();
+      reader.onload=e=>{
+        sentences=e.target.result.trim().split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+        sentences.sort(()=>0.5-Math.random());
+        sessionStorage.setItem("dict",JSON.stringify(sentences));
+        history=[]; sessionStorage.removeItem("history");
+        loadSentence(currentIndex=0);
+        document.getElementById("nextBtn").style.display=sentences.length>1?"inline-block":"none";
+        document.getElementById("clearBtn").style.display="inline-block";
+        document.getElementById("revealBtn").style.display="inline-block";
+        document.getElementById("playAudioEn").style.display="inline-block";
+        document.getElementById("sentenceEn").textContent="";
+        document.getElementById("sentencePt").textContent="";
+        document.getElementById("sentencePt").style.display = "none";
+      };
+      reader.readAsText(this.files[0],"UTF-8");
+    };
+
+    window.onload=()=>{
+      const saved=JSON.parse(sessionStorage.getItem("dict")||"[]");
+      const hist=JSON.parse(sessionStorage.getItem("history")||"[]");
+      if(saved.length){
+        sentences=saved; history=hist;
+        loadSentence(currentIndex=0);
+        document.getElementById("nextBtn").style.display=sentences.length>1?"inline-block":"none";
+        document.getElementById("clearBtn").style.display="inline-block";
+        document.getElementById("revealBtn").style.display="inline-block";
+        document.getElementById("playAudioEn").style.display="inline-block";
+      }
+      renderSidebar();
+    };
+  </script>
+</body>
+</html>
