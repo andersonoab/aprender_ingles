@@ -2,76 +2,66 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lousa da Fluência</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    :root { --blue-1:#007bff; --blue-2:#00b1e0; --orange:#ff6b00; --grey-bg:#f5f5f5; --grey-txt:#555; }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body { font-family:'Roboto',sans-serif; background:#fff; color:#333; display:flex; flex-direction:column; min-height:100vh; }
-    header { background:linear-gradient(135deg,var(--blue-1),var(--blue-2)); color:#fff; text-align:center; padding:60px 20px 80px; position:relative; }
+    :root { --blue-1:#007bff; --blue-2:#00b1e0; --orange:#ff6b00; --grey-bg:#f5f5f5; --grey-txt:#555;}
+    * { box-sizing: border-box; margin:0; padding:0;}
+    body { font-family:'Roboto',sans-serif; background:#fff; color:#333; min-height:100vh; display:flex; flex-direction:column;}
+    header { background:linear-gradient(135deg,var(--blue-1) 0%,var(--blue-2)100%); color:#fff; text-align:center; padding:60px 20px 80px; position:relative;}
     header h1 { font-size:2.4rem; font-weight:800; }
-    header svg.wave { position:absolute; left:0; bottom:-1px; width:100%; height:60px; }
-    .container { flex:1; display:flex; flex-wrap:wrap; padding:40px 20px; gap:30px; justify-content:center; }
-    .main { flex:1 1 600px; max-width:800px; text-align:center; }
-    .board { background:var(--grey-bg); border:2px solid var(--blue-1); border-radius:10px; padding:32px; margin-bottom:24px; box-shadow:0 6px 14px rgba(0,0,0,0.08); width:100%; }
-    .board p { font-size:1.2rem; margin-bottom:18px; color:#333; }
+    header svg.wave { position:absolute; left:0; bottom:-1px; width:100%; height:60px;}
+    .container { flex:1; display:flex; flex-wrap:wrap; padding:40px 20px; gap:30px; justify-content:center;}
+    .main { flex:1 1 600px; max-width:800px; text-align:center;}
+    .board { background:var(--grey-bg); border:2px solid var(--blue-1); border-radius:10px; padding:32px; margin-bottom:24px; box-shadow:0 6px 14px rgba(0,0,0,0.08); width:100%;}
+    .board p { font-size:1.2rem; margin-bottom:18px; color:#333;}
     .dropzone { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; min-height:64px; }
-    .slot { position:relative; flex:1 1 120px; max-width:150px; min-width:80px; padding:12px; border:2px dashed var(--blue-1); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:#333; user-select:none; }
-    .slot .hint-icon { position:absolute; top:4px; right:6px; font-size:.85rem; color:var(--blue-1); cursor:pointer; }
-    #word-bank { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px; }
-    .word { flex:1 1 100px; max-width:150px; padding:8px 16px; background:#fff; border:2px solid var(--blue-1); color:var(--blue-1); border-radius:6px; font-size:0.85rem; cursor:grab; user-select:none; transition:.2s; text-align:center; }
-    .word.incorrect { border-color:#e53935; color:#e53935; }
-    #controls { margin-bottom:24px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-    input[type="file"] { display:none; }
-    .btn { padding:10px 20px; font-size:1rem; font-weight:500; border:none; border-radius:6px; cursor:pointer; transition:.2s; min-width:120px; }
-    .btn-primary { background:var(--blue-1); color:#fff; }
-    .btn-primary:hover { background:var(--blue-2); }
-    #controls .tooltip { position:relative; display:inline-block; margin-left:6px; font-size:1rem; color:#fff; cursor:help; }
-    #controls .tooltip .tooltiptext { visibility:hidden; width:200px; background:#333; color:#fff; text-align:center; padding:6px; border-radius:6px; position:absolute; bottom:125%; left:50%; transform:translateX(-50%); opacity:0; transition:opacity .2s; }
-    #controls .tooltip:hover .tooltiptext { visibility:visible; opacity:1; }
-    #controls #nextBtn .icon-next { background:#fff!important; border-radius:50%; padding:4px; display:inline-flex; align-items:center; justify-content:center; margin-left:6px; }
-    #controls #nextBtn .icon-next svg { width:16px; height:16px; fill:var(--blue-1); }
-    #audio-controls { margin:28px 0; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-    .btn-orange { background:var(--orange); color:#fff; }
-    .btn-orange:hover { filter:brightness(1.1); }
-    .feedback { display:none; margin-top:24px; text-align:left; background:#fff; border-left:6px solid var(--orange); padding:18px; border-radius:8px; }
-    .feedback div { font-weight:700; font-size:1.1rem; color:var(--blue-1); margin:6px 0; }
-    #sidebar { flex:0 0 280px; max-width:300px; background:var(--grey-bg); padding:24px; border-left:4px solid var(--blue-1); overflow-y:auto; }
-    #sidebar h2 { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px; }
-    #score { font-size:1.1rem; font-weight:500; margin-bottom:18px; color:#333; }
-    #history { list-style:none; max-height:300px; overflow-y:auto; }
-    #history li { font-size:.9rem; color:var(--grey-txt); margin-bottom:8px; }
-    footer { text-align:center; padding:20px 10px; font-size:.9rem; color:var(--blue-1); background:#fff; }
+    .slot { position:relative; flex:1 1 120px; max-width:150px; min-width:80px; padding:12px; border:2px dashed var(--blue-1); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:#333; user-select:none; word-wrap:break-word;}
+    .slot .hint-icon { position:absolute; top:4px; right:6px; font-size:.85rem; color:var(--blue-1); cursor:pointer;}
+    #word-bank { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px;}
+    .word { flex:1 1 100px; max-width:150px; padding:8px 16px; background:#fff; border:2px solid var(--blue-1); color:var(--blue-1); border-radius:6px; font-size:0.85rem; cursor:grab; user-select:none; transition:.2s; text-align:center; word-wrap:break-word;}
+    .word.incorrect { border-color:#e53935; color:#e53935;}
+    #controls { margin-bottom:24px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+    input[type="file"] { display:none;}
+    .btn { padding:10px 20px; font-size:1rem; font-weight:500; border:none; border-radius:6px; cursor:pointer; transition:.2s; flex:1 1 auto; min-width:120px;}
+    .btn-primary { background:var(--blue-1); color:#fff;}
+    .btn-primary:hover { background:var(--blue-2);}
+    .btn-orange { background:var(--orange); color:#fff;}
+    .btn-orange:hover { filter:brightness(1.1);}
+    .feedback { display:none; margin-top:24px; text-align:left; background:#fff; border-left:6px solid var(--orange); padding:18px; border-radius:8px;}
+    .feedback div { font-weight:700; font-size:1.1rem; color:var(--blue-1); margin:6px 0;}
+    #sidebar { flex:0 0 280px; max-width:300px; background:var(--grey-bg); padding:24px; border-left:4px solid var(--blue-1); overflow-y:auto;}
+    #sidebar h2 { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px;}
+    #score { font-size:1.1rem; font-weight:500; margin-bottom:18px; color:#333;}
+    #history { list-style:none; max-height:300px; overflow-y:auto;}
+    #history li { font-size:.9rem; color:var(--grey-txt); margin-bottom:8px;}
+    footer { text-align:center; padding:20px 10px; font-size:.9rem; color:var(--blue-1); background:#fff;}
+    #audio-controls {
+  	display: flex;
+  	flex-wrap: wrap;
+  	justify-content: center;
+  	gap: 16px;
+  	margin: 30px 0 10px;
+	}
+
   </style>
 </head>
 <body>
   <header>
     <h1>Lousa da Fluência</h1>
-    <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none">
-      <path d="M0,30 C400,60 1040,0 1440,30 L1440,60 L0,60 Z" fill="#fff"/>
-    </svg>
+    <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C400,60 1040,0 1440,30 L1440,60 L0,60 Z" fill="#fff"/></svg>
   </header>
 
   <div class="container">
     <div class="main">
       <div id="controls">
-        <button id="loadOnlineBtn" class="btn btn-primary">Ler Online</button>
-        <label class="btn btn-primary" for="fileInput">
-          Escolher arquivo
-          <span class="tooltip">❔
-            <span class="tooltiptext">Importe seu .txt se preferir usar frases locais.</span>
-          </span>
-        </label>
-        <input type="file" id="fileInput" accept=".txt"/>
-        <button id="nextBtn" class="btn btn-primary" style="display:none;">
-          Próxima Frase
-          <span class="icon-next" aria-hidden="true">
-            <svg viewBox="0 0 16 16"><polygon points="4,3 10,8 4,13"/><polygon points="7,3 13,8 7,13"/></svg>
-          </span>
-        </button>
-        <button id="clearBtn" class="btn btn-primary" style="display:none;">Limpar Histórico</button>
+        <button id="loadOnlineBtn" class="btn btn-primary">📡 Carregar Online</button>
+        <label class="btn btn-primary" for="fileInput">📁 Escolher Arquivo</label>
+        <input type="file" id="fileInput" accept=".txt" />
+        <button id="nextBtn" class="btn btn-primary" style="display:none;">➡ Próxima Frase</button>
+        <button id="clearBtn" class="btn btn-primary" style="display:none;">🧹 Limpar Histórico</button>
       </div>
 
       <div class="board">
@@ -96,14 +86,16 @@
       <h2>Histórico</h2>
       <div id="score">Frases vistas: 0</div>
       <ul id="history"></ul>
-      <button id="savePdfBtn" class="btn btn-primary" style="width:100%; margin-top:10px;">Salvar Histórico em PDF</button>
+      <button id="savePdfBtn" class="btn btn-primary" style="width:100%; margin-top:10px;">💾 Salvar em PDF</button>
     </aside>
   </div>
 
   <footer>© 2025 Igarapé Digital – Todos os direitos reservados</footer>
 
   <script>
-    let sentences = [], currentIndex = 0, history = [], translationCache = {}, dragged = null;
+    let sentences=[], currentIndex=0, currentWords=[], dragged=null;
+    let history=[], translationCache={};
+    let textEn="", textPt="";
 
     function renderSidebar(){
       document.getElementById("score").textContent = "Frases vistas: " + history.length;
@@ -118,155 +110,122 @@
 
     function saveHistory(en, pt){
       history.push({en,pt});
-      sessionStorage.setItem("history", JSON.stringify(history));
       renderSidebar();
     }
 
-    function clearHistory(){
-      history = [];
-      sessionStorage.removeItem("history");
-      renderSidebar();
-    }
-
-    function speakEN(txt){
-      const u = new SpeechSynthesisUtterance(txt);
-      u.lang = 'en-US'; u.rate = 1;
-      speechSynthesis.speak(u);
-    }
-
-    function speakPT(txt){
-      const u = new SpeechSynthesisUtterance(txt);
-      u.lang = 'pt-BR'; u.rate = 1.1;
-      speechSynthesis.speak(u);
+    function speak(txt, lang='en-US', rate=1){
+      const utter = new SpeechSynthesisUtterance(txt);
+      utter.lang = lang;
+      utter.rate = rate;
+      window.speechSynthesis.speak(utter);
     }
 
     function loadSentence(idx){
-      const textEn = sentences[idx];
-      const words = textEn.split(" ");
-      setupBoard(words);
+      textEn = sentences[idx];
+      textPt = "";
+      currentWords = textEn.split(" ");
+      document.getElementById("sentenceEn").textContent = "";
+      document.getElementById("sentencePt").textContent = "";
+      setupBoard();
       document.getElementById("feedback").style.display = "none";
-      document.getElementById("playAudioEn").onclick = () => speakEN(textEn);
-      document.getElementById("revealBtn").onclick = revealTranslation;
-      setTimeout(()=>speakEN(textEn), 300);
+      document.getElementById("playAudioEn").onclick = ()=> speak(textEn);
+      setTimeout(()=>speak(textEn),300);
     }
 
-    function setupBoard(words){
-      const slots = document.getElementById("slots"),
-            bank  = document.getElementById("word-bank");
-      slots.innerHTML = ""; bank.innerHTML = "";
-
-      words.forEach((_,i)=>{
-        const slot = document.createElement("div");
-        slot.className = "slot"; slot.dataset.index = i;
-        const hint = document.createElement("span");
-        hint.className = "hint-icon"; hint.textContent = "🛈";
-        hint.title = "Dica: palavra correta aqui";
+    function setupBoard(){
+      const slots=document.getElementById("slots"), bank=document.getElementById("word-bank");
+      slots.innerHTML=""; bank.innerHTML="";
+      currentWords.forEach((_,i)=>{
+        const slot=document.createElement("div"); slot.className="slot"; slot.dataset.index=i;
+        const hint=document.createElement("span"); hint.className="hint-icon"; hint.textContent="🛈"; hint.title="Dica";
         slot.appendChild(hint);
-        slot.ondragover = e => e.preventDefault();
-        slot.ondrop = () => {
-          if (!dragged) return;
-          const correct = words[slot.dataset.index];
-          if (dragged.textContent === correct){
-            if (slot.querySelector(".word")) bank.appendChild(slot.querySelector(".word"));
-            slot.appendChild(dragged);
-            checkComplete(words.join(" "));
+        slot.ondragover=e=>e.preventDefault();
+        slot.ondrop=()=>{
+          if(!dragged) return;
+          const correctWord=currentWords[slot.dataset.index];
+          if(dragged.textContent===correctWord){
+            if(slot.querySelector(".word")) bank.appendChild(slot.querySelector(".word"));
+            slot.appendChild(dragged); checkComplete();
           } else {
             dragged.classList.add("incorrect");
-            setTimeout(()=>dragged.classList.remove("incorrect"), 500);
+            setTimeout(()=>dragged.classList.remove("incorrect"),500);
           }
         };
         slots.appendChild(slot);
       });
-
-      words.sort(()=>0.5-Math.random()).forEach(w=>{
-        const el = document.createElement("div");
-        el.className = "word"; el.textContent = w;
-        el.draggable = true; el.ondragstart = ()=> dragged = el;
+      [...currentWords].sort(()=>0.5-Math.random()).forEach(w=>{
+        const el=document.createElement("div"); el.className="word"; el.textContent=w;
+        el.draggable=true; el.ondragstart=()=>dragged=el;
         bank.appendChild(el);
       });
     }
 
-    function checkComplete(full){
-      const ok = [...document.querySelectorAll(".slot")].every(s=>s.querySelector(".word"));
-      if(ok){
-        document.getElementById("sentenceEn").textContent = "EN: " + full;
-        document.getElementById("feedback").style.display = "block";
-        saveHistory(full, translationCache[full]||"");
+    function checkComplete(){
+      const slots=[...document.querySelectorAll(".slot")];
+      if(slots.every(s=>s.querySelector(".word"))){
+        document.getElementById("sentenceEn").textContent="EN: "+textEn;
+        document.getElementById("feedback").style.display="block";
+        document.getElementById("revealBtn").onclick = async ()=>{
+          document.getElementById("revealBtn").disabled=true;
+          let pt = translationCache[textEn];
+          if(!pt){
+            try {
+              const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(textEn)}`;
+              const res = await fetch(url);
+              const data = await res.json();
+              pt = data[0][0][0];
+              translationCache[textEn]=pt;
+            } catch {
+              pt="Tradução indisponível";
+            }
+          }
+          document.getElementById("sentencePt").textContent="PT: "+pt;
+          document.getElementById("playAudioPt").onclick=()=>speak(pt, 'pt-BR', 1.1);
+          saveHistory(textEn,pt);
+          document.getElementById("revealBtn").disabled=false;
+        };
       }
     }
 
-    async function revealTranslation(){
-      const en = document.getElementById("sentenceEn").textContent.replace("EN: ","");
-      document.getElementById("revealBtn").disabled = true;
-      let pt = translationCache[en];
-      if(!pt){
-        try {
-          const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(en)}`);
-          pt = (await res.json())[0][0][0];
-        } catch {
-          pt = "Tradução indisponível";
-        }
-        translationCache[en] = pt;
-      }
-      document.getElementById("sentencePt").textContent = "PT: " + pt;
-      document.getElementById("playAudioPt").onclick = () => speakPT(pt);
-      document.getElementById("revealBtn").disabled = false;
-    }
-
-    // Ler Online: fetch e carrega todas as frases, exibe a primeira
-    document.getElementById("loadOnlineBtn").addEventListener("click", ()=>{
-      fetch("frases_unicas_1000.txt")
-        .then(r=>r.text())
-        .then(txt=>{
+    document.getElementById("loadOnlineBtn").onclick = () => {
+      fetch("https://raw.githubusercontent.com/andersonoab/aprender_ingles/main/frases_unicas_1000.txt")
+        .then(res => res.text())
+        .then(txt => {
+          txt = txt.replace(/^\uFEFF/, '');
           sentences = txt.trim().split(/\r?\n/).filter(Boolean);
-          currentIndex = 0;
-          loadSentence(0);
+          sentences.sort(() => 0.5 - Math.random());
+          loadSentence(currentIndex = 0);
+          renderSidebar();
           document.getElementById("nextBtn").style.display = "inline-block";
           document.getElementById("clearBtn").style.display = "inline-block";
-          renderSidebar();
-        })
-        .catch(err=>console.error("Erro ao ler online:", err));
-    });
+        });
+    };
 
-    // Escolher arquivo local: sobrescreve sentences
     document.getElementById("fileInput").onchange = function(){
-      if(!this.files.length) return;
+      const file = this.files[0];
+      if (!file) return;
       const reader = new FileReader();
       reader.onload = e => {
-        sentences = e.target.result.trim().split(/\r?\n/).filter(Boolean);
-        currentIndex = 0;
-        loadSentence(0);
-        document.getElementById("nextBtn").style.display = sentences.length>1?"inline-block":"none";
-        document.getElementById("clearBtn").style.display = "inline-block";
+        const txt = e.target.result.replace(/^\uFEFF/, '');
+        sentences = txt.trim().split(/\r?\n/).filter(Boolean);
+        sentences.sort(() => 0.5 - Math.random());
+        loadSentence(currentIndex = 0);
         renderSidebar();
+        document.getElementById("nextBtn").style.display = "inline-block";
+        document.getElementById("clearBtn").style.display = "inline-block";
       };
-      reader.readAsText(this.files[0], "UTF-8");
+      reader.readAsText(file, "UTF-8");
     };
 
-    // Próxima Frase
-    document.getElementById("nextBtn").onclick = ()=>{
-      currentIndex = (currentIndex+1) % sentences.length;
-      loadSentence(currentIndex);
-    };
-
-    document.getElementById("clearBtn").onclick = clearHistory;
-
+    document.getElementById("nextBtn").onclick = ()=>{ currentIndex=(currentIndex+1)%sentences.length; loadSentence(currentIndex); };
+    document.getElementById("clearBtn").onclick = ()=>{ history=[]; renderSidebar(); };
     document.getElementById("savePdfBtn").onclick = ()=>{
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({unit:"pt",format:"a4"}); let y=40;
+      const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:"pt",format:"a4"}); let y=40;
       doc.setFontSize(16); doc.text("Histórico de Frases",40,y); y+=30;
-      history.forEach((h,i)=>{
-        doc.setFontSize(12); doc.text(`${i+1}. ${h.en} | ${h.pt}`,40,y); y+=20;
-        if(y>780){ doc.addPage(); y=40; }
-      });
+      history.forEach((h,i)=>{ doc.setFontSize(12); doc.text(`${i+1}. ${h.en} | ${h.pt||""}`,40,y); y+=20; if(y>780){doc.addPage();y=40;} });
       doc.save("historico_frases.pdf");
-    };
-
-    window.onload = ()=>{
-      const hist = JSON.parse(sessionStorage.getItem("history")||"[]");
-      if(hist.length) history = hist;
-      renderSidebar();
     };
   </script>
 </body>
 </html>
+
