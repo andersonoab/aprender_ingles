@@ -1,6 +1,7 @@
 # Lousa da Fluência
 - **Usar no Chrome** Usar apenas no Chrome.
 - **No Celular, usar somente no Android** No Celular, usar somente no Android.
+https://andersonoab.github.io/aprender_ingles/
 
 Uma aplicação web para praticar construção de frases em inglês por meio de drag & drop, com reprodução de áudio e exportação de histórico em PDF.
 
