@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -65,23 +64,25 @@
         <button id="nextBtn" class="btn btn-primary" style="display:none;">
           Próxima Frase
           <span class="icon-next" aria-hidden="true">
-            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="4,3 10,8 4,13"/><polygon points="7,3 13,8 7,13"/>
-            </svg>
+            <svg viewBox="0 0 16 16"><polygon points="4,3 10,8 4,13"/><polygon points="7,3 13,8 7,13"/></svg>
           </span>
         </button>
         <button id="clearBtn" class="btn btn-primary" style="display:none;">Limpar Histórico</button>
       </div>
+
       <div class="board">
         <p>Arraste as palavras para os quadrados:</p>
         <div class="dropzone" id="slots"></div>
       </div>
       <div id="word-bank"></div>
+
+      <!-- Botões laranja visíveis desde o início -->
       <div id="audio-controls">
-        <button id="playAudioEn" class="btn btn-orange" style="display:none;">🔊 Ouvir em Inglês</button>
-        <button id="revealBtn" class="btn btn-orange" style="display:none;">👁️ Revelar Tradução</button>
-        <button id="playAudioPt" class="btn btn-orange" style="display:none;">🔊 Ouvir em Português</button>
+        <button id="playAudioEn" class="btn btn-orange">🔊 Ouvir em Inglês</button>
+        <button id="revealBtn" class="btn btn-orange">👁️ Revelar Tradução</button>
+        <button id="playAudioPt" class="btn btn-orange">🔊 Ouvir em Português</button>
       </div>
+
       <div class="feedback" id="feedback">
         <div id="sentenceEn"></div>
         <div id="sentencePt"></div>
@@ -95,10 +96,27 @@
     </aside>
   </div>
   <footer>© 2025 Igarapé Digital – Todos os direitos reservados</footer>
+
   <script>
     let sentences=[], currentIndex=0, currentWords=[], dragged=null;
     let history=[], translationCache={};
     let textEn="", textPt="";
+
+    // ao clicar em "Escolher arquivo", carrega online se ainda não carregou
+    document.getElementById('fileInput').addEventListener('click', function(){
+      if(!sessionStorage.getItem('dictLoadedOnline')){
+        fetch('frases_unicas_1000.txt')
+          .then(res=>res.text())
+          .then(txt=>{
+            sentences = txt.trim().split(/\r?\\n/).filter(Boolean);
+            sentences.sort(()=>0.5-Math.random());
+            sessionStorage.setItem('dictLoadedOnline','true');
+            loadSentence(currentIndex=0);
+            renderSidebar();
+          })
+          .catch(err=>console.error('Erro ao carregar online:',err));
+      }
+    });
 
     function renderSidebar(){
       document.getElementById("score").textContent = "Frases vistas: " + history.length;
@@ -106,7 +124,7 @@
       ul.innerHTML = "";
       history.slice().reverse().forEach(item => {
         const li = document.createElement("li");
-        li.textContent = `${item.en} | ${item.pt?item.pt:""}`;
+        li.textContent = `${item.en} | ${item.pt||""}`;
         ul.appendChild(li);
       });
     }
@@ -146,24 +164,16 @@
       currentWords = textEn.split(" ");
       setupBoard();
       document.getElementById("feedback").style.display="none";
-      document.getElementById("revealBtn").style.display="inline-block";
-      document.getElementById("playAudioEn").style.display="inline-block";
-      document.getElementById("playAudioPt").style.display="none";
-      document.getElementById("sentencePt").textContent = "";
-      // Falar inglês ao carregar nova frase
-      setTimeout(()=>speakEN(textEn), 300);
+      document.getElementById("playAudioEn").onclick = ()=> speakEN(textEn);
+      setTimeout(()=>speakEN(textEn),300);
     }
 
     function setupBoard(){
       const slots=document.getElementById("slots"), bank=document.getElementById("word-bank");
       slots.innerHTML=""; bank.innerHTML="";
       currentWords.forEach((_,i)=>{
-        const slot=document.createElement("div"); slot.className="slot";
-        slot.dataset.index=i;
-        const hint=document.createElement("span"); hint.className="hint-icon";
-        hint.textContent="🛈";
-        hint.title="Dica: Palavra correta nesta posição";
-        hint.onclick=e=>e.stopPropagation();
+        const slot=document.createElement("div"); slot.className="slot"; slot.dataset.index=i;
+        const hint=document.createElement("span"); hint.className="hint-icon"; hint.textContent="🛈"; hint.title="Dica";
         slot.appendChild(hint);
         slot.ondragover=e=>e.preventDefault();
         slot.ondrop=()=>{
@@ -180,8 +190,8 @@
         slots.appendChild(slot);
       });
       [...currentWords].sort(()=>0.5-Math.random()).forEach(w=>{
-        const el=document.createElement("div"); el.className="word";
-        el.textContent=w; el.draggable=true; el.ondragstart=()=>dragged=el;
+        const el=document.createElement("div"); el.className="word"; el.textContent=w;
+        el.draggable=true; el.ondragstart=()=>dragged=el;
         bank.appendChild(el);
       });
     }
@@ -189,112 +199,63 @@
     function checkComplete(){
       const slots=[...document.querySelectorAll(".slot")];
       if(slots.every(s=>s.querySelector(".word"))){
-        const ans=slots.map(s=>s.querySelector(".word").textContent).join(" ");
-        const correct = ans===textEn;
         document.getElementById("sentenceEn").textContent="EN: "+textEn;
-        if(correct){
-          document.getElementById("feedback").style.display="block";
-          document.getElementById("revealBtn").style.display="inline-block";
-          document.getElementById("playAudioEn").style.display="inline-block";
-          // Falar inglês ao completar corretamente
-          speakEN(textEn);
-        }
-        document.getElementById("nextBtn").style.display="inline-block";
-        document.getElementById("nextBtn").focus();
+        document.getElementById("feedback").style.display="block";
+        document.getElementById("revealBtn").onclick = async ()=>{
+          document.getElementById("revealBtn").disabled=true;
+          let pt = translationCache[textEn];
+          if(!pt){
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(textEn)}`;
+            try {
+              const res = await fetch(url);
+              const data = await res.json();
+              pt = data[0][0][0];
+              translationCache[textEn]=pt;
+            } catch {
+              pt="Tradução indisponível";
+            }
+          }
+          document.getElementById("sentencePt").textContent="PT: "+pt;
+          document.getElementById("playAudioPt").onclick=()=>speakPT(pt);
+          saveHistory(textEn,pt);
+          document.getElementById("revealBtn").disabled=false;
+        };
       }
     }
-
-    document.getElementById("nextBtn").onclick = function(){
-      let skip=0;
-      do {
-        currentIndex=(currentIndex+1)%sentences.length;
-        skip++;
-      } while(history.find(h=>h.en===sentences[currentIndex])&&skip<=sentences.length);
-      if(skip>sentences.length){
-        alert("Você completou todas as frases. Carregue outro arquivo para reiniciar.");
-      } else {
-        loadSentence(currentIndex);
-      }
-    };
-
-    document.getElementById("clearBtn").onclick=clearHistory;
-
-    document.getElementById("savePdfBtn").onclick=()=>{
-      const {jsPDF}=window.jspdf;
-      const doc=new jsPDF({unit:"pt",format:"a4"});
-      let y=40; doc.setFontSize(16); doc.text("Histórico de Frases",40,y); y+=30;
-      history.forEach((h,i)=>{
-        const line=`${i+1}. ${h.en} | ${h.pt||""}`;
-        doc.setFontSize(12); doc.text(line,40,y); y+=20;
-        if(y>780){doc.addPage();y=40;}
-      });
-      doc.save("historico_frases.pdf");
-    };
-
-    document.getElementById("playAudioEn").onclick=()=>{
-      speakEN(textEn);
-    };
-
-    document.getElementById("playAudioPt").onclick=()=>{
-      speakPT(textPt);
-    };
-
-    document.getElementById("revealBtn").onclick=async()=>{
-      if(!textEn) return;
-      document.getElementById("revealBtn").disabled = true;
-      let pt = translationCache[textEn];
-      if(!pt){
-        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(textEn)}`;
-        try {
-          const res = await fetch(url);
-          const data = await res.json();
-          pt = data[0][0][0];
-          translationCache[textEn] = pt;
-        } catch (e) {
-          pt = "Tradução indisponível";
-        }
-      }
-      textPt = pt;
-      document.getElementById("sentencePt").textContent = "PT: "+pt;
-      document.getElementById("sentencePt").style.display = "block";
-      document.getElementById("playAudioPt").style.display = "inline-block";
-      saveHistory(textEn, pt);
-      document.getElementById("revealBtn").disabled = false;
-    };
 
     document.getElementById("fileInput").onchange=function(){
       if(!this.files.length)return;
       const reader=new FileReader();
       reader.onload=e=>{
-        sentences=e.target.result.trim().split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+        sentences=e.target.result.trim().split(/\r?\n/).filter(Boolean);
         sentences.sort(()=>0.5-Math.random());
         sessionStorage.setItem("dict",JSON.stringify(sentences));
         history=[]; sessionStorage.removeItem("history");
         loadSentence(currentIndex=0);
-        document.getElementById("nextBtn").style.display=sentences.length>1?"inline-block":"none";
-        document.getElementById("clearBtn").style.display="inline-block";
-        document.getElementById("revealBtn").style.display="inline-block";
-        document.getElementById("playAudioEn").style.display="inline-block";
-        document.getElementById("sentenceEn").textContent="";
-        document.getElementById("sentencePt").textContent="";
-        document.getElementById("sentencePt").style.display = "none";
+        renderSidebar();
       };
       reader.readAsText(this.files[0],"UTF-8");
     };
 
-    window.onload=()=>{
+    document.getElementById("nextBtn").onclick = ()=>{ currentIndex=(currentIndex+1)%sentences.length; loadSentence(currentIndex); };
+    document.getElementById("clearBtn").onclick = clearHistory;
+    document.getElementById("savePdfBtn").onclick = ()=>{
+      const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:"pt",format:"a4"}); let y=40;
+      doc.setFontSize(16); doc.text("Histórico de Frases",40,y); y+=30;
+      history.forEach((h,i)=>{ doc.setFontSize(12); doc.text(`${i+1}. ${h.en} | ${h.pt||""}`,40,y); y+=20; if(y>780){doc.addPage();y=40;} });
+      doc.save("historico_frases.pdf");
+    };
+
+    window.onload = ()=>{
       const saved=JSON.parse(sessionStorage.getItem("dict")||"[]");
       const hist=JSON.parse(sessionStorage.getItem("history")||"[]");
       if(saved.length){
         sentences=saved; history=hist;
         loadSentence(currentIndex=0);
-        document.getElementById("nextBtn").style.display=sentences.length>1?"inline-block":"none";
-        document.getElementById("clearBtn").style.display="inline-block";
-        document.getElementById("revealBtn").style.display="inline-block";
-        document.getElementById("playAudioEn").style.display="inline-block";
+        renderSidebar();
       }
-      renderSidebar();
     };
   </script>
 </body>
 </html>
+
