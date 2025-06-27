@@ -7,45 +7,38 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    :root { --blue-1:#007bff; --blue-2:#00b1e0; --orange:#ff6b00; --grey-bg:#f5f5f5; --grey-txt:#555;}
-    * { box-sizing: border-box; margin:0; padding:0;}
-    body { font-family:'Roboto',sans-serif; background:#fff; color:#333; min-height:100vh; display:flex; flex-direction:column;}
-    header { background:linear-gradient(135deg,var(--blue-1) 0%,var(--blue-2)100%); color:#fff; text-align:center; padding:60px 20px 80px; position:relative;}
+    :root { --blue-1:#007bff; --blue-2:#00b1e0; --orange:#ff6b00; --grey-bg:#f5f5f5; --grey-txt:#555; }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family:'Roboto',sans-serif; background:#fff; color:#333; min-height:100vh; display:flex; flex-direction:column; }
+    header { background:linear-gradient(135deg,var(--blue-1) 0%,var(--blue-2)100%); color:#fff; text-align:center; padding:60px 20px 80px; position:relative; }
     header h1 { font-size:2.4rem; font-weight:800; }
-    header svg.wave { position:absolute; left:0; bottom:-1px; width:100%; height:60px;}
-    .container { flex:1; display:flex; flex-wrap:wrap; padding:40px 20px; gap:30px; justify-content:center;}
-    .main { flex:1 1 600px; max-width:800px; text-align:center;}
-    .board { background:var(--grey-bg); border:2px solid var(--blue-1); border-radius:10px; padding:32px; margin-bottom:24px; box-shadow:0 6px 14px rgba(0,0,0,0.08); width:100%;}
-    .board p { font-size:1.2rem; margin-bottom:18px; color:#333;}
+    header svg.wave { position:absolute; left:0; bottom:-1px; width:100%; height:60px; }
+    .container { flex:1; display:flex; flex-wrap:wrap; padding:40px 20px; gap:30px; justify-content:center; }
+    .main { flex:1 1 600px; max-width:800px; text-align:center; }
+    .board { background:var(--grey-bg); border:2px solid var(--blue-1); border-radius:10px; padding:32px; margin-bottom:24px; box-shadow:0 6px 14px rgba(0,0,0,0.08); width:100%; }
+    .board p { font-size:1.2rem; margin-bottom:18px; color:#333; }
     .dropzone { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; min-height:64px; }
-    .slot { position:relative; flex:1 1 120px; max-width:150px; min-width:80px; padding:12px; border:2px dashed var(--blue-1); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:#333; user-select:none; word-wrap:break-word;}
-    .slot .hint-icon { position:absolute; top:4px; right:6px; font-size:.85rem; color:var(--blue-1); cursor:pointer;}
-    #word-bank { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px;}
-    .word { flex:1 1 100px; max-width:150px; padding:8px 16px; background:#fff; border:2px solid var(--blue-1); color:var(--blue-1); border-radius:6px; font-size:0.85rem; cursor:grab; user-select:none; transition:.2s; text-align:center; word-wrap:break-word;}
-    .word.incorrect { border-color:#e53935; color:#e53935;}
-    #controls { margin-bottom:24px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
-    input[type="file"] { display:none;}
-    .btn { padding:10px 20px; font-size:1rem; font-weight:500; border:none; border-radius:6px; cursor:pointer; transition:.2s; flex:1 1 auto; min-width:120px;}
-    .btn-primary { background:var(--blue-1); color:#fff;}
-    .btn-primary:hover { background:var(--blue-2);}
-    .btn-orange { background:var(--orange); color:#fff;}
-    .btn-orange:hover { filter:brightness(1.1);}
-    .feedback { display:none; margin-top:24px; text-align:left; background:#fff; border-left:6px solid var(--orange); padding:18px; border-radius:8px;}
-    .feedback div { font-weight:700; font-size:1.1rem; color:var(--blue-1); margin:6px 0;}
-    #sidebar { flex:0 0 280px; max-width:300px; background:var(--grey-bg); padding:24px; border-left:4px solid var(--blue-1); overflow-y:auto;}
-    #sidebar h2 { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px;}
-    #score { font-size:1.1rem; font-weight:500; margin-bottom:18px; color:#333;}
-    #history { list-style:none; max-height:300px; overflow-y:auto;}
-    #history li { font-size:.9rem; color:var(--grey-txt); margin-bottom:8px;}
-    footer { text-align:center; padding:20px 10px; font-size:.9rem; color:var(--blue-1); background:#fff;}
-    #audio-controls {
-  	display: flex;
-  	flex-wrap: wrap;
-  	justify-content: center;
-  	gap: 16px;
-  	margin: 30px 0 10px;
-	}
-
+    .slot { position:relative; flex:1 1 120px; max-width:150px; min-width:80px; padding:12px; border:2px dashed var(--blue-1); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:#333; user-select:none; word-wrap:break-word; }
+    .slot .hint-icon { position:absolute; top:4px; right:6px; font-size:.85rem; color:var(--blue-1); cursor:pointer; }
+    #word-bank { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px; }
+    .word { flex:1 1 100px; max-width:150px; padding:8px 16px; background:#fff; border:2px solid var(--blue-1); color:var(--blue-1); border-radius:6px; font-size:0.85rem; cursor:grab; user-select:none; transition:.2s; text-align:center; word-wrap:break-word; }
+    .word.incorrect { border-color:#e53935; color:#e53935; }
+    #controls { margin-bottom:24px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
+    input[type="file"] { display:none; }
+    .btn { padding:10px 20px; font-size:1rem; font-weight:500; border:none; border-radius:6px; cursor:pointer; transition:.2s; flex:1 1 auto; min-width:120px; }
+    .btn-primary { background:var(--blue-1); color:#fff; }
+    .btn-primary:hover { background:var(--blue-2); }
+    .btn-orange { background:var(--orange); color:#fff; }
+    .btn-orange:hover { filter:brightness(1.1); }
+    .feedback { display:none; margin-top:24px; text-align:left; background:#fff; border-left:6px solid var(--orange); padding:18px; border-radius:8px; }
+    .feedback div { font-weight:700; font-size:1.1rem; color:var(--blue-1); margin:6px 0; }
+    #sidebar { flex:0 0 280px; max-width:300px; background:var(--grey-bg); padding:24px; border-left:4px solid var(--blue-1); overflow-y:auto; }
+    #sidebar h2 { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px; }
+    #score { font-size:1.1rem; font-weight:500; margin-bottom:18px; color:#333; }
+    #history { list-style:none; max-height:300px; overflow-y:auto; }
+    #history li { font-size:.9rem; color:var(--grey-txt); margin-bottom:8px; }
+    footer { text-align:center; padding:20px 10px; font-size:.9rem; color:var(--blue-1); background:#fff; }
+    #audio-controls { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin:30px 0 10px; }
   </style>
 </head>
 <body>
@@ -93,34 +86,35 @@
   <footer>© 2025 Igarapé Digital – Todos os direitos reservados</footer>
 
   <script>
-    let sentences=[], currentIndex=0, currentWords=[], dragged=null;
-    let history=[], translationCache={};
-    let textEn="", textPt="";
+    let sentences = [], currentIndex = 0, currentWords = [], dragged = null;
+    let history = [], translationCache = {};
+    let textEn = "", textPt = "";
 
-    function renderSidebar(){
+    function renderSidebar() {
       document.getElementById("score").textContent = "Frases vistas: " + history.length;
       const ul = document.getElementById("history");
       ul.innerHTML = "";
       history.slice().reverse().forEach(item => {
         const li = document.createElement("li");
-        li.textContent = `${item.en} | ${item.pt||""}`;
+        li.textContent = `${item.en} | ${item.pt || ""}`;
         ul.appendChild(li);
       });
     }
 
-    function saveHistory(en, pt){
-      history.push({en,pt});
+    function saveHistory(en, pt) {
+      history.push({ en, pt });
+      sessionStorage.setItem('history', JSON.stringify(history));
       renderSidebar();
     }
 
-    function speak(txt, lang='en-US', rate=1){
+    function speak(txt, lang = 'en-US', rate = 1) {
       const utter = new SpeechSynthesisUtterance(txt);
       utter.lang = lang;
       utter.rate = rate;
       window.speechSynthesis.speak(utter);
     }
 
-    function loadSentence(idx){
+    function loadSentence(idx) {
       textEn = sentences[idx];
       textPt = "";
       currentWords = textEn.split(" ");
@@ -128,64 +122,90 @@
       document.getElementById("sentencePt").textContent = "";
       setupBoard();
       document.getElementById("feedback").style.display = "none";
-      document.getElementById("playAudioEn").onclick = ()=> speak(textEn);
-      setTimeout(()=>speak(textEn),300);
+      document.getElementById("playAudioEn").onclick = () => speak(textEn);
+      setTimeout(() => speak(textEn), 300);
+      sessionStorage.setItem('currentIndex', currentIndex);
     }
 
-    function setupBoard(){
-      const slots=document.getElementById("slots"), bank=document.getElementById("word-bank");
-      slots.innerHTML=""; bank.innerHTML="";
-      currentWords.forEach((_,i)=>{
-        const slot=document.createElement("div"); slot.className="slot"; slot.dataset.index=i;
-        const hint=document.createElement("span"); hint.className="hint-icon"; hint.textContent="🛈"; hint.title="Dica";
+    function setupBoard() {
+      const slots = document.getElementById("slots"), bank = document.getElementById("word-bank");
+      slots.innerHTML = "";
+      bank.innerHTML = "";
+      currentWords.forEach((_, i) => {
+        const slot = document.createElement("div");
+        slot.className = "slot";
+        slot.dataset.index = i;
+        const hint = document.createElement("span");
+        hint.className = "hint-icon";
+        hint.textContent = "🛈";
+        hint.title = "Dica";
         slot.appendChild(hint);
-        slot.ondragover=e=>e.preventDefault();
-        slot.ondrop=()=>{
-          if(!dragged) return;
-          const correctWord=currentWords[slot.dataset.index];
-          if(dragged.textContent===correctWord){
-            if(slot.querySelector(".word")) bank.appendChild(slot.querySelector(".word"));
-            slot.appendChild(dragged); checkComplete();
+        slot.ondragover = e => e.preventDefault();
+        slot.ondrop = () => {
+          if (!dragged) return;
+          const correctWord = currentWords[slot.dataset.index];
+          if (dragged.textContent === correctWord) {
+            if (slot.querySelector(".word")) bank.appendChild(slot.querySelector(".word"));
+            slot.appendChild(dragged);
+            checkComplete();
           } else {
             dragged.classList.add("incorrect");
-            setTimeout(()=>dragged.classList.remove("incorrect"),500);
+            setTimeout(() => dragged.classList.remove("incorrect"), 500);
           }
         };
         slots.appendChild(slot);
       });
-      [...currentWords].sort(()=>0.5-Math.random()).forEach(w=>{
-        const el=document.createElement("div"); el.className="word"; el.textContent=w;
-        el.draggable=true; el.ondragstart=()=>dragged=el;
+      [...currentWords].sort(() => 0.5 - Math.random()).forEach(w => {
+        const el = document.createElement("div");
+        el.className = "word";
+        el.textContent = w;
+        el.draggable = true;
+        el.ondragstart = () => dragged = el;
         bank.appendChild(el);
       });
     }
 
-    function checkComplete(){
-      const slots=[...document.querySelectorAll(".slot")];
-      if(slots.every(s=>s.querySelector(".word"))){
-        document.getElementById("sentenceEn").textContent="EN: "+textEn;
-        document.getElementById("feedback").style.display="block";
-        document.getElementById("revealBtn").onclick = async ()=>{
-          document.getElementById("revealBtn").disabled=true;
+    function checkComplete() {
+      const slots = [...document.querySelectorAll(".slot")];
+      if (slots.every(s => s.querySelector(".word"))) {
+        document.getElementById("sentenceEn").textContent = "EN: " + textEn;
+        document.getElementById("feedback").style.display = "block";
+        document.getElementById("revealBtn").onclick = async () => {
+          document.getElementById("revealBtn").disabled = true;
           let pt = translationCache[textEn];
-          if(!pt){
+          if (!pt) {
             try {
               const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(textEn)}`;
               const res = await fetch(url);
               const data = await res.json();
               pt = data[0][0][0];
-              translationCache[textEn]=pt;
+              translationCache[textEn] = pt;
             } catch {
-              pt="Tradução indisponível";
+              pt = "Tradução indisponível";
             }
           }
-          document.getElementById("sentencePt").textContent="PT: "+pt;
-          document.getElementById("playAudioPt").onclick=()=>speak(pt, 'pt-BR', 1.1);
-          saveHistory(textEn,pt);
-          document.getElementById("revealBtn").disabled=false;
+          document.getElementById("sentencePt").textContent = "PT: " + pt;
+          document.getElementById("playAudioPt").onclick = () => speak(pt, 'pt-BR', 1.1);
+          saveHistory(textEn, pt);
+          document.getElementById("revealBtn").disabled = false;
         };
       }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedSentences = sessionStorage.getItem('sentences');
+      const savedIndex = sessionStorage.getItem('currentIndex');
+      const savedHistory = sessionStorage.getItem('history');
+      if (savedSentences) {
+        sentences = JSON.parse(savedSentences);
+        currentIndex = savedIndex ? parseInt(savedIndex) : 0;
+        history = savedHistory ? JSON.parse(savedHistory) : [];
+        loadSentence(currentIndex);
+        renderSidebar();
+        document.getElementById("nextBtn").style.display = 'inline-block';
+        document.getElementById("clearBtn").style.display = 'inline-block';
+      }
+    });
 
     document.getElementById("loadOnlineBtn").onclick = () => {
       fetch("https://raw.githubusercontent.com/andersonoab/aprender_ingles/main/frases_unicas_1000.txt")
@@ -194,6 +214,9 @@
           txt = txt.replace(/^\uFEFF/, '');
           sentences = txt.trim().split(/\r?\n/).filter(Boolean);
           sentences.sort(() => 0.5 - Math.random());
+          sessionStorage.setItem('sentences', JSON.stringify(sentences));
+          sessionStorage.setItem('currentIndex', '0');
+          sessionStorage.removeItem('history');
           loadSentence(currentIndex = 0);
           renderSidebar();
           document.getElementById("nextBtn").style.display = "inline-block";
@@ -201,7 +224,7 @@
         });
     };
 
-    document.getElementById("fileInput").onchange = function(){
+    document.getElementById("fileInput").onchange = function () {
       const file = this.files[0];
       if (!file) return;
       const reader = new FileReader();
@@ -209,6 +232,9 @@
         const txt = e.target.result.replace(/^\uFEFF/, '');
         sentences = txt.trim().split(/\r?\n/).filter(Boolean);
         sentences.sort(() => 0.5 - Math.random());
+        sessionStorage.setItem('sentences', JSON.stringify(sentences));
+        sessionStorage.setItem('currentIndex', '0');
+        sessionStorage.removeItem('history');
         loadSentence(currentIndex = 0);
         renderSidebar();
         document.getElementById("nextBtn").style.display = "inline-block";
@@ -217,15 +243,32 @@
       reader.readAsText(file, "UTF-8");
     };
 
-    document.getElementById("nextBtn").onclick = ()=>{ currentIndex=(currentIndex+1)%sentences.length; loadSentence(currentIndex); };
-    document.getElementById("clearBtn").onclick = ()=>{ history=[]; renderSidebar(); };
-    document.getElementById("savePdfBtn").onclick = ()=>{
-      const {jsPDF}=window.jspdf; const doc=new jsPDF({unit:"pt",format:"a4"}); let y=40;
-      doc.setFontSize(16); doc.text("Histórico de Frases",40,y); y+=30;
-      history.forEach((h,i)=>{ doc.setFontSize(12); doc.text(`${i+1}. ${h.en} | ${h.pt||""}`,40,y); y+=20; if(y>780){doc.addPage();y=40;} });
+    document.getElementById("nextBtn").onclick = () => {
+      currentIndex = (currentIndex + 1) % sentences.length;
+      loadSentence(currentIndex);
+    };
+
+    document.getElementById("clearBtn").onclick = () => {
+      history = [];
+      sessionStorage.removeItem('history');
+      renderSidebar();
+    };
+
+    document.getElementById("savePdfBtn").onclick = () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ unit: "pt", format: "a4" });
+      let y = 40;
+      doc.setFontSize(16);
+      doc.text("Histórico de Frases", 40, y);
+      y += 30;
+      history.forEach((h, i) => {
+        doc.setFontSize(12);
+        doc.text(`${i + 1}. ${h.en} | ${h.pt || ""}`, 40, y);
+        y += 20;
+        if (y > 780) { doc.addPage(); y = 40; }
+      });
       doc.save("historico_frases.pdf");
     };
   </script>
 </body>
 </html>
-
