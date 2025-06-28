@@ -573,424 +573,1306 @@ She analyzed pay equity trends over the past five years.
 We monitored onboarding satisfaction through NPS surveys.
 He automated talent pipeline health reports for recruiters.
 They applied predictive models to forecast hiring bottlenecks.
-I built a dynamic turnover risk dashboard with drill-down features.
-She measured the impact of recognition programs on morale.
-We visualized workload distribution across project teams.
-He tracked engagement pulse survey responses by demographic.
-They implemented AI-driven candidate screening analytics.
-I analyzed corporate culture alignment through survey clustering.
-She developed a KPI for measuring leadership effectiveness.
-We automated the delivery of weekly HR analytics newsletters.
-He tracked compliance training completion and sent reminders.
-They visualized employee life cycle stages in a funnel chart.
-I built a predictive index for long-term retention probabilities.
-She measured the success rate of internal talent marketplaces.
-We created an integrated people analytics hub for HR users.
-He used variance analysis to pinpoint budget deviations.
-They tracked interactive learning metrics via LMS APIs.
-I visualized performance distribution with box-and-whisker plots.
-She applied decision trees to predict employee promotion likelihood.
-She filed the motion to dismiss before the clerk's office closed.
-He reviewed the contract clauses to ensure legal compliance.
-They drafted the legislative bill for environmental protection.
-I argued the case before the appellate court yesterday.
-She analyzed the statutory provisions for data privacy.
-We prepared the deposition transcript for the trademark dispute.
-He interpreted the constitutional amendment on freedom of speech.
-They negotiated the settlement agreement in the contract lawsuit.
-I conducted legal research on intellectual property rights.
-She reviewed the labor regulations for employee classification.
-We filed the patent application before the deadline.
-He drafted the power of attorney for overseas representation.
-They assessed the regulatory impact of the new tax law.
-I prepared the arbitration clause for the international contract.
-She filed the brief in support of the summary judgment motion.
-We complied with anti-corruption legislation for corporate governance.
-He examined the case law on product liability claims.
-They drafted the merger agreement with detailed covenants.
-I analyzed the federal statutes related to workplace safety.
-She negotiated the plea bargain in the criminal proceeding.
-We updated the compliance policy following the new regulations.
-He conducted due diligence for the property acquisition.
-They filed the injunction to stop the trademark infringement.
-I reviewed the amendments to the civil procedure code.
-She drafted the non-disclosure agreement for the partnership.
-We prepared the tax returns in accordance with the revenue code.
-He examined the evidence for the negligence tort action.
-They submitted the environmental impact report to the agency.
-I researched the precedents on defamation and libel.
-She drafted the shareholder agreement for corporate structure.
-We filed the bankruptcy petition under Chapter 11.
-He negotiated the commercial lease under real estate statutes.
-They analyzed the EU directives on cross-border data transfers.
-I prepared the will and testament according to succession law.
-She argued the constitutional challenge in the Supreme Court.
-We drafted the compliance checklist for GDPR requirements.
-He conducted a rights audit for intellectual property assets.
-They filed the appeal against the district court ruling.
-I reviewed the tort reform proposals in the state legislature.
-She drafted the affidavit for the witness testimony.
-We analyzed the antitrust laws for market competition issues.
-He negotiated the terms of the licensing agreement.
-They filed the request for summary execution under civil law.
-I researched the legal framework for virtual assets regulation.
-She reviewed the insurance policy exclusions thoroughly.
-We prepared the legal memorandum on consumer protection.
-He drafted the deed of trust for the mortgage agreement.
-They conducted the mock trial for litigation preparedness.
-I analyzed the sanctions under international trade law.
-She filed the motion to compel discovery in the lawsuit.
-We negotiated the settlement of the class action lawsuit.
-He reviewed the administrative regulations for zoning compliance.
-They drafted the framework for alternative dispute resolution.
-I prepared the consent decree to avoid future litigation.
-She researched the legal implications of blockchain contracts.
-We filed the habeas corpus petition for unlawful detention.
-He drafted the promissory note for the loan agreement.
-They analyzed the case briefs for the upcoming hearing.
-I prepared the corporate bylaws for the board of directors.
-She filed the notice of appeal within the statutory period.
-We negotiated the joint venture agreement with detailed clauses.
-He examined the jurisdictional issues in the cross-border case.
-They drafted the indemnity clause to limit liability exposure.
-I reviewed the childcare legislation for parental leave rights.
-She prepared the legal brief on medical malpractice standards.
-We filed the petition for guardianship of a minor.
-He drafted the share purchase agreement for the acquisition.
-They analyzed the family law statutes on asset division.
-I drafted the cease-and-desist letter for copyright infringement.
-She reviewed the judicial opinions on sentencing guidelines.
-We prepared the compliance audit for anti-money laundering laws.
-He drafted the trust instrument for wealth management.
-They filed the motion for a temporary restraining order.
-I researched the legal standards for workplace discrimination claims.
-She negotiated the employee stock option plan terms.
-We drafted the environmental compliance certification report.
-He analyzed the consumer credit protection statutes.
-They filed the complaint for breach of fiduciary duty.
-I reviewed the HIPAA regulations for data confidentiality.
-She prepared the subpoena duces tecum for document production.
-We drafted the contract addendum for scope changes.
-He analyzed the cyber law provisions on data breaches.
-They filed the motion for change of venue request.
-I reviewed the privacy policy to ensure CCPA compliance.
-She drafted the joint defense agreement for co-defendants.
-We prepared the legal strategy for intellectual property enforcement.
-He researched the statutory limitations for tort claims.
-They filed the bill of sale for the vehicle transaction.
-I analyzed the EU GDPR fines and enforcement actions.
-She drafted the emergency powers ordinance for local government.
-We filed the request for arbitration under UNCITRAL rules.
-He reviewed the LIFO and FIFO accounting methods under tax code.
-They drafted the promissory guarantee for the bond issuance.
-I researched the environmental tariffs under WTO agreements.
-She prepared the affidavit of service for the legal notice.
-We drafted the service-level agreement for IT support contracts.
-He analyzed the sanctions regime under OFAC regulations.
-They filed the request for mediation in the divorce proceedings.
-I reviewed the stock exchange listing requirements under securities law.
-She drafted the consent form for clinical trial participants.
-We deployed the application to the Kubernetes cluster this morning.
-She automated the CI/CD pipeline using Jenkins and Docker.
-We migrated our databases to a cloud-based managed service.
-He optimized the SQL queries to improve performance.
-They implemented end-to-end encryption for all API communications.
-I updated the firmware on the IoT sensors remotely.
-She configured the firewall rules for improved network security.
-We trained a convolutional neural network for image recognition.
-He refactored the legacy codebase to adopt microservices architecture.
-They integrated the payment gateway with our e-commerce platform.
-I monitored server performance using Prometheus and Grafana.
-She conducted penetration testing on the web application.
-We developed a RESTful API for mobile and web clients.
-He implemented role-based access control in the authentication system.
-They containerized the application using Docker Compose.
-I set up automated backups for the production database.
-She migrated the monolith to a microservices architecture.
-We optimized the machine learning model for lower latency.
-He configured load balancing across multiple application servers.
-They implemented CI/CD with GitLab runners.
-I wrote Terraform scripts to provision the cloud infrastructure.
-She integrated real-time analytics with Apache Kafka.
-We developed a mobile app with React Native.
-He refactored the Python scripts for better readability.
-They deployed a serverless function on AWS Lambda.
-I optimized the CDN configuration for faster content delivery.
-She conducted user acceptance testing before release.
-We configured SSL certificates for secure HTTPS connections.
-He created a chatbot using natural language processing.
-They implemented rollback strategies for zero-downtime deployments.
-I performed a code review to ensure coding standards.
-She set up a VPN for secure remote access to the network.
-We monitored application logs with Elasticsearch and Kibana.
-He designed the database schema for scalability.
-They integrated Single Sign-On using OAuth2.
-I wrote unit tests to increase code coverage.
-She automated the provisioning of virtual machines.
-We implemented data versioning with DVC.
-He developed a recommendation engine using collaborative filtering.
-They configured WebSocket connections for real-time updates.
-I deployed the infrastructure with AWS CloudFormation.
-She implemented CI pipelines with Azure DevOps.
-We containerized machine learning models with Docker.
-He optimized network throughput using TCP tuning.
-They integrated LDAP for centralized user authentication.
-I built a micro-frontend architecture with Webpack.
-She set up email notifications with SendGrid API.
-We configured auto-scaling groups for dynamic load handling.
-He implemented circuit breaker patterns for fault tolerance.
-They developed an AR application using Unity.
-I configured edge computing nodes for low-latency processing.
-She analyzed big data with Apache Spark.
-We implemented distributed tracing with Jaeger.
-He created an ETL pipeline using Apache NiFi.
-They secured the Kubernetes cluster with RBAC.
-I used feature flags to deploy new features gradually.
-She wrote scripts to automate database migrations.
-We implemented GraphQL for efficient data querying.
-He optimized the React application for better performance.
-They integrated server monitoring with Datadog.
-I deployed the blockchain network on multiple nodes.
-She developed a voice-enabled assistant with Alexa Skills Kit.
-We configured a continuous delivery pipeline for faster releases.
-He performed security audits on the code repository.
-They set up Google Analytics for user behavior tracking.
-I implemented cross-origin resource sharing policies.
-She built a custom web component library.
-We deployed a multiregion database for high availability.
-He optimized Kubernetes pod resource requests and limits.
-They integrated Stripe for subscription billing.
-I migrated the on-premise servers to Azure.
-She configured Apache Spark clusters on EMR.
-We developed a desktop application with Electron.
-He automated SSL certificate renewal with Certbot.
-They implemented a service mesh with Istio.
-I built a real-time dashboard with Node.js and Socket.io.
-She configured a NAT gateway for secure outbound traffic.
-We integrated Slack notifications into the monitoring system.
-He performed load testing with JMeter.
-They deployed an NLP pipeline with spaCy.
-I set up Docker Swarm for container orchestration.
-She built a recommendation system with TensorFlow.
-We implemented passwordless login with WebAuthn.
-He monitored cloud spend using AWS Cost Explorer.
-They configured backup rotas for critical data.
-I created a cross-platform mobile game with Flutter.
-She configured Elasticsearch index shards for performance.
-We secured APIs with JWT authentication.
-He deployed a private blockchain network with Hyperledger Fabric.
-They implemented advanced routing with NGINX.
-I automated data ingestion with Airflow DAGs.
-She optimized the CSS and JavaScript bundling.
-We configured IPv6 support across our network.
-He built a microservices health check endpoint.
-They integrated an external REST API for data enrichment.
-I performed container registry cleanup to reclaim space.
-She developed an AI-powered fraud detection system.
-We configured SPOG (Single Pane of Glass) for dashboarding.
-He set up a Kubernetes operator for custom resources.
-They implemented infrastructure observability with OpenTelemetry.
-She looked after her younger brother while their parents were away.
-We ran out of milk this morning before breakfast.
-He picked up the documents from the front desk.
-They broke down the project into smaller tasks.
-I turned off the lights before leaving the office.
-She put off the meeting until next week.
-We got along well during the entire workshop.
-He took over the presentation when the manager left.
-They set up the conference room for the training.
-I checked in at the hotel late last night.
-She called off the appointment due to a family emergency.
-We looked up the meaning of the word in the dictionary.
-He came across an old photo in the attic.
-They carried out the test successfully.
-I filled out the application form online.
-She gave up trying to reach customer support.
-We got back from the event around midnight.
-He held on to the ticket just in case.
-They kept up with the deadlines despite the delay.
-I logged in to the system using my credentials.
-She pointed out the issue with the code.
-We put together a proposal for the client.
-He ran into an old friend at the airport.
-They showed up late to the meeting.
-I sorted out the files by category.
-She stood out during the group presentation.
-We switched off the machine after use.
-He threw away the broken charger.
-They tried on the new uniforms in the locker room.
-I turned down the job offer politely.
-She woke up early to prepare breakfast.
-We worked out a solution to the conflict.
-He broke up with his partner last week.
-They brought up an interesting point during the call.
-I checked out of the hotel before noon.
-She came up with a creative idea for the project.
-We found out the truth after the audit.
-He got over the flu after a few days.
-They handed in the report just before the deadline.
-I hung up the phone after the call ended.
-She let down her friend by forgetting the event.
-We looked forward to the holiday break.
-He made up an excuse for being late.
-They passed out the papers to everyone in the room.
-I put on a jacket because it was cold.
-She ran away from the barking dog.
-We set off on the journey at dawn.
-He spoke up during the team discussion.
-They took off as soon as the meeting ended.
-I turned around when I heard my name.
-She watched out for pedestrians while driving.
-We wrote down the instructions for the new tool.
-He backed up the data before updating the system.
-They caught up with the rest of the class quickly.
-I came down with a cold over the weekend.
-She filled in for the receptionist at lunch.
-We gave in to the team’s suggestion.
-He held back his opinion during the meeting.
-They let in the delivery driver through the gate.
-I looked into the issue reported by the user.
-She made out the sign through the fog.
-We put aside money for the annual trip.
-He ran out of patience during the call.
-They set aside the differences and worked together.
-I took back what I said immediately.
-She turned in the homework on time.
-We broke into applause after the performance.
-He called back to clarify the details.
-They checked out the new restaurant last night.
-I came over to help with the move.
-She dealt with the complaint professionally.
-We got through the day despite the setbacks.
-He held up the line at the checkout.
-They laid off several employees last month.
-I looked out the window and saw the rain.
-She passed by the café on her way to work.
-We picked out a gift for the teacher.
-He put away his tools after fixing the leak.
-They reached out to the support team for help.
-I saw off my friend at the airport.
-She spoke out against the unfair policy.
-We stood by our decision during the meeting.
-He took down the poster from the wall.
-They turned up the volume on the TV.
-I broke off the conversation to take a call.
-She came through the operation safely.
-We found out about the event from social media.
-He gave away old clothes to charity.
-They looked over the document before signing.
-I moved in last weekend.
-She pulled over when the police signaled.
-We ran into technical issues during the demo.
-He settled down after the move.
-They threw up their hands in frustration.
-I checked up on the patient in the afternoon.
-She counted on her friend for support.
-We got by with limited resources.
-He held out hope until the end.
-They let out a sigh of relief.
-I looked back on the memories fondly.
-She made up with her colleague after the argument.
-We saw through the lie quickly.
-She followed the rabbit down a mysterious digital tunnel.
-We fell into a world where logic danced with nonsense.
-He opened a door too small to fit, yet stepped through with ease.
-They drank the data potion that made them see beyond reality.
-I asked the clock if it ever cared about time—it yawned.
-She conversed with a smiling algorithm that disappeared mid-sentence.
-We played chess on a board that floated above clouds of code.
-He sipped tea at a table where time refused to move forward.
-They ran from shadows that had minds of their own.
-I balanced on words that had turned into stepping stones.
-She argued with logic until it turned into a butterfly.
-We shrank so small that ideas became landscapes.
-He solved a riddle that rewrote the laws of gravity.
-They wandered through a maze made entirely of questions.
-I listened to a caterpillar made of circuits and steam.
-She painted roses that blinked with artificial eyes.
-We sang with flowers that corrected our grammar.
-He fell upward into a debate with a digital queen.
-They followed whispers through an invisible corridor.
-I found a door in the mirror and walked through memory.
-She chased curiosity into a machine that dreams.
-We dined with paradoxes under a quantum moon.
-He met a hatmaker who stitched time into his clothes.
-They danced with chess pieces that plotted revolutions.
-I heard music coming from pages that weren’t written yet.
-She debated etiquette with a holographic hare.
-We sailed in a teacup across a storm made of metaphors.
-He wrote answers before reading the questions.
-They befriended a clock that ticked in riddles.
-I walked on a river of ink, guided by punctuation marks.
-She whispered secrets into a pocket watch’s ear.
-We ran with shadows that had their own destinations.
-He looked through a keyhole and saw himself from tomorrow.
-They found gravity arguing with possibility.
-I joined a game where the rules rewrote themselves.
-She climbed a ladder made of forgotten thoughts.
-We shared riddles with a cat who grinned at silence.
-He touched a mirror and felt his thoughts rearrange.
-They passed through walls made of forgotten dreams.
-I floated through a library that read me instead.
-She met a queen who ruled over unfinished ideas.
-We walked backwards to reach the start of the end.
-He built a house out of unanswered questions.
-They stood still and watched time race by.
-I poured tea for memories I hadn’t made yet.
-She turned left at the corner of ‘why’ and ‘what if’.
-We counted stars that whispered our names.
-He painted skies that changed color with emotion.
-They picked mushrooms that grew from curiosity.
-I rode a train of thought that never stopped.
-She jumped into a puddle and landed on another planet.
-We found logic sleeping in the arms of wonder.
-He argued with reality until it reshaped itself.
-They followed a path made of maybe and possibly.
-I danced with reflections that weren’t mine.
-She played hopscotch on a cloud of probability.
-We collected clocks that ran on stories.
-He climbed inside a question mark and found clarity.
-They hunted silence in a garden of echoes.
-I sat at a table where chairs told jokes.
-She wore gloves that remembered her dreams.
-We stared at maps that changed when no one looked.
-He drew doors on walls and walked through them.
-They fished for inspiration in a sea of tea.
-I followed a melody into a forest of thoughts.
-She raced a wind made of laughter.
-We visited a library where books wrote themselves.
-He stepped onto a staircase that looped into itself.
-They stitched reality back together with questions.
-I saw a cat grin before it appeared.
-She polished a mirror until it showed the future.
-We ate cake that whispered compliments.
-He balanced time on the tip of a spoon.
-They watched clouds debate over direction.
-I juggled apples of possibility and oranges of doubt.
-She listened to thunder that told bedtime stories.
-We wore hats that changed shape with thought.
-He explored a cave filled with unfinished ideas.
-They wrapped up the wind and gave it as a gift.
-I opened a book that spoke in riddles.
-She sailed a paper boat on a river of ink.
-We unlocked a door with a song instead of a key.
-He slept on a pillow that whispered secrets.
-They climbed vines of poetry under a binary sky.
-I drank from a cup of inspiration and saw stars.
-She sketched dreams that grew roots.
-We followed our shadows into the unknown.
-He danced with a thought until it turned into light.
-They hid inside a cloud of forgotten words.
-I listened to silence and heard everything.
-She folded time into a paper crane.
-We baked ideas into biscuits of brilliance.
-He played chess with possibility and almost won.
-They opened a window into imagination’s attic.
-I painted with stardust and hummingbird wings.
-She wandered where logic refused to go.
-We rewrote endings that had never begun.
-He built bridges between daydreams.
-They chased butterflies made of forgotten feelings.
-I sat at a table where the sugar spoke truth.
-She mapped a world that moved when you blinked.
-We solved puzzles made of moonlight and mist.
+How are you today?
+I'm feeling great, thank you.
+Where are you going now?
+Can you help me, please?
+I need to talk to you.
+I’m learning English every day.
+I work in Human Resources.
+He is not at home right now.
+She works at the hospital.
+We have a meeting at 10 AM.
+They are very friendly people.
+This coffee is too hot.
+I like to drink water in the morning.
+Let’s go to the supermarket.
+Do you have any questions?
+Can I ask something?
+I’m looking for my keys.
+The bus is late again.
+It’s raining outside.
+I forgot my umbrella.
+Turn off the lights, please.
+Close the door slowly.
+I have a dog and a cat.
+What’s your favorite food?
+I love pizza and hamburgers.
+I don’t eat meat.
+Are you ready to go?
+It’s very cold today.
+The internet is not working.
+Let’s try again later.
+I’m on my way now.
+Call me when you arrive.
+What time is it?
+It’s almost lunchtime.
+I woke up late today.
+Do you speak English?
+I understand a little.
+Please, speak slowly.
+Can you repeat that?
+What does that mean?
+How do you spell your name?
+I live in São Paulo.
+I work from Monday to Friday.
+Today is my day off.
+I’m tired but happy.
+My phone is charging.
+Your English is very good!
+Let’s study together.
+I need more practice.
+Repeat after me.
+Listen and say it.
+Take a deep breath.
+Relax and speak clearly.
+He is my brother.
+She is my sister.
+This is my friend.
+Nice to meet you.
+I’m married.
+I’m single.
+I have two children.
+I’m very busy today.
+Don’t worry about it.
+It’s okay, no problem.
+I’m learning every day.
+I want to improve my English.
+That’s a good question.
+Could you show me, please?
+Do you have time now?
+Let’s talk about it.
+I’ll be there soon.
+I’m almost finished.
+Just a moment, please.
+It’s easy to understand.
+It’s difficult to explain.
+Try again, please.
+It’s not working.
+Let’s fix it together.
+I don’t remember now.
+I’ll check and let you know.
+What do you think?
+It makes sense to me.
+I agree with you.
+I don’t think so.
+Can you explain that?
+Wait a minute, please.
+Is it urgent?
+I’ll call you back.
+I like your idea.
+That’s interesting.
+Let’s take a break.
+See you tomorrow.
+Have a good day!
+Good night and sweet dreams.
+Take care of yourself.
+I believe in you.
+You can do it!
+Let’s keep going.
+I want to meet someone sweet.
+Take a seat and feel the heat.
+Don’t cheat, just eat your meat.
+She is neat and very sweet.
+Stay on your feet, don’t take a seat.
+Let’s beat the heat and hit the street.
+He can’t sleep, his thoughts run deep.
+She sings a song all day long.
+I belong where hearts are strong.
+The light is bright in the night.
+I feel all right under the moonlight.
+We fight, then make it right.
+Take a bite, the cake is light.
+Hold me tight and say goodnight.
+The bird is heard in the third word.
+The road is cold and full of gold.
+Fold the clothes before it explodes!
+The rain in Spain falls mainly on the plain.
+Time to shine, everything is fine.
+He drinks wine and walks the line.
+She reads signs and loves good lines.
+Fine line between yours and mine.
+I take my time to make it mine.
+No pain, no gain.
+The train is late again.
+It’s insane how much it rains.
+Stay sane, avoid the pain.
+Brain and train sound the same.
+Feel the thrill and keep it real.
+He paid the bill on the hill.
+Chill and refill your will.
+I still believe in skill.
+He wears a coat on the boat.
+She wrote a note with a quote.
+Don’t gloat, just float.
+Grab your coat and don't miss the boat.
+The cat sat on the mat.
+The bat is fat, imagine that!
+The hat is flat on the mat.
+Let’s chat and make a pact.
+That’s that – end of the chat.
+I see a bee near the tree.
+He had a key for the sea.
+Let it be, just like the bee.
+She is free, like a melody.
+I see three birds in the tree.
+He runs for fun in the sun.
+It’s done when you’ve won.
+We had a run and it was fun.
+The bun is hot, not a lot.
+I got a shot at the top spot.
+The pot is not hot.
+I forgot what I got.
+What a plot! Like a robot.
+She likes to dance in France.
+Take a chance on romance.
+The plants grew by chance.
+The ants march in a trance.
+Advance if you see the chance.
+I heard the word and it was absurd.
+The bird stirred when it heard.
+The nerd preferred the third word.
+He blurs the words he heard.
+We walk and talk in the dark.
+The park is far from the spark.
+Make your mark with a remark.
+Bark like a dog at the park.
+Start the spark before it's dark.
+He’s brave but not a slave.
+She gave what she could save.
+Behave or leave the cave.
+Shave before you wave.
+He paves the way to the rave.
+You said red, I said bread.
+She read what I said.
+They fled before the thread spread.
+She bled and he sped.
+He led with what he read.
+I have a dream of a better tomorrow.
+Yes, we can change the world.
+Ask not what others can do for you.
+We shall never give up.
+Education is the most powerful weapon.
+Speak up, even if your voice shakes.
+Hope is stronger than fear.
+We are the change we seek.
+The time is always right to do right.
+Let your courage be louder than fear.
+Justice will rise when silence ends.
+We must act now, not tomorrow.
+You were born to lead.
+Freedom is not given, it is earned.
+One voice can shake the world.
+Speak for those who cannot.
+Together, we are unstoppable.
+Power belongs to the people.
+You can light the world with truth.
+Believe in something bigger than yourself.
+Silence supports injustice.
+No one is free until all are free.
+Dream big, act bold.
+Your time is limited, don’t waste it.
+Find what you love, and fight for it.
+Change begins with one step.
+The future belongs to those who act.
+You are stronger than you think.
+Never settle for less than justice.
+Don’t wait. Be the voice.
+Words can move mountains.
+Lead with empathy and strength.
+Kindness is a revolutionary act.
+You don’t need permission to be great.
+Every small act matters.
+Truth is always powerful.
+Rise when others fall.
+Speak your truth, even if alone.
+You are the light in the darkness.
+We don’t inherit the earth, we borrow it.
+Use your mind and your heart.
+When you stand up, others follow.
+Fear has no power over truth.
+Dare to dream beyond limits.
+Change the system, not yourself.
+You are not too small to make a difference.
+Courage is contagious.
+Fight with peace, not hate.
+Voices united will never be defeated.
+Listen deeply. Speak wisely.
+You were made for this moment.
+History is watching us now.
+We will not be ignored.
+Do not wait to be chosen. Choose yourself.
+Each generation writes its own story.
+Now is the time to rise.
+Lead with purpose, not with pride.
+Ideas are bulletproof.
+Actions speak louder than excuses.
+You were not born to stay silent.
+The world needs your voice.
+Never stop asking questions.
+Truth will always find its way.
+We fight not for victory, but for justice.
+Never underestimate your power.
+Raise your words, not your fists.
+Injustice anywhere is a threat to justice everywhere.
+You are not alone in this.
+Be brave enough to start.
+The world changes with intention.
+Let your passion lead the way.
+Together, we write history.
+Freedom is worth the fight.
+Your voice is your superpower.
+Never doubt your worth.
+Act with hope, speak with fire.
+Now is not the time to be silent.
+Don’t wait for permission to shine.
+Peace begins when we listen.
+No more waiting — we rise.
+Dreams are fuel for revolution.
+Truth has no borders.
+Step forward, even if afraid.
+They tried to silence us. We grew louder.
+We are more than they expect.
+Let’s leave the world better than we found it.
+Even one drop creates ripples.
+When they say “not yet,” say “now.”
+Every generation needs its voice.
+Plant truth where there is doubt.
+Don’t ask for change — be the change.
+Build bridges, not walls.
+Your legacy starts today.
+Only love can end hate.
+A better world begins with brave people.
+Be relentless with hope.
+History honors those who act.
+You don’t need to shout to be heard.
+Let’s rise, not fall.
+Your story is your power.
+We were young and wild and free.
+I still hear your voice in the rain.
+We danced like no one was watching.
+Our love lived in quiet moments.
+You held my hand like forever.
+We promised to never say goodbye.
+I see your smile in every sunrise.
+Your laughter still echoes in my soul.
+Time changed us, but not my heart.
+You are the memory I never let go.
+Even the silence remembers you.
+We built dreams on broken streets.
+Your kiss stayed on my skin.
+I can still taste yesterday.
+You were my first and only.
+Every goodbye still feels like the first.
+We said forever under the stars.
+You left, but love stayed.
+I remember us in faded photos.
+That summer lives in my veins.
+You’re the reason my heart still aches.
+Love like ours doesn’t fade.
+We lost each other, not the feeling.
+We ran away from time itself.
+I still keep your letters close.
+We never needed words.
+I would do it all again.
+Your name lives in my breath.
+The music stopped, but I still dance.
+We were fire in a cold world.
+I loved you with no fear.
+You were the calm in my storm.
+Even now, I wait for you.
+The past is a place I visit you.
+You were my unfinished song.
+Our story still plays in my mind.
+We kissed like we had no tomorrow.
+No one understood us but us.
+Love like ours rewrites time.
+You left your shadow in my heart.
+Sometimes I still walk our street.
+The nights are longer without you.
+We were too perfect to last.
+You made forever feel real.
+I whisper your name in the dark.
+We said goodbye, but I never meant it.
+The stars remember our secrets.
+You taught me how to feel.
+Our love still burns, silently.
+I still write poems for you.
+Your love was my compass.
+Time won’t steal our story.
+You are the “what if” I always ask.
+Some loves never end, just change.
+We grew apart, but never unloved.
+The wind still carries your song.
+I wore your love like armor.
+Our laughter is locked in time.
+You were my best hello.
+You’re still my hardest goodbye.
+I wish you knew how much you mattered.
+Even distance couldn’t erase you.
+We were a spark in the dark.
+You’re the reason I still believe.
+The world moved on — I didn’t.
+I see us in other people’s smiles.
+My soul still calls your name.
+We said goodbye with our eyes.
+I still carry pieces of you.
+You were a chapter I never closed.
+Your voice is my favorite sound.
+We were poetry in motion.
+You were the only one who saw me.
+I remember the way you looked back.
+We grew older, but love didn’t.
+I’d give anything for one more day.
+You were the calm before every storm.
+Somewhere, we still exist.
+Your goodbye was never complete.
+I still love you in silence.
+Our hearts still know the way.
+You live in every sad song.
+You’re the reason I write at night.
+Even now, I wait by the phone.
+You were my beginning.
+You’re my favorite memory.
+If I had the chance, I’d never let go.
+You are the ghost I welcome.
+The moonlight remembers us.
+We loved like there was no end.
+The clock stopped when you left.
+Every tear still says your name.
+We were more than a moment.
+You taught me how to break.
+I never stopped being yours.
+We were infinite, once.
+You were the dream that stayed.
+We said forever — and meant it.
+You’re the missing part of me.
+I still wear your goodbye like a scar.
+You’re still my favorite story.
+I’m learning English every day.  
+Can you help me, please?  
+I woke up late today.  
+What time is it?  
+I don’t understand this.  
+Please, speak slowly.  
+I need more time.  
+I forgot my wallet.  
+Let’s go together.  
+I’m very tired today.  
+I work in payroll.  
+She is my best friend.  
+He lives near my house.  
+We have a meeting tomorrow.  
+They are on vacation.  
+Do you speak English?  
+I can speak a little.  
+I’m trying my best.  
+Don’t worry about it.  
+Everything is fine.  
+I’m not sure.  
+Can you repeat that?  
+Where is the bathroom?  
+I’m hungry.  
+Let’s have lunch.  
+What do you think?  
+I agree with you.  
+That’s a great idea.  
+This is not working.  
+Let’s try again.  
+I lost my phone.  
+Call me later.  
+It’s raining a lot.  
+Do you like coffee?  
+I love this song.  
+Turn off the lights.  
+Close the window.  
+Open the door.  
+Take a deep breath.  
+We are almost there.  
+It’s too expensive.  
+This is very cheap.  
+I need a break.  
+Let’s go home.  
+I’m not ready yet.  
+Wait a minute, please.  
+Are you okay?  
+I’m feeling better.  
+Thanks for your help.  
+You’re welcome.  
+Excuse me.  
+I’m sorry.  
+No problem.  
+I don’t know.  
+I understand now.  
+It’s time to go.  
+Have a good day.  
+Good night.  
+See you later.  
+Nice to meet you.  
+My name is Anderson.  
+Where are you from?  
+I’m from Brazil.  
+What do you do?  
+I’m a lawyer.  
+I’m a developer.  
+Let’s study together.  
+You can do it.  
+Believe in yourself.  
+Never give up.  
+Be careful.  
+Watch out!  
+It’s dangerous.  
+Call the police.  
+I’m at the hospital.  
+Take your medicine.  
+Drink more water.  
+Get some rest.  
+Go to sleep.  
+Wake up early.  
+Brush your teeth.  
+Take a shower.  
+Get dressed.  
+Time to eat.  
+Let’s clean the house.  
+Where is my key?  
+Lock the door.  
+Turn on the TV.  
+Turn off your phone.  
+Read this book.  
+Write your name.  
+Sign here, please.  
+Fill out this form.  
+Check your email.  
+I’m on my way.  
+I’ll be right there.  
+See you tomorrow.  
+Don’t be late.  
+Everything will be okay.
+I’m cooking lunch now.  
+Please wash the dishes.  
+Where is the frying pan?  
+Turn on the stove.  
+Cut the vegetables, please.  
+Put the food in the oven.  
+Can you set the table?  
+Pass me the knife, please.  
+The fridge is full.  
+Don’t forget the spoon.  
+I’m going to bed now.  
+Make your bed, please.  
+Where’s my pillow?  
+Close the curtains.  
+Turn off the light.  
+I can’t find my blanket.  
+The wardrobe is full.  
+Put your clothes away.  
+Let’s fold the laundry.  
+Pick up your shoes.  
+I’m taking a shower.  
+Where’s the soap?  
+The towel is wet.  
+Brush your teeth.  
+Don’t forget the shampoo.  
+I need to shave.  
+The sink is dirty.  
+Please clean the toilet.  
+There’s no toilet paper.  
+Turn on the hot water.  
+I’m studying now.  
+Open your notebook.  
+Where’s my pen?  
+I need my laptop.  
+Turn off the TV, please.  
+Let’s focus on homework.  
+This book is interesting.  
+My headphones are on the desk.  
+Let’s review the lesson.  
+What page are we on?  
+Let’s clean the house.  
+Sweep the floor, please.  
+The living room is a mess.  
+Vacuum the carpet.  
+Take out the trash.  
+Let’s water the plants.  
+Feed the dog, please.  
+Close the front door.  
+Open the gate.  
+Where’s the remote control?  
+The couch is comfortable.  
+Wipe the table after eating.  
+Let’s watch a movie.  
+Light the candle.  
+Turn on the fan.  
+It’s time to relax.  
+Let’s listen to some music.  
+I’m hungry.  
+Let’s have dinner together.  
+Put the leftovers in the fridge.  
+This soup is too hot.  
+The glass is on the counter.  
+Hang your jacket here.  
+I left my socks under the bed.  
+Clean the mirror, please.  
+I sleep with two pillows.  
+There’s dust on the shelf.  
+Don’t jump on the bed.  
+Dry your hair.  
+Use the hair dryer.  
+The mirror is foggy.  
+Wash your hands.  
+Throw it in the trash can.  
+Read it out loud.  
+Check the dictionary.  
+Use your highlighter.  
+I have an online class.  
+My camera is not working.  
+The Wi-Fi is slow today.  
+Let’s take a short break.  
+Don’t sit on the table.  
+The doorbell rang.  
+I lost my keys again.  
+Close the window.  
+Open the door.  
+Get dressed now.  
+Time to eat.  
+Take your medicine.  
+Go to sleep.  
+Wake up early.  
+Brush your teeth before bed.  
+The toothpaste is almost gone.  
+Put the toothbrush in the holder.  
+I’m not ready yet.  
+Wait a minute, please.  
+Are you okay?  
+Thanks for your help.  
+You’re welcome.  
+Excuse me.  
+I’m sorry.  
+No problem.  
+Everything will be okay.
+I am tired today.  
+She is in the kitchen.  
+We are ready for dinner.  
+The keys are on the table.  
+I have a lot to do.  
+Do you have the remote?  
+They have dinner at 7 PM.  
+We have a meeting tomorrow.  
+Do you want some coffee?  
+I want to clean my room.  
+I want to take a break.  
+They want to watch a movie.  
+He wants a cup of tea.  
+I need more time.  
+We need to buy groceries.  
+You need to clean your room.  
+She needs a towel.  
+I do the dishes every day.  
+Do you do your homework?  
+He does a great job.  
+They do everything together.  
+Let’s go to the kitchen.  
+I go to bed at 10.  
+We go shopping on Sunday.  
+She goes to work early.  
+I make coffee every morning.  
+He makes dinner on Fridays.  
+She makes the bed after waking up.  
+We make plans for the weekend.  
+Take your shoes off.  
+I take a shower in the morning.  
+He takes the trash out.  
+Take your medicine, please.  
+Come to the living room.  
+She comes home at 6 PM.  
+The kids come here after school.  
+Come help me clean this.  
+I get up at 6 AM.  
+They get dressed quickly.  
+We get groceries every week.  
+Get your phone, it's ringing.  
+I see the problem.  
+Do you see my notebook?  
+We see each other every day.  
+She sees the mess in the room.  
+Look at the mess on the floor.  
+Look in the fridge.  
+Look outside, it's raining.  
+He looks tired today.  
+He says he's hungry.  
+She says good night every day.  
+I say thank you often.  
+Don’t say that again.  
+I use this pan to cook.  
+We use the microwave every night.  
+She uses her laptop for class.  
+Use the other towel.  
+I find my keys on the couch.  
+He finds peace in silence.  
+They find the book interesting.  
+I can’t find the remote.  
+I know this recipe.  
+She knows how to fix it.  
+Do you know this word?  
+I don’t know where my phone is.  
+Give me a second.  
+Give him a glass of water.  
+Can you give me the notebook?  
+I give her a hug every morning.  
+I work from home.  
+He works in the office.  
+We work together in the kitchen.  
+She works late on Mondays.  
+I tell the kids to be quiet.  
+Can you tell me the truth?  
+He tells jokes at dinner.  
+Tell her to clean her room.  
+Can I ask a question?  
+Ask your sister to help.  
+They ask for help sometimes.  
+I ask about the homework.  
+Let’s make dinner now.  
+She takes care of the dog.  
+We go for a walk in the evening.  
+I want to rest a little.  
+He gets ready fast.  
+Come and see what I did.  
+Look at this photo.  
+We know what to do.  
+You need to call her.  
+I have an idea.  
+Do you use this chair?  
+He wants to sleep.  
+They do everything well.  
+We find it funny.  
+I say hello to everyone.  
+Give her a smile.  
+Take a seat, please.  
+Let’s go now.  
+God loves you more than you imagine.  
+Jesus walks with you every day.  
+Faith moves the heart of God.  
+Forgiveness brings freedom.  
+Grace is a gift, not a reward.  
+Love your neighbor — no exceptions.  
+Speak truth with love.  
+Even in pain, God has a plan.  
+Your past doesn’t define your future.  
+Hope is never wasted.  
+Jesus never gives up on you.  
+Light shines stronger in the dark.  
+Choose kindness, even when it’s hard.  
+The Gospel is love in action.  
+Faith starts with trust.  
+God hears every silent prayer.  
+You are never alone.  
+Your life has a purpose.  
+Mercy rewrites our story.  
+Forgive as you have been forgiven.  
+Jesus meets you where you are.  
+Let peace rule in your heart.  
+Pray without fear.  
+He is still working in your life.  
+Be strong, the Lord is with you.  
+God is bigger than your fears.  
+Love is the greatest command.  
+The cross changed everything.  
+You are saved by grace.  
+Let go and let God.  
+God’s timing is perfect.  
+Stay faithful, even when it’s quiet.  
+Every storm has an end.  
+Worship is more than a song.  
+Faith grows in the struggle.  
+God restores what is broken.  
+Your tears matter to God.  
+Walk in truth and grace.  
+God’s love never runs out.  
+He died so you could live.  
+Jesus is the way, the truth, and the life.  
+Live for something eternal.  
+Obey even when you don’t understand.  
+God sees your heart.  
+Be light in someone’s darkness.  
+Peace comes from trusting Him.  
+Let love lead your life.  
+We are forgiven to forgive.  
+Nothing can separate us from His love.  
+The Spirit helps us when we are weak.  
+Kindness reflects the heart of God.  
+God’s grace covers every sin.  
+Be faithful in the little things.  
+Jesus brings rest to the weary.  
+Love never gives up.  
+Pray for those who hurt you.  
+Be the hands and feet of Jesus.  
+Humility opens the door to wisdom.  
+Jesus welcomes the broken.  
+Hope is alive because He lives.  
+Keep your eyes on Jesus.  
+Let your faith be bigger than your fear.  
+Faith isn’t about feelings, it’s about trust.  
+God uses ordinary people for extraordinary things.  
+Every day is a chance to love like Christ.  
+Jesus never stops loving you.  
+Trust God, even in silence.  
+Your story is not over.  
+Live with purpose and passion.  
+Serve with joy.  
+Love louder than hate.  
+We were made for more.  
+God’s grace is always enough.  
+Jesus sees beyond your mistakes.  
+Be patient — God is at work.  
+Even when you fall, grace lifts you.  
+Speak life, not judgment.  
+Faith is choosing to believe again.  
+God’s love breaks every chain.  
+Shine your light wherever you go.  
+Jesus heals hearts.  
+The Gospel is good news for everyone.  
+Every sinner has a future.  
+God fights your battles.  
+The cross is proof of love.  
+You are chosen, not forgotten.  
+There is power in His name.  
+Let your heart be open to God.  
+Be still and trust Him.  
+Live what you believe.  
+Jesus brings new beginnings.  
+God’s mercy is new every morning.  
+Let your actions preach louder than words.  
+Stay close to His Word.  
+Faith makes you brave.  
+Let God write your story.  
+Speak hope into this world.  
+You are part of His plan.  
+Live loved.  
+God is your safe place.  
+He calls you by name.  
+Go and love like Jesus.
+The book is on the table.  
+The keys are in my bag.  
+I wake up at 6 a.m.  
+We have dinner at 8.  
+She works in an office.  
+He lives near the park.  
+Put the phone on the shelf.  
+My shoes are under the bed.  
+We go to church on Sundays.  
+She studies in the morning.  
+Let’s meet after lunch.  
+I’ll be at home tonight.  
+There’s water in the fridge.  
+The light is on the wall.  
+Leave your coat by the door.  
+He’s waiting in the car.  
+I’ll call you in the evening.  
+She’s on the phone right now.  
+I found it in my pocket.  
+There’s a pen on your desk.  
+They play in the backyard.  
+I read books at night.  
+There’s coffee on the table.  
+She’s looking for her keys.  
+He’s talking on the phone.  
+The kids are in the kitchen.  
+Turn off the light, please.  
+I need help with this form.  
+The meeting is at 10 a.m.  
+The charger is in the drawer.  
+The cat is behind the curtain.  
+She’s good at cooking.  
+He’s afraid of dogs.  
+We’re late for the movie.  
+He’s not at work today.  
+They’re ready for the trip.  
+She’s busy with her homework.  
+He’s responsible for the report.  
+We’re proud of you.  
+Let’s sit on the couch.  
+There’s a dog in the garden.  
+I have a class at 2 p.m.  
+She’s good at English.  
+He’s interested in music.  
+Put your shoes in the closet.  
+She’s out of the office.  
+We’re back from vacation.  
+I’m sorry for the delay.  
+They’re in a meeting now.  
+He’s famous for his music.  
+The milk is on the counter.  
+Don’t leave it on the floor.  
+The door is open now.  
+The window is closed.  
+There’s a message on the screen.  
+The paper is in the printer.  
+Let’s walk around the block.  
+He went to the store.  
+She’s waiting at the bus stop.  
+Take a look at this.  
+He works late on Fridays.  
+The children are at school.  
+He’s married with two kids.  
+They live on my street.  
+The bag is full of books.  
+She’s talking to her friend.  
+Let’s have coffee in the kitchen.  
+I’ll call you after lunch.  
+He’s looking at the clock.  
+There’s a spider on the wall.  
+He’s sitting in the chair.  
+I’m ready for the trip.  
+The food is on the stove.  
+We eat together at the table.  
+She’s watching TV in the living room.  
+The file is on your desktop.  
+He’s coming back from work.  
+She’s standing near the door.  
+I left my phone in the car.  
+He’s running late again.  
+I’m waiting for your reply.  
+She’s good with people.  
+I’m looking for my notebook.  
+He’s listening to music.  
+The glass is next to the sink.  
+Let’s meet at the coffee shop.  
+She’s behind the counter.  
+He’s ahead of schedule.  
+We’re out of time.  
+It’s time for a break.  
+Put the dishes in the sink.  
+Let’s talk after dinner.  
+He’s afraid of the dark.  
+There’s a bird on the roof.  
+She’s always on time.  
+The bus is in front of the school.  
+I’m in a hurry right now.  
+Let’s go for a walk.  
+He’s in charge of the project.  
+I’m on my way home.  
+She’s on vacation this week.
+Hi, my name is Anderson.  
+I’m from Brazil, and I live in São Paulo.  
+I work as a senior payroll analyst.  
+I’m currently working at Hospital Alemão Oswaldo Cruz.  
+I have experience in HR operations and payroll compliance.  
+I’ve been working in the payroll field for over 15 years.  
+I specialize in payroll, benefits, and labor law.  
+I also have a degree in Law and Systems Development.  
+I’m passionate about people, processes, and productivity.  
+I work with SAP, Protheus, Senior, and Oracle.  
+I’ve led payroll migration and eSocial implementation projects.  
+I’m responsible for payroll validation, audits, and legal reports.  
+I have strong knowledge of Brazilian labor and tax legislation.  
+I also work with people analytics and HR indicators.  
+I use Python and Excel to automate HR routines.  
+I’m the founder of Igarapé Digital, a training and automation project.  
+I teach programming and English for HR professionals.  
+I’m currently learning English to expand my international career.  
+I speak Portuguese and have intermediate English skills.  
+One of my strengths is solving problems with simple solutions.  
+I’m used to working under pressure and with tight deadlines.  
+I’m proud of my contributions to payroll accuracy and team training.  
+In my free time, I love to read, write, and develop tools.  
+I’m always looking for ways to improve processes.  
+I believe that technology can empower HR teams.  
+I’m open to new opportunities in payroll and HR data analytics.  
+Nice to meet you!
+My name is Anderson.  
+I’m from Brazil.  
+I live in São Paulo.  
+I’m 38 years old.  
+I work in Human Resources.  
+I’m a payroll specialist.  
+I’m also a lawyer.  
+I have a degree in Law.  
+I also studied Systems Development.  
+I’ve been working in payroll for over 15 years.  
+I have experience with large companies.  
+I’ve worked in hospitals and industries.  
+I know how to manage payroll systems.  
+I’m good with deadlines and compliance.  
+I use SAP, Protheus, Senior and Oracle.  
+I’m familiar with eSocial and FGTS Digital.  
+I’ve led payroll migration projects.  
+I’m used to high-pressure situations.  
+I’m passionate about technology and HR.  
+I like to automate processes.  
+I build solutions in Python.  
+I’ve created dashboards in Excel and Power BI.  
+I’m the founder of Igarapé Digital.  
+I teach programming and English.  
+I enjoy helping others learn.  
+I speak Portuguese and I’m learning English.  
+I practice English every day.  
+I understand technical HR terms in English.  
+I like to read books on productivity.  
+I often study at night.  
+I enjoy writing and organizing ideas.  
+I use ChatGPT for daily support.  
+I enjoy solving problems with logic.  
+I like to explain things in simple ways.  
+I’m organized and focused.  
+I enjoy challenges.  
+I work well in teams.  
+I also work well alone.  
+I take responsibility for my tasks.  
+I follow company policies and deadlines.  
+I value respect and ethics.  
+I try to learn from every situation.  
+I believe in continuous improvement.  
+I love to share knowledge.  
+I enjoy speaking in public.  
+I like teaching others what I’ve learned.  
+I record videos and create content.  
+I also enjoy creating training materials.  
+I support diversity and inclusion.  
+I care about mental health at work.  
+I’m curious and always ask questions.  
+I enjoy learning from others.  
+I stay calm under pressure.  
+I prefer solving the root cause.  
+I work with empathy and discipline.  
+I often create checklists and workflows.  
+I love helping my team grow.  
+I always look for more efficient ways.  
+I believe feedback helps us improve.  
+I enjoy creating systems to save time.  
+I respect different opinions.  
+I like to build trust with colleagues.  
+I’ve worked on compliance audits.  
+I understand accounting logic in payroll.  
+I handle rescisões and férias calculations.  
+I also support recruitment and DHO.  
+I’ve created many spreadsheets for HR.  
+I like clean and simple visuals.  
+I enjoy learning new software.  
+I’m interested in data analysis.  
+I want to grow in HR Analytics.  
+I plan to become fluent in English.  
+I want to teach internationally.  
+I see English as a tool for growth.  
+I enjoy watching content in English.  
+I translate HR terms to study better.  
+I listen to HR podcasts and webinars.  
+I sometimes write articles on LinkedIn.  
+I believe learning never ends.  
+I want to help people with knowledge.  
+I dream of launching my own platform.  
+I would like to speak at HR events.  
+I’m learning a little Spanish too.  
+I use Google Calendar to stay organized.  
+I prefer clear communication.  
+I like to give and receive honest feedback.  
+I love solving Excel problems.  
+I enjoy studying business models.  
+I’m building my second career carefully.  
+I want to be a professor in the future.  
+I help friends with job interviews.  
+I enjoy mentoring interns.  
+I sometimes write scripts in VBA.  
+I like understanding how systems connect.  
+I support digital transformation in HR.  
+I believe in balance between tech and people.  
+I’m building tools to simplify HR tasks.  
+I’m happy when I’m helping others.
+I work with payroll automation.  
+I build tools to validate payroll data.  
+I’m developing a payroll dashboard in Python.  
+I use pandas to analyze payroll spreadsheets.  
+My goal is to simplify payroll routines.  
+I create scripts to check payroll inconsistencies.  
+I automate payroll reports using Excel and VBA.  
+I help HR understand payroll through code.  
+I connect payroll logic with system rules.  
+I’m writing code to simulate rescisões.  
+I’ve built a routine to process folha data.  
+I work on payroll indicators for HR.  
+I develop filters for payroll analytics.  
+I created a form to collect folha adjustments.  
+I generate charts for payroll evolution.  
+I apply Python to validate eSocial events.  
+I link payroll and finance data in BI.  
+I use Streamlit to present payroll results.  
+I automate the checking of folha totals.  
+I test payroll events before sending to eSocial.  
+I calculate INSS and IRRF in my code.  
+I help teams read .CNAB files.  
+I built a tool for folha consolidation.  
+I convert Excel sheets into structured data.  
+I extract payroll data from ERP exports.  
+I’m developing a salary projection tool.  
+I analyze headcount trends by code.  
+I design payroll graphs for monthly review.  
+I support HR by coding automations.  
+I integrate folha data with Power BI.  
+I debug scripts for folha inconsistencies.  
+I simulate folha closure with different dates.  
+I cross-check payroll vs. benefits data.  
+I validate DARF values using formulas.  
+I created a Python script for GFIP validation.  
+I assist with payroll forecasting logic.  
+I automate warnings for payroll errors.  
+I develop tools to support payroll audits.  
+I manage payroll version control in development.  
+I use Git to track changes in HR scripts.  
+I built a REST API to expose folha KPIs.  
+I send automated emails with folha summaries.  
+I prepare data to feed compliance dashboards.  
+I test calculations of salary increases.  
+I connect payroll adjustments to organizational charts.  
+I align folha logic with legal rules.  
+I generate JSON reports from folha data.  
+I use SQL to fetch payroll history.  
+I normalize folha tables before analysis.  
+I train HR to use automated workflows.  
+I document payroll automation processes.  
+I use Python to read DIRF and DCTF files.  
+I apply regex to clean payroll text data.  
+I use Tkinter to build folha input forms.  
+I map payroll flows for system improvement.  
+I explain folha logic to non-technical staff.  
+I audit payroll runs using scripts.  
+I monitor variations in folha accounts.  
+I log errors found during folha processing.  
+I classify folha events by category.  
+I use markdown to explain payroll projects.  
+I structure payroll data for Power BI reports.  
+I assist managers with folha understanding.  
+I review folha loads before final submission.  
+I created a checklist app for payroll closure.  
+I integrate folha with RH and financeiro.  
+I visualize folha anomalies in charts.  
+I provide insights from folha history.  
+I created dynamic folha summaries.  
+I’m building an app to read folha PDFs.  
+I include hash verification for payroll security.  
+I connect eSocial files to folha events.  
+I run scripts to verify terminated employees.  
+I manage different types of folha (regular, 13th, rescisão).  
+I show payroll cost per department.  
+I compare folha vs. budget in BI.  
+I generate alerts for folha inconsistencies.  
+I match folha vs. point system data.  
+I’m coding a payroll simulator for HR.  
+I translate folha reports for management.  
+I analyze variations by cost center.  
+I train teams to read folha indicators.  
+I centralize folha errors by rule type.  
+I align folha events with compliance goals.  
+I define rules to detect manual folha errors.  
+I export payroll KPIs to Excel and PDF.  
+I connect folha with time & attendance data.  
+I visualize high-cost folha components.  
+I code rescisão simulations by type.  
+I group folha items for audit trails.  
+I export payroll logs for external validation.  
+I compare SAP vs. calculated folha.  
+I automate approval flows for folha events.  
+I’m building a chatbot to explain folha.  
+I plan to teach payroll automation publicly.  
+I believe payroll should be transparent.  
+I help simplify folha for HR teams.  
+I transform payroll into visual data.  
+I’m passionate about connecting payroll and tech.  
+I use tech to improve payroll compliance.  
+I dream of a platform for folha intelligence.  
+I want to share my folha automation tools.  
+I believe code empowers HR.  
+She eats cheese with tea.  
+I sit in the big kitchen.  
+That cat sat on a mat.  
+Come and have some fun.  
+Her bird heard the word.  
+The dog is not on the log.  
+I saw the tall wall fall.  
+Put the book on the cushion.  
+He knew you too.  
+The father laughed in the bath.  
+Let’s go out now.  
+She likes to wear blue shoes.  
+He made a great cake.  
+They show no hope.  
+My ear hears fear.  
+He’s there near the chair.  
+Tour the poor door.  
+Boy, enjoy the toy.  
+I try to find time to write.  
+We go by plane today.  
+The clock stops at ten.  
+John and Jane joined the game.  
+The train arrives at noon.  
+She washed the white wall.  
+He thinks this thing is thick.  
+The phone rang three times.  
+That zebra is in the zoo.  
+She has a sharp knife.  
+Please bring me a glass of water.  
+Ben can’t bend the metal.  
+Don’t push the book too far.  
+Keep your feet on the floor.  
+The queen quickly quit the quiz.  
+The girl gave a great gift.  
+He plays the guitar gently.  
+We watched the match on TV.  
+Drive slowly down the road.  
+They jump over the hill.  
+A tall tree stands there.  
+He cut the cake carefully.  
+The bell fell on the shell.  
+I love your voice.  
+Let’s eat lunch together.  
+He picked up the black bag.  
+Close the door before you go.  
+She dreams during the day.  
+I bought four more forks.  
+The ship is near the shore.  
+Read the red book on the bed.  
+They danced around the fire.  
+This page has strange names.  
+Let’s go fishing in the lake.  
+The kid kicked the bucket.  
+She helped him fix the bike.  
+He smells the smoke in the air.  
+Please clean the glass.  
+Don't break the brown bowl.  
+The cow is down the hill.  
+She’s calling the cat.  
+They’re running in the rain.  
+He wore warm wool today.  
+The nurse works in the hospital.  
+The bottle is on the table.  
+She saw a shadow on the wall.  
+Take the cheese from the fridge.  
+The mouse lives in the house.  
+He held the cold coin.  
+My hand hurts a little.  
+The frog jumped in the pond.  
+Let’s talk after lunch.  
+We heard a loud sound.  
+The baby is crying again.  
+I wrote a short note.  
+Turn the light off now.  
+I need to fix the net.  
+The mirror is broken.  
+She opened the window fast.  
+They play football every Friday.  
+Wash your hands before dinner.  
+He’s hiding behind the curtain.  
+Her voice is full of joy.  
+This dish is too spicy.  
+I stayed home all night.  
+The moon looks bright tonight.  
+A fox ran through the forest.  
+It’s hot in the sun.  
+I found a coin on the road.  
+He’s teaching English online.  
+That joke made me laugh.  
+Draw a line on the board.  
+Hold the rope tight.  
+He built a strong wall.  
+They looked for the lost dog.  
+He stood still and smiled.  
+She dropped the glass.  
+Give me some sugar, please.  
+We watched stars in the sky.  
+He chews gum all day.
+Do you want salad or soup?  
+Would you like coffee or tea?  
+Can you give me a minute?  
+Did you eat yet?  
+I don’t know about that.  
+She’s gonna be late.  
+We’re gonna need more time.  
+What did you do?  
+Tell him I said hi.  
+Lemme know when you’re done.  
+Gimme five minutes.  
+I want a little more.  
+What are you doing now?  
+Whatcha doing later?  
+Did you call him?  
+They’re outta town.  
+I shoulda told you.  
+I coulda done more.  
+You could’ve said something.  
+He would’ve helped you.  
+Gotta go now.  
+Wanna come with me?  
+I’m tryna understand.  
+I dunno what to say.  
+I’m gonna call her.  
+We’ve gotta do it today.  
+He’s kinda tired.  
+She’s sorta busy.  
+It’s a lotta work.  
+There’s a tonna stuff here.  
+Watcha gonna do?  
+Aren’t you coming too?  
+Can you do it or not?  
+What time is it again?  
+You want ice or water?  
+Do you like it or not?  
+I’ll get it if you want.  
+He said he’d do it.  
+I think I’ll stay home.  
+Is she in or out?  
+Why don’t you ask him?  
+Don’tcha know the answer?  
+I dunno if I can.  
+Couldja help me, please?  
+Wouldja mind closing the door?  
+Let’s see whatcha got.  
+Didja bring your phone?  
+Tell ‘em I’m coming.  
+You want some or not?  
+Go ahead and sit down.  
+It’s right in front of you.  
+There’s a cat on it.  
+I’ll meetcha there.  
+Whatcha doing tomorrow?  
+You gonna eat that?  
+It’s not about me.  
+Where’d you put it?  
+I’m gonna tell her.  
+You’ve gotta be kidding.  
+I’m not gonna lie.  
+I didn’t mean it.  
+I shouldn’t have said that.  
+That’s kinda strange.  
+What’re you up to?  
+She’s outta her mind.  
+We gotta talk.  
+You gotta see this.  
+I want a cup of tea.  
+There’s a bit of milk left.  
+Lemme check real quick.  
+What happened to you?  
+Did you ask her yet?  
+Where’s he going?  
+I’ll call you later.  
+I’ve been waiting for you.  
+I should’ve called first.  
+I could’ve helped you.  
+You would’ve liked it.  
+I might’ve seen him.  
+Let’s get outta here.  
+We’re gonna be fine.  
+Let her know, okay?  
+Just a sec.  
+It’s not a big deal.  
+What’s it about?  
+I’m outta time.  
+You seen it yet?  
+She’s gotta work.  
+They want it now.  
+Whatcha waiting for?  
+He’s been there before.  
+Lemme help you.  
+I needa talk to you.  
+Tell ‘im to call me.  
+Talk to her about it.  
+Can ya believe it?  
+Where’d ya find that?  
+How much is it again?
