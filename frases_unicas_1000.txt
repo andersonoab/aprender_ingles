@@ -925,7 +925,7 @@ I’m used to high-pressure situations.
 I’m passionate about technology and HR.
 I like to automate processes.
 I build solutions in Python.
-I’ve created dashboards in Excel and Power BI.
+I’ve created dashboards in Excel and Power BI
 I’m the founder of Igarapé Digital.
 I teach programming and English.
 I enjoy helping others learn.
@@ -1012,28 +1012,28 @@ I automate payroll reports using Excel and VBA.
 I help HR understand payroll through code.
 I connect payroll logic with system rules.
 I’m writing code to simulate rescisões.
-I’ve built a routine to process folha data.
+I’ve built a routine to process Payroll data.
 I work on payroll indicators for HR.
 I develop filters for payroll analytics.
-I created a form to collect folha adjustments.
+I created a form to collect Payroll adjustments.
 I generate charts for payroll evolution.
 I apply Python to validate eSocial events.
 I link payroll and finance data in BI.
 I use Streamlit to present payroll results.
-I automate the checking of folha totals.
+I automate the checking of Payroll totals.
 I test payroll events before sending to eSocial.
 I calculate INSS and IRRF in my code.
 I help teams read .CNAB files.
-I built a tool for folha consolidation.
+I built a tool for Payroll consolidation.
 I convert Excel sheets into structured data.
 I extract payroll data from ERP exports.
 I’m developing a salary projection tool.
 I analyze headcount trends by code.
 I design payroll graphs for monthly review.
 I support HR by coding automations.
-I integrate folha data with Power BI.
-I debug scripts for folha inconsistencies.
-I simulate folha closure with different dates.
+I integrate Payroll data with Power BI.
+I debug scripts for Payroll inconsistencies.
+I simulate Payroll closure with different dates.
 I cross-check payroll vs.benefits data.
 I validate DARF values using formulas.
 I created a Python script for GFIP validation.
@@ -1042,68 +1042,68 @@ I automate warnings for payroll errors.
 I develop tools to support payroll audits.
 I manage payroll version control in development.
 I use Git to track changes in HR scripts.
-I built a REST API to expose folha KPIs.
-I send automated emails with folha summaries.
+I built a REST API to expose Payroll KPIs.
+I send automated emails with Payroll summaries.
 I prepare data to feed compliance dashboards.
 I test calculations of salary increases.
 I connect payroll adjustments to organizational charts.
-I align folha logic with legal rules.
-I generate JSON reports from folha data.
+I align Payroll logic with legal rules.
+I generate JSON reports from Payroll data.
 I use SQL to fetch payroll history.
-I normalize folha tables before analysis.
+I normalize Payroll tables before analysis.
 I train HR to use automated workflows.
 I document payroll automation processes.
 I use Python to read DIRF and DCTF files.
 I apply regex to clean payroll text data.
-I use Tkinter to build folha input forms.
+I use Tkinter to build Payroll input forms.
 I map payroll flows for system improvement.
-I explain folha logic to non-technical staff.
+I explain Payroll logic to non-technical staff.
 I audit payroll runs using scripts.
-I monitor variations in folha accounts.
-I log errors found during folha processing.
-I classify folha events by category.
+I monitor variations in Payroll accounts.
+I log errors found during Payroll processing.
+I classify Payroll events by category.
 I use markdown to explain payroll projects.
 I structure payroll data for Power BI reports.
-I assist managers with folha understanding.
-I review folha loads before final submission.
+I assist managers with Payroll understanding.
+I review Payroll loads before final submission.
 I created a checklist app for payroll closure.
-I integrate folha with RH and financeiro.
-I visualize folha anomalies in charts.
-I provide insights from folha history.
-I created dynamic folha summaries.
-I’m building an app to read folha PDFs.
+I integrate Payroll with RH and financeiro.
+I visualize Payroll anomalies in charts.
+I provide insights from Payroll history.
+I created dynamic Payroll summaries.
+I’m building an app to read Payroll PDFs.
 I include hash verification for payroll security.
-I connect eSocial files to folha events.
+I connect eSocial files to Payroll events.
 I run scripts to verify terminated employees.
-I manage different types of folha (regular, 13th, rescisão).
+I manage different types of Payroll (regular, 13th, rescisão).
 I show payroll cost per department.
-I compare folha vs.budget in BI.
-I generate alerts for folha inconsistencies.
-I match folha vs.point system data.
+I compare Payroll vs.budget in BI.
+I generate alerts for Payroll inconsistencies.
+I match Payroll vs.point system data.
 I’m coding a payroll simulator for HR.
-I translate folha reports for management.
+I translate Payroll reports for management.
 I analyze variations by cost center.
-I train teams to read folha indicators.
-I centralize folha errors by rule type.
-I align folha events with compliance goals.
-I define rules to detect manual folha errors.
+I train teams to read Payroll indicators.
+I centralize Payroll errors by rule type.
+I align Payroll events with compliance goals.
+I define rules to detect manual Payroll errors.
 I export payroll KPIs to Excel and PDF.
-I connect folha with time & attendance data.
-I visualize high-cost folha components.
+I connect Payroll with time & attendance data.
+I visualize high-cost Payroll components.
 I code rescisão simulations by type.
-I group folha items for audit trails.
+I group Payroll items for audit trails.
 I export payroll logs for external validation.
-I compare SAP vs.calculated folha.
-I automate approval flows for folha events.
-I’m building a chatbot to explain folha.
+I compare SAP vs.calculated Payroll.
+I automate approval flows for Payroll events.
+I’m building a chatbot to explain Payroll.
 I plan to teach payroll automation publicly.
 I believe payroll should be transparent.
-I help simplify folha for HR teams.
+I help simplify Payroll for HR teams.
 I transform payroll into visual data.
 I’m passionate about connecting payroll and tech.
 I use tech to improve payroll compliance.
-I dream of a platform for folha intelligence.
-I want to share my folha automation tools.
+I dream of a platform for Payroll intelligence.
+I want to share my Payroll automation tools.
 I believe code empowers HR.
 She eats cheese with tea.
 I sit in the big kitchen.
@@ -1301,3 +1301,42 @@ Talk to her about it.
 Can ya believe it?
 Where’d ya find that?
 How much is it again?
+Hi, Anderson. Thank you for coming. Can you tell me about yourself?
+Hi, thank you for the opportunity.
+My name is Anderson, I am 38 years old and I live in São Paulo.
+I work at a hospital as a Payroll and HR Specialist.
+I also have a degree in Law, and I study programming in Python.
+I love learning and improving processes.
+I am organized, responsible, and always ready to help my team.
+I am looking for new challenges and opportunities to grow.
+Very good. What are your main abilities?
+I can solve payroll and HR problems.
+I can work with Excel, Python and Power BI.
+I can manage benefits, taxes, and eSocial tasks.
+I can prepare reports and control deadlines.
+I can communicate very well and work under pressure.
+I always try to bring solutions and make things easier for the team.
+Great. What are your qualifications?
+I have a degree in Law and a degree in Systems Development.
+I have more than 10 years of experience in HR and Payroll.
+I worked with systems like Senior, SAP, ADP, TOTVS, Protheus, and Tasy.
+I know how to handle eSocial, FGTS Digital, audits and government reports.
+I also build automations using Python to improve HR routines.
+I like to study technology and help teams become more productive.
+That’s impressive. And what about your weaknesses?
+Well, I know nobody is perfect.
+Sometimes, I demand too much of myself.
+I try to solve many things at the same time.
+But I am working on it. I’ve learned to plan better and focus on priorities.
+This helps me stay calm and more effective in my work.
+Do you speak English every day at work?
+Not every day, but I study and practice English every week.
+I read, write emails and sometimes talk to people from other countries.
+I am improving my speaking and I feel more confident now.
+Why do you want this job?
+Because I like challenges and I want to grow.
+I believe I can help your company with my experience and ideas.
+I am ready to work hard and learn more every day.
+I see this as a great opportunity to use my skills and develop new ones.
+Thank you, Anderson. You did very well.
+Thank you so much. It was a pleasure to talk to you.
