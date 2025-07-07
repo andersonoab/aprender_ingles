@@ -34,12 +34,18 @@
     .feedback div { font-weight:700; font-size:1.1rem; color:var(--blue-1); margin:6px 0; }
     #sidebar { flex:0 0 280px; max-width:300px; background:var(--grey-bg); padding:24px; border-left:4px solid var(--blue-1); overflow-y:auto; }
     #sidebar h2 { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px; }
+    #madeCountLabel { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px; }
     #score { font-size:1.1rem; font-weight:500; margin-bottom:18px; color:#333; }
     #history { list-style:none; max-height:300px; overflow-y:auto; }
     #history li { font-size:.9rem; color:var(--grey-txt); margin-bottom:8px; }
     footer { text-align:center; padding:20px 10px; font-size:.9rem; color:var(--blue-1); background:#fff; }
     #audio-controls { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin:30px 0 10px; }
+    .copy-btn { background: transparent; border: none; cursor: pointer; padding: 0 6px; vertical-align: middle; }
+    .copy-btn:hover { background: rgba(0,0,0,0.05); border-radius: 4px; }
+    .copy-btn .bi { font-size: 1rem; color: #007bff; }
+    .copy-btn:active .bi { color: #000; }
   </style>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -76,6 +82,7 @@
     </div>
 
     <aside id="sidebar">
+      <h2 id="madeCountLabel">Frases feitas: 0</h2>
       <h2>Histórico</h2>
       <div id="score">Frases vistas: 0</div>
       <ul id="history"></ul>
@@ -89,6 +96,23 @@
     let sentences = [], currentIndex = 0, currentWords = [], dragged = null;
     let history = [], translationCache = {};
     let textEn = "", textPt = "";
+    let madeCount = 0;
+
+    function loadMadeCount() {
+      const stored = localStorage.getItem('madeCount');
+      madeCount = stored ? parseInt(stored) : 0;
+      document.getElementById('madeCountLabel').textContent = 'Frases feitas: ' + madeCount;
+    }
+
+    function saveMadeCount() {
+      localStorage.setItem('madeCount', madeCount);
+    }
+
+    function incrementMadeCount() {
+      madeCount++;
+      saveMadeCount();
+      document.getElementById('madeCountLabel').textContent = 'Frases feitas: ' + madeCount;
+    }
 
     function renderSidebar() {
       document.getElementById("score").textContent = "Frases vistas: " + history.length;
@@ -103,7 +127,7 @@
 
     function saveHistory(en, pt) {
       history.push({ en, pt });
-      sessionStorage.setItem('history', JSON.stringify(history));
+      localStorage.setItem('history', JSON.stringify(history));
       renderSidebar();
     }
 
@@ -168,7 +192,13 @@
     function checkComplete() {
       const slots = [...document.querySelectorAll(".slot")];
       if (slots.every(s => s.querySelector(".word"))) {
-        document.getElementById("sentenceEn").textContent = "EN: " + textEn;
+        incrementMadeCount();
+        document.getElementById("sentenceEn").innerHTML = `
+      <span id="copyEnText" style="color: var(--blue-1); font-weight: bold;">EN: ${textEn}</span>
+      <button class="copy-btn" onclick="copyText('copyEnText')" title="Copiar">
+        <i class="bi bi-clipboard"></i>
+      </button>
+`;
         document.getElementById("feedback").style.display = "block";
         document.getElementById("revealBtn").onclick = async () => {
           document.getElementById("revealBtn").disabled = true;
@@ -184,7 +214,12 @@
               pt = "Tradução indisponível";
             }
           }
-          document.getElementById("sentencePt").textContent = "PT: " + pt;
+          document.getElementById("sentencePt").innerHTML = `
+      <span id="copyPtText" style="color: var(--blue-1); font-weight: bold;">PT: ${pt}</span>
+      <button class="copy-btn" onclick="copyText('copyPtText')" title="Copiar">
+        <i class="bi bi-clipboard"></i>
+      </button>
+`;
           document.getElementById("playAudioPt").onclick = () => speak(pt, 'pt-BR', 1.1);
           saveHistory(textEn, pt);
           document.getElementById("revealBtn").disabled = false;
@@ -192,56 +227,61 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedSentences = sessionStorage.getItem('sentences');
-      const savedIndex = sessionStorage.getItem('currentIndex');
-      const savedHistory = sessionStorage.getItem('history');
-      if (savedSentences) {
-        sentences = JSON.parse(savedSentences);
-        currentIndex = savedIndex ? parseInt(savedIndex) : 0;
-        history = savedHistory ? JSON.parse(savedHistory) : [];
-        loadSentence(currentIndex);
-        renderSidebar();
-        document.getElementById("nextBtn").style.display = 'inline-block';
-        document.getElementById("clearBtn").style.display = 'inline-block';
-      }
-    });
+	document.addEventListener('DOMContentLoaded', () => {
+	  const savedSentences = localStorage.getItem('sentences');
+	  const savedIndex = localStorage.getItem('currentIndex');
+	  const savedHistory = localStorage.getItem('history');
 
-    document.getElementById("loadOnlineBtn").onclick = () => {
-      fetch("https://raw.githubusercontent.com/andersonoab/aprender_ingles/main/frases_unicas_1000.txt")
-        .then(res => res.text())
-        .then(txt => {
-          txt = txt.replace(/^\uFEFF/, '');
-          sentences = txt.trim().split(/\r?\n/).filter(Boolean);
-          sentences.sort(() => 0.5 - Math.random());
-          sessionStorage.setItem('sentences', JSON.stringify(sentences));
-          sessionStorage.setItem('currentIndex', '0');
-          sessionStorage.removeItem('history');
-          loadSentence(currentIndex = 0);
-          renderSidebar();
-          document.getElementById("nextBtn").style.display = "inline-block";
-          document.getElementById("clearBtn").style.display = "inline-block";
-        });
-    };
+	  history = savedHistory ? JSON.parse(savedHistory) : [];
+	  renderSidebar(); // Sempre renderiza o histórico
 
-    document.getElementById("fileInput").onchange = function () {
-      const file = this.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = e => {
-        const txt = e.target.result.replace(/^\uFEFF/, '');
-        sentences = txt.trim().split(/\r?\n/).filter(Boolean);
-        sentences.sort(() => 0.5 - Math.random());
-        sessionStorage.setItem('sentences', JSON.stringify(sentences));
-        sessionStorage.setItem('currentIndex', '0');
-        sessionStorage.removeItem('history');
-        loadSentence(currentIndex = 0);
-        renderSidebar();
-        document.getElementById("nextBtn").style.display = "inline-block";
-        document.getElementById("clearBtn").style.display = "inline-block";
-      };
-      reader.readAsText(file, "UTF-8");
-    };
+	  if (savedSentences) {
+	    sentences = JSON.parse(savedSentences);
+	    currentIndex = savedIndex ? parseInt(savedIndex) : 0;
+	    loadSentence(currentIndex);
+	    document.getElementById("nextBtn").style.display = 'inline-block';
+	    document.getElementById("clearBtn").style.display = 'inline-block';
+	  }
+
+	  loadMadeCount();
+	});
+
+	document.getElementById("loadOnlineBtn").onclick = () => {
+	  fetch("https://raw.githubusercontent.com/andersonoab/aprender_ingles/main/frases_unicas_1000.txt")
+	    .then(res => res.text())
+	    .then(txt => {
+	      txt = txt.replace(/^\uFEFF/, '');
+	      sentences = txt.trim().split(/\r?\n/).filter(Boolean);
+	      sentences.sort(() => 0.5 - Math.random());
+	      localStorage.setItem('sentences', JSON.stringify(sentences));
+	      localStorage.setItem('currentIndex', '0');
+	      // NÃO APAGAR O HISTÓRICO MAIS
+	      loadSentence(currentIndex = 0);
+	      renderSidebar();
+	      document.getElementById("nextBtn").style.display = "inline-block";
+	      document.getElementById("clearBtn").style.display = "inline-block";
+	    });
+	};
+
+
+	document.getElementById("fileInput").onchange = function () {
+	  const file = this.files[0];
+	  if (!file) return;
+	  const reader = new FileReader();
+	  reader.onload = e => {
+	    const txt = e.target.result.replace(/^\uFEFF/, '');
+	    sentences = txt.trim().split(/\r?\n/).filter(Boolean);
+	    sentences.sort(() => 0.5 - Math.random());
+	    localStorage.setItem('sentences', JSON.stringify(sentences));
+	    localStorage.setItem('currentIndex', '0');
+	    // NÃO APAGAR O HISTÓRICO MAIS
+	    loadSentence(currentIndex = 0);
+	    renderSidebar();
+	    document.getElementById("nextBtn").style.display = 'inline-block';
+	    document.getElementById("clearBtn").style.display = 'inline-block';
+	  };
+	  reader.readAsText(file, "UTF-8");
+	};
 
     document.getElementById("nextBtn").onclick = () => {
       currentIndex = (currentIndex + 1) % sentences.length;
@@ -250,10 +290,17 @@
 
     document.getElementById("clearBtn").onclick = () => {
       history = [];
-      sessionStorage.removeItem('history');
+      localStorage.removeItem('history');
       renderSidebar();
     };
 
+    function copyText(elementId) {
+      const text = document.getElementById(elementId).textContent.replace(/^EN: |^PT: /, '');
+      navigator.clipboard.writeText(text).then(() => {
+        console.log("Copiado:", text);
+      });
+    }
+    
     document.getElementById("savePdfBtn").onclick = () => {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF({ unit: "pt", format: "a4" });
