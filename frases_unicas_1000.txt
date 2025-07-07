@@ -298,3 +298,13 @@ The system was approved by the auditor.
 The design was released by the manager.
 The design was delayed by the auditor.
 The report was secured by the client.
+I have never worked with that software before.
+I have never missed a deadline in my career.
+I have never led a team, but I am ready for the challenge.
+I have never had a conflict with a manager.
+I have never taken extended time off from work.
+I have never been late for an important meeting.
+I have never handled international payroll, but I’m eager to learn.
+I have never worked remotely before, but I am very disciplined.
+I have never used Power BI professionally, only for personal projects.
+I have never changed jobs without giving proper notice.
