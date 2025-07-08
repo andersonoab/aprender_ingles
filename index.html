@@ -253,22 +253,22 @@
 	      txt = txt.replace(/^\uFEFF/, '');
 	      sentences = txt.trim().split(/\r?\n/).filter(Boolean);
 	
-	      // Embaralha as frases aleatoriamente
+	      // Embaralha todas as frases
 	      sentences.sort(() => 0.5 - Math.random());
 	
-	      localStorage.setItem('sentences', JSON.stringify(sentences));
-	      localStorage.setItem('currentIndex', '0');
+	      // Escolhe um índice aleatório para começar
+	      currentIndex = Math.floor(Math.random() * sentences.length);
 	
-	      // NÃO APAGAR O HISTÓRICO MAIS
-	      loadSentence(currentIndex = 0);
+	      localStorage.setItem('sentences', JSON.stringify(sentences));
+	      localStorage.setItem('currentIndex', currentIndex.toString());
+	
+	      loadSentence(currentIndex);
 	      renderSidebar();
 	
-	      // Exibe os botões de navegação
 	      document.getElementById("nextBtn").style.display = "inline-block";
 	      document.getElementById("clearBtn").style.display = "inline-block";
 	    });
 	};
-
 
 
 	document.getElementById("fileInput").onchange = function () {
@@ -283,11 +283,14 @@
 	    sentences = txt.trim().split(/\r?\n/).filter(Boolean);
 	    sentences.sort(() => 0.5 - Math.random());
 	
+	    // Escolhe uma frase aleatória da lista
+	    currentIndex = Math.floor(Math.random() * sentences.length);
+	
 	    localStorage.setItem('sentences', JSON.stringify(sentences));
-	    localStorage.setItem('currentIndex', '0');
+	    localStorage.setItem('currentIndex', currentIndex.toString());
 	
 	    // NÃO APAGAR O HISTÓRICO MAIS
-	    loadSentence(currentIndex = 0);
+	    loadSentence(currentIndex);
 	    renderSidebar();
 	
 	    // Exibe os botões de navegação
@@ -297,6 +300,7 @@
 	
 	  reader.readAsText(file, "UTF-8");
 	};
+
 
 
     document.getElementById("nextBtn").onclick = () => {
