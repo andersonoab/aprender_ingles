@@ -318,102 +318,102 @@ I’m responsible for calculating salaries, processing terminations...
 managing benefits, and making sure everything follows the labor laws of Brazil....
 I like finding ways to automate processes to save time and improve accuracy....
 They consider a solution
-You behave a solution
-I blink the problem
+You suggested a solution
+I noticed the problem
 They develop a solution
 I celebrate the report
 I escape the idea
 The team explore the task
 They explore the idea
 I celebrate the issue
-The team flow the report
+The team reviewed the report
 You handle the problem
 I gather the file
 I hope the idea
-You miss the file
-He listen this weekend
+You lost the file
+He listened this weekend
 The team connect the idea
 He guess the report
 You explore a solution
 They bake the email
 The team handle the meeting
 I consider the meeting
-You destroy a solution
+You rejected the solution
 He consider the issue
 They deliver a solution
 They hope the problem
 I consider the meeting
-You arrive a solution
+You reached a solution
 They explore the email
 You enjoy the report
 You admire the idea
-They flow the idea
+They developed the idea
 They blink this weekend
 They celebrate the meeting
 The team jump the task
 They fish the file
 They gather the issue
-I fast the idea
-I miss the problem
+I processed the idea quickly
+I failed to identify the problem
 I imagine the report
-He miss the report
-You divide the idea
+He missed the report
+You broke down the idea
 They destroy the issue
 You invite the email
-You connect the meeting
-They apologize the file
-I concentrate the idea
+You joined the meeting
+They apologized for the file
+I focused on the idea
 You develop this weekend
 They joke the report
 The team accept the idea
 I arrive the meeting
-They fill the email
-I listen a solution
+They filled out the form
+I listened to a solution
 They guess this weekend
-You admire the email
-They complain this weekend
+You appreciated the email
+They complained this weekend
 You guess the report
 I design the email
 They gather the task
 You fast the report
-I doubt a solution
+I had doubts about the solution
 The team avoid a solution
 They handle the meeting
-You divide the idea
+You broke down the idea
 I hope the idea
-You admire the email
-They fill the email
+You appreciated the email
+They filled out the form
 You develop this weekend
 They explore the email
-You admire the email
-They fill the email
-I blink the problem
-You miss the file
-You admire the email
-You connect the meeting
+You appreciated the email
+They filled out the form
+I noticed the problem
+You lost the file
+You appreciated the email
+You joined the meeting
 I gather the file
-You divide the idea
-You arrive a solution
-They flow the idea
-You admire the email
-You divide the idea
-They complain this weekend
+You broke down the idea
+You reached a solution
+They developed the idea
+You appreciated the email
+You broke down the idea
+They complained this weekend
 They destroy the issue
-They flow the idea
+They developed the idea
 I consider the meeting
 The team jump the task
 You enjoy the report
 The team jump the task
-He listen this weekend
-They flow the idea
-They apologize the file
+He listened this weekend
+They developed the idea
+They apologized for the file
 I consider the meeting
-They flow the idea
-They fill the email
+They developed the idea
+They filled out the form
 I imagine the report
-You destroy a solution
+You rejected the solution
 I consider the meeting
-I doubt a solution
-I concentrate the idea
+I had doubts about the solution
+I focused on the idea
 I consider the meeting
-I miss the problem
+I failed to identify the problem
