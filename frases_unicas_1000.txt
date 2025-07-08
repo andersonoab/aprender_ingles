@@ -118,8 +118,8 @@ Although he was busy, he kept working.
 Although they were busy, we enjoyed the picnic.
 The policy was finalized by the auditor.
 The system was approved by the auditor.
-The design was released by the manager.
-The design was delayed by the auditor.
+I created the email layout.
+I created the email layout.
 The report was secured by the client.
 I have never worked with that software before.
 I have never missed a deadline in my career.
@@ -148,7 +148,7 @@ She helps new employees settle in.
 This topic was covered in training.
 I improved my listening skills.
 They analyze the survey results.
-We develop our team regularly.
+You worked on development this weekend.
 He leads the payroll project.
 I clarified my doubts yesterday.
 We focus on clear communication.
@@ -168,7 +168,7 @@ The company offers benefits.
 I revised the whole text.
 They reviewed the contract.
 The summary is very helpful.
-I learned to avoid mistakes.
+The team avoided making a decision.
 We corrected the report.
 He summarized the updates.
 I followed the instructions.
@@ -275,16 +275,16 @@ He will finish in the morning.
 She will meet on Friday.
 You will call later today.
 You will meet this afternoon.
-If you study hard, we will celebrate.
+I successfully completed the task.
 If he works late, they will take a break.
 If she studies hard, they will cancel the trip.
 If you study hard, she will take a break.
 If she arrives, she will take a break.
 If she works late, she will cancel the trip.
-If we finish, he will celebrate.
+I successfully completed the task.
 If I study hard, I will cancel the trip.
 If I finish, you will leave early.
-If she calls, we will celebrate.
+I successfully completed the task.
 If he calls, she will start the meeting.
 If it rains, he will buy a new car.
 If you study hard, you will cancel the trip.
@@ -293,11 +293,11 @@ If we call, you might buy a new car.
 If he studies hard, they will cancel the trip.
 If it rains, we will leave early.
 If I arrive, I will take a break.
-If you finish, he will celebrate.
+I successfully completed the task.
 If I finish, he will start the meeting.
 If we arrive, she will cancel the trip.
 If he calls, we will leave early.
-If you study hard, you will celebrate.
+I successfully completed the task.
 If we work late, he will buy a new car.
 If you finish, she will take a break.
 They have waited for ten days.
@@ -317,19 +317,19 @@ I’ve worked with different payroll systems like SAP, ADP, and Protheus....
 I’m responsible for calculating salaries, processing terminations...
 managing benefits, and making sure everything follows the labor laws of Brazil....
 I like finding ways to automate processes to save time and improve accuracy....
-They consider a solution
+I considered the idea carefully.
 You suggested a solution
 I noticed the problem
-They develop a solution
+You worked on development this weekend.
 I completed the report
 I dismissed the idea
 The team tackles the task
-They explore the idea
+They reviewed the idea.
 I addressed the issue
 The team reviewed the report
-You handle the problem
+The team handled the meeting efficiently.
 I retrieved the file
-I hope the idea
+They hoped to fix the problem.
 You lost the file
 He listened this weekend
 The team develops the idea
@@ -339,7 +339,7 @@ They drafted the email
 The team handles the meeting
 I attended the meeting
 You rejected the solution
-He consider the issue
+I considered the idea carefully.
 They deliver a solution
 They hoped to solve the problem
 I attended the meeting
@@ -349,7 +349,7 @@ You enjoy the report
 You admire the idea
 They developed the idea
 They took a break this weekend
-They celebrate the meeting
+I successfully completed the task.
 The team tackles the task
 They retrieved the file
 They identified the issue
@@ -358,32 +358,32 @@ I failed to identify the problem
 I envisioned the report
 He missed the report
 You broke down the idea
-They destroy the issue
-You invite the email
+They resolved the issue.
+I sent the invitation.
 You joined the meeting
 They apologized for the file
 I focused on the idea
-You will develop it this weekend
+You worked on development this weekend.
 They joked about the report
 The team accepts the idea
 I arrive the meeting
 They filled out the form
 I listened to a solution
-They guess this weekend
+They think it will happen this weekend.
 You appreciated the email
 They complained this weekend
 You correctly predicted the report's content
 I designed the email
-They gather the task
+They collected the documents.
 You finished the report quickly
 I had doubts about the solution
 the team avoids a solution
-They handle the meeting
+The team handled the meeting efficiently.
 You broke down the idea
-I hope the idea
+They hoped to fix the problem.
 You appreciated the email
 They filled out the form
-You will develop it this weekend
+You worked on development this weekend.
 They reviewed the email
 You appreciated the email
 They filled out the form
@@ -398,7 +398,7 @@ They developed the idea
 You appreciated the email
 You broke down the idea
 They complained this weekend
-They destroy the issue
+They resolved the issue.
 They developed the idea
 I attended the meeting
 The team tackles the task
