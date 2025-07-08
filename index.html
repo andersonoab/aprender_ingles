@@ -252,36 +252,52 @@
 	    .then(txt => {
 	      txt = txt.replace(/^\uFEFF/, '');
 	      sentences = txt.trim().split(/\r?\n/).filter(Boolean);
+	
+	      // Embaralha as frases aleatoriamente
 	      sentences.sort(() => 0.5 - Math.random());
+	
 	      localStorage.setItem('sentences', JSON.stringify(sentences));
 	      localStorage.setItem('currentIndex', '0');
+	
 	      // NÃO APAGAR O HISTÓRICO MAIS
 	      loadSentence(currentIndex = 0);
 	      renderSidebar();
+	
+	      // Exibe os botões de navegação
 	      document.getElementById("nextBtn").style.display = "inline-block";
 	      document.getElementById("clearBtn").style.display = "inline-block";
 	    });
 	};
 
 
+
 	document.getElementById("fileInput").onchange = function () {
 	  const file = this.files[0];
 	  if (!file) return;
+	
 	  const reader = new FileReader();
 	  reader.onload = e => {
 	    const txt = e.target.result.replace(/^\uFEFF/, '');
+	
+	    // Divide e embaralha as frases
 	    sentences = txt.trim().split(/\r?\n/).filter(Boolean);
 	    sentences.sort(() => 0.5 - Math.random());
+	
 	    localStorage.setItem('sentences', JSON.stringify(sentences));
 	    localStorage.setItem('currentIndex', '0');
+	
 	    // NÃO APAGAR O HISTÓRICO MAIS
 	    loadSentence(currentIndex = 0);
 	    renderSidebar();
+	
+	    // Exibe os botões de navegação
 	    document.getElementById("nextBtn").style.display = 'inline-block';
 	    document.getElementById("clearBtn").style.display = 'inline-block';
 	  };
+	
 	  reader.readAsText(file, "UTF-8");
 	};
+
 
     document.getElementById("nextBtn").onclick = () => {
       currentIndex = (currentIndex + 1) % sentences.length;
