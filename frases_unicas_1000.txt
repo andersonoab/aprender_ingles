@@ -1,13 +1,13 @@
 I found a great tutorial on the internet.
-I saw the video on YouTube yesterday.
+I watched a video on YouTube yesterday.
 She wrote an article about payroll.
 I’m looking for a new challenge.
-We combine data to find new insights.
+We analyze data to uncover new insights.
 He needs to improve his pronunciation.
-They follow the updates on LinkedIn.
+They follow updates on LinkedIn.
 You can learn a lot from this channel.
-The course helped me to understand the topic.
-I like reading news about technology.
+The course helped me understand the topic.
+I like reading technology news.
 My experience is mostly in HR systems.
 I usually work with payroll data.
 The meeting is scheduled for Monday.
@@ -15,7 +15,7 @@ We need to review the benefits policy.
 This tool helps with data analysis.
 I joined the team last year.
 They always support new ideas.
-We share knowledge during the training.
+We share knowledge during training.
 It is important to ensure confidentiality.
 We store the data securely.
 She is responsible for employee records.
@@ -49,23 +49,23 @@ It helps me improve my English.
 I review the data carefully.
 We follow up with clients weekly.
 The report needs to be revised.
-He has lived for ten days.
-She has waited since 2020.
-They have cooked since last summer.
-She has traveled since 2020.
-I have waited for ten days.
+He has been living here for ten days.
+She has been waiting since 2020.
+They have been cooking since last summer.
+She has been traveling since 2020.
+I have been waiting for ten days.
 She has cooked since 2020.
 They have saved for a long time.
-She has worked for a long time.
+She has been working for a long time.
 She has waited since last summer.
 You have traveled since last summer.
-I have played for a long time.
-We have watched for two years.
+I have been playing for a long time.
+We have been watching for two years.
 He has cooked for a long time.
-They have learned since 2020.
-We have lived since last summer.
-We have learned for two years.
-We have saved for two years.
+They have been learning since 2020.
+We have been living here since last summer.
+We have been learning for two years.
+We have been saving for two years.
 He should finish more carefully.
 They could check the presentation.
 He could prepare the report.
@@ -301,7 +301,7 @@ If you study hard, you will celebrate.
 If we work late, he will buy a new car.
 If you finish, she will take a break.
 They have waited for ten days.
-I have cooked for ten days.
+I have been cooking for ten days.
 I have learned for ten days.
 I have saved for several months.
 We have watched for ten days.
@@ -321,41 +321,41 @@ They consider a solution
 You suggested a solution
 I noticed the problem
 They develop a solution
-I celebrate the report
-I escape the idea
-The team explore the task
+I completed the report
+I dismissed the idea
+The team tackles the task
 They explore the idea
-I celebrate the issue
+I addressed the issue
 The team reviewed the report
 You handle the problem
-I gather the file
+I retrieved the file
 I hope the idea
 You lost the file
 He listened this weekend
-The team connect the idea
-He guess the report
-You explore a solution
-They bake the email
-The team handle the meeting
-I consider the meeting
+The team develops the idea
+He reviewed the report
+You explored a solution
+They drafted the email
+The team handles the meeting
+I attended the meeting
 You rejected the solution
 He consider the issue
 They deliver a solution
-They hope the problem
-I consider the meeting
+They hoped to solve the problem
+I attended the meeting
 You reached a solution
-They explore the email
+They reviewed the email
 You enjoy the report
 You admire the idea
 They developed the idea
-They blink this weekend
+They took a break this weekend
 They celebrate the meeting
-The team jump the task
-They fish the file
-They gather the issue
+The team tackles the task
+They retrieved the file
+They identified the issue
 I processed the idea quickly
 I failed to identify the problem
-I imagine the report
+I envisioned the report
 He missed the report
 You broke down the idea
 They destroy the issue
@@ -363,19 +363,19 @@ You invite the email
 You joined the meeting
 They apologized for the file
 I focused on the idea
-You develop this weekend
-They joke the report
-The team accept the idea
+You will develop it this weekend
+They joked about the report
+The team accepts the idea
 I arrive the meeting
 They filled out the form
 I listened to a solution
 They guess this weekend
 You appreciated the email
 They complained this weekend
-You guess the report
-I design the email
+You correctly predicted the report's content
+I designed the email
 They gather the task
-You fast the report
+You finished the report quickly
 I had doubts about the solution
 the team avoids a solution
 They handle the meeting
@@ -383,15 +383,15 @@ You broke down the idea
 I hope the idea
 You appreciated the email
 They filled out the form
-You develop this weekend
-They explore the email
+You will develop it this weekend
+They reviewed the email
 You appreciated the email
 They filled out the form
 I noticed the problem
 You lost the file
 You appreciated the email
 You joined the meeting
-I gather the file
+I retrieved the file
 You broke down the idea
 You reached a solution
 They developed the idea
@@ -400,20 +400,20 @@ You broke down the idea
 They complained this weekend
 They destroy the issue
 They developed the idea
-I consider the meeting
-The team jump the task
+I attended the meeting
+The team tackles the task
 You enjoy the report
-The team jump the task
+The team tackles the task
 He listened this weekend
 They developed the idea
 They apologized for the file
-I consider the meeting
+I attended the meeting
 They developed the idea
 They filled out the form
-I imagine the report
+I envisioned the report
 You rejected the solution
-I consider the meeting
+I attended the meeting
 I had doubts about the solution
 I focused on the idea
-I consider the meeting
+I attended the meeting
 I failed to identify the problem
