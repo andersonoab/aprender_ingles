@@ -49,6 +49,88 @@ It helps me improve my English.
 I review the data carefully.
 We follow up with clients weekly.
 The report needs to be revised.
+He has lived for ten days.
+She has waited since 2020.
+They have cooked since last summer.
+She has traveled since 2020.
+I have waited for ten days.
+She has cooked since 2020.
+They have saved for a long time.
+She has worked for a long time.
+She has waited since last summer.
+You have traveled since last summer.
+I have played for a long time.
+We have watched for two years.
+He has cooked for a long time.
+They have learned since 2020.
+We have lived since last summer.
+We have learned for two years.
+We have saved for two years.
+He should finish more carefully.
+They could check the presentation.
+He could prepare the report.
+I should discuss my homework with them.
+I must check the report.
+I should prepare the presentation.
+She should check the report.
+You must discuss earlier.
+You could review more carefully.
+He might improve his homework.
+She must prepare the presentation.
+I must finish the report.
+I could improve earlier.
+She could finish more carefully.
+They might check earlier.
+He must check the details.
+You must finish the details.
+They could prepare earlier.
+They must improve their process with more attention.
+We must review the details.
+He must check earlier.
+I must improve the report.
+I must prepare more carefully.
+You must finish the details.
+I should check earlier.
+Although they were busy, they attended the event.
+Although it was late, he kept working.
+Although he was busy, he kept working.
+Although they were busy, she finished the project.
+Although the task was difficult, he kept working.
+Although they were busy, we went for a walk.
+Although they were busy, she solved the problem.
+Although he was tired, she solved the problem.
+Although the weather was bad, she solved the problem.
+Although the task was difficult, she finished the project.
+Although he was tired, we went for a walk.
+Although he was tired, he kept working.
+Although the task was difficult, they attended the event.
+Although they were busy, we went for a walk.
+Although it was late, they attended the event.
+Although the weather was bad, we went for a walk.
+Although the weather was bad, she finished the project.
+Although the task was difficult, we went for a walk.
+Although the task was difficult, he kept working.
+Although they were busy, we enjoyed the picnic.
+Although she had no money, she finished the project.
+Although the task was difficult, she solved the problem.
+Although he was tired, we enjoyed the picnic.
+Although he was busy, he kept working.
+Although they were busy, we enjoyed the picnic.
+The policy was finalized by the auditor.
+The system was approved by the auditor.
+The design was released by the manager.
+The design was delayed by the auditor.
+The report was secured by the client.
+I have never worked with that software before.
+I have never missed a deadline in my career.
+I have never led a team, but I am ready for the challenge.
+I have never had a conflict with a manager.
+I have never taken extended time off from work.
+I have never been late for an important meeting.
+I have never handled international payroll, but I’m eager to learn.
+I have never worked remotely before, but I am very disciplined.
+I have never used Power BI professionally, only for personal projects.
+I have never changed jobs without giving proper notice.
 I read articles about payroll.
 He prepares the monthly summary.
 We use a secure login system.
@@ -175,7 +257,7 @@ We visited a computer store last week.
 She met my friend yesterday.
 You will clean in the morning.
 He will travel next month.
-We will buy this afternoon.
+We will buy some equipment this afternoon.
 I will buy tonight.
 He will buy this afternoon.
 I will finish next month.
@@ -194,27 +276,27 @@ She will meet on Friday.
 You will call later today.
 You will meet this afternoon.
 If you study hard, we will celebrate.
-If he work late, they will take a break.
-If she study hard, they will cancel the trip.
+If he works late, they will take a break.
+If she studies hard, they will cancel the trip.
 If you study hard, she will take a break.
-If she arrive, she will take a break.
-If she work late, she will cancel the trip.
+If she arrives, she will take a break.
+If she works late, she will cancel the trip.
 If we finish, he will celebrate.
-If i study hard, i will cancel the trip.
-If i finish, you will leave early.
-If she call, we will celebrate.
-If he call, she will start the meeting.
-If she rain, he will buy a new car.
+If I study hard, I will cancel the trip.
+If I finish, you will leave early.
+If she calls, we will celebrate.
+If he calls, she will start the meeting.
+If it rains, he will buy a new car.
 If you study hard, you will cancel the trip.
-If she rain, she will buy a new car.
-If we call, you will buy a new car.
-If he study hard, they will cancel the trip.
-If you rain, we will leave early.
-If i arrive, i will take a break.
+If it rains, she will buy a new car.
+If we call, you might buy a new car.
+If he studies hard, they will cancel the trip.
+If it rains, we will leave early.
+If I arrive, I will take a break.
 If you finish, he will celebrate.
-If i finish, he will start the meeting.
+If I finish, he will start the meeting.
 If we arrive, she will cancel the trip.
-If he call, we will leave early.
+If he calls, we will leave early.
 If you study hard, you will celebrate.
 If we work late, he will buy a new car.
 If you finish, she will take a break.
@@ -226,88 +308,6 @@ We have watched for ten days.
 You have waited for a long time.
 They have played since last summer.
 I have lived for ten days.
-He has lived for ten days.
-She has waited since 2020.
-They have cooked since last summer.
-She has traveled since 2020.
-I have waited for ten days.
-She has cooked since 2020.
-They have saved for a long time.
-She has worked for a long time.
-She has waited since last summer.
-You have traveled since last summer.
-I have played for a long time.
-We have watched for two years.
-He has cooked for a long time.
-They have learned since 2020.
-We have lived since last summer.
-We have learned for two years.
-We have saved for two years.
-He should finish more carefully.
-They could check the presentation.
-He could prepare the report.
-I should discuss their homework.
-I must check the report.
-I should prepare the presentation.
-She should check the report.
-You must discuss earlier.
-You could review more carefully.
-He might improve their homework.
-She must prepare the presentation.
-I must finish the report.
-I could improve earlier.
-She could finish more carefully.
-They might check earlier.
-He must check the details.
-You must finish the details.
-They could prepare earlier.
-They must improve more carefully.
-We must review the details.
-He must check earlier.
-I must improve the report.
-I must prepare more carefully.
-You must finish the details.
-I should check earlier.
-Although they were busy, they attended the event.
-Although it was late, he kept working.
-Although they were busy, he kept working.
-Although they were busy, she finished the project.
-Although the task was difficult, he kept working.
-Although they were busy, we went for a walk.
-Although they were busy, she solved the problem.
-Although he was tired, she solved the problem.
-Although the weather was bad, she solved the problem.
-Although the task was difficult, she finished the project.
-Although he was tired, we went for a walk.
-Although he was tired, he kept working.
-Although the task was difficult, they attended the event.
-Although they were busy, we went for a walk.
-Although it was late, they attended the event.
-Although the weather was bad, we went for a walk.
-Although the weather was bad, she finished the project.
-Although the task was difficult, we went for a walk.
-Although the task was difficult, he kept working.
-Although they were busy, we enjoyed the picnic.
-Although she had no money, she finished the project.
-Although the task was difficult, she solved the problem.
-Although he was tired, we enjoyed the picnic.
-Although they were busy, he kept working.
-Although they were busy, we enjoyed the picnic.
-The policy was finalized by the auditor.
-The system was approved by the auditor.
-The design was released by the manager.
-The design was delayed by the auditor.
-The report was secured by the client.
-I have never worked with that software before.
-I have never missed a deadline in my career.
-I have never led a team, but I am ready for the challenge.
-I have never had a conflict with a manager.
-I have never taken extended time off from work.
-I have never been late for an important meeting.
-I have never handled international payroll, but I’m eager to learn.
-I have never worked remotely before, but I am very disciplined.
-I have never used Power BI professionally, only for personal projects.
-I have never changed jobs without giving proper notice.
 Hey Anderson! Ready to start the interview?...
 Let's start with a basic question:...
 Can you tell me a little about your experience with payroll?...
