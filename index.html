@@ -2,66 +2,103 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Lousa da Fluência</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
+  <meta name="description" content="Monte frases em inglês, treine com repetição espaçada e ouça em caminhada com a tela desligada." />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Lousa" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    :root { --blue-1:#007bff; --blue-2:#00b1e0; --orange:#ff6b00; --grey-bg:#f5f5f5; --grey-txt:#555; }
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body { font-family:'Roboto',sans-serif; background:#fff; color:#333; min-height:100vh; display:flex; flex-direction:column; }
-    header { background:linear-gradient(135deg,var(--blue-1) 0%,var(--blue-2)100%); color:#fff; text-align:center; padding:60px 20px 80px; position:relative; }
-    header h1 { font-size:2.4rem; font-weight:800; }
-    header svg.wave { position:absolute; left:0; bottom:-1px; width:100%; height:60px; }
-    .container { flex:1; display:flex; flex-wrap:wrap; padding:40px 20px; gap:30px; justify-content:center; }
-    .main { flex:1 1 600px; max-width:800px; text-align:center; }
-    .board { background:var(--grey-bg); border:2px solid var(--blue-1); border-radius:10px; padding:32px; margin-bottom:24px; box-shadow:0 6px 14px rgba(0,0,0,0.08); width:100%; }
-    .board p { font-size:1.2rem; margin-bottom:18px; color:#333; }
-    .dropzone { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; min-height:64px; }
-    .slot { position:relative; flex:1 1 120px; max-width:150px; min-width:80px; padding:12px; border:2px dashed var(--blue-1); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:center; font-size:0.9rem; color:#333; user-select:none; word-wrap:break-word; }
-    .slot .hint-icon { position:absolute; top:4px; right:6px; font-size:.85rem; color:var(--blue-1); cursor:pointer; }
-    #word-bank { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:12px; }
-    .word { flex:1 1 100px; max-width:150px; padding:8px 16px; background:#fff; border:2px solid var(--blue-1); color:var(--blue-1); border-radius:6px; font-size:0.85rem; cursor:grab; user-select:none; transition:.2s; text-align:center; word-wrap:break-word; }
-    .word.incorrect { border-color:#e53935; color:#e53935; }
-    #controls { margin-bottom:24px; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; }
-    input[type="file"] { display:none; }
-    .btn { padding:10px 20px; font-size:1rem; font-weight:500; border:none; border-radius:6px; cursor:pointer; transition:.2s; flex:1 1 auto; min-width:120px; }
-    .btn-primary { background:var(--blue-1); color:#fff; }
-    .btn-primary:hover { background:var(--blue-2); }
-    .btn-orange { background:var(--orange); color:#fff; }
-    .btn-orange:hover { filter:brightness(1.1); }
-    .feedback { display:none; margin-top:24px; text-align:left; background:#fff; border-left:6px solid var(--orange); padding:18px; border-radius:8px; }
-    .feedback div { font-weight:700; font-size:1.1rem; color:var(--blue-1); margin:6px 0; }
-    #sidebar { flex:0 0 280px; max-width:300px; background:var(--grey-bg); padding:24px; border-left:4px solid var(--blue-1); overflow-y:auto; }
-    #sidebar h2 { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px; }
-    #madeCountLabel { font-size:1.3rem; color:var(--blue-1); margin-bottom:12px; }
-    #score { font-size:1.1rem; font-weight:500; margin-bottom:18px; color:#333; }
-    #history { list-style:none; max-height:300px; overflow-y:auto; }
-    #history li { font-size:.9rem; color:var(--grey-txt); margin-bottom:8px; }
-    footer { text-align:center; padding:20px 10px; font-size:.9rem; color:var(--blue-1); background:#fff; }
-    #audio-controls { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin:30px 0 10px; }
-    .copy-btn { background: transparent; border: none; cursor: pointer; padding: 0 6px; vertical-align: middle; }
-    .copy-btn:hover { background: rgba(0,0,0,0.05); border-radius: 4px; }
-    .copy-btn .bi { font-size: 1rem; color: #007bff; }
-    .copy-btn:active .bi { color: #000; }
-  </style>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <header>
-    <h1>Lousa da Fluência</h1>
-    <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C400,60 1040,0 1440,30 L1440,60 L0,60 Z" fill="#fff"/></svg>
+    <h1>🗣️ Lousa da Fluência</h1>
+    <p class="header-sub">Monte frases em inglês e evolua com repetição espaçada</p>
+    <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path d="M0,30 C400,60 1040,0 1440,30 L1440,60 L0,60 Z" fill="#f0f4fa"/>
+    </svg>
   </header>
 
   <div class="container">
     <div class="main">
       <div id="controls">
-        <button id="loadOnlineBtn" class="btn btn-primary">📡 Carregar Online</button>
-        <label class="btn btn-primary" for="fileInput">📁 Escolher Arquivo</label>
-        <input type="file" id="fileInput" accept=".txt" />
-        <button id="nextBtn" class="btn btn-primary" style="display:none;">➡ Próxima Frase</button>
-        <button id="clearBtn" class="btn btn-primary" style="display:none;">🧹 Limpar Histórico</button>
+        <div class="control-shell">
+          <div class="action-hero">
+            <button id="loadOnlineBtn" class="btn btn-primary"><i class="fa fa-cloud-download-alt"></i> Carregar Online</button>
+            <label class="btn btn-primary" for="fileInput"><i class="fa fa-folder-open"></i> Carregar TXT</label>
+            <input type="file" id="fileInput" accept=".txt" />
+            <button id="nextBtn" class="btn btn-primary" style="display:none;"><i class="fa fa-forward"></i> Próxima Frase</button>
+            <button id="menuToggleBtn" class="btn btn-soft"><i class="fa fa-sliders-h"></i> Mais ações</button>
+          </div>
+          <div class="action-stack" id="secondaryActions" style="display:none;">
+            <button id="reviewNowBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-redo"></i> Revisar Agora</button>
+            <button id="trainWorstBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-fire"></i> Piores frases</button>
+            <button id="speakModeBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-microphone"></i> Modo falar</button>
+            <button id="patternModeBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-cubes"></i> Modo blocos</button>
+            <button id="autoReadBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-book-open"></i> Leitura guiada</button>
+            <button id="walkModeBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-walking"></i> Modo Caminhada</button>
+            <button id="pocketModeBtn" class="btn btn-soft"><i class="fa fa-moon"></i> Modo Bolso</button>
+            <button id="bridgeModeBtn" class="btn btn-soft"><i class="fa fa-language"></i> Modo Ponte PT→EN</button>
+            <button id="favoriteBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-star"></i> Marcar frase</button>
+            <button id="trainFavoritesBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-heart"></i> Treinar favoritas</button>
+            <button id="groupModeBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-layer-group"></i> Treinar grupo</button>
+            <button id="clearBtn" class="btn btn-soft" style="display:none;"><i class="fa fa-trash-alt"></i> Limpar Histórico</button>
+            <label class="toggle" id="newOnlyToggleWrap" style="display:none;"><input type="checkbox" id="newOnlyToggle" /><i class="fa fa-seedling"></i> Modo novas frases</label>
+          </div>
+          <div id="walkStatus" class="walk-status" style="display:none;">Modo Caminhada pronto. Tela escura, leitura contínua e tentativa de manter a tela ativa.</div>
+
+          <div class="opt-row" id="bridgeOptions" style="display:none;">
+            <label class="opt-item">
+              Palavras extras
+              <select id="bridgeDistractors">
+                <option value="0">nenhuma</option>
+                <option value="2">2 distratores</option>
+                <option value="4">4 distratores</option>
+              </select>
+            </label>
+            <label class="opt-item opt-check">
+              <input type="checkbox" id="bridgeTapToggle" checked /> Tocar para posicionar
+            </label>
+          </div>
+
+          <div class="opt-row" id="walkOptions">
+            <label class="opt-item opt-check">
+              <input type="checkbox" id="walkScreenOff" checked /> Deixar a tela apagar
+            </label>
+            <label class="opt-item">
+              Voz
+              <select id="walkVoiceSelect">
+                <option value="auto">MP3 com fallback</option>
+                <option value="mp3">só MP3</option>
+                <option value="tts">voz do sistema</option>
+              </select>
+            </label>
+            <label class="opt-item">
+              Repetições em inglês
+              <select id="walkRepeatSelect">
+                <option value="1">1x</option>
+                <option value="2">2x</option>
+                <option value="3">3x</option>
+              </select>
+            </label>
+            <label class="opt-item opt-check">
+              <input type="checkbox" id="walkIncludePt" checked /> Falar a tradução
+            </label>
+          </div>
+
+          <div id="walkEngineStatus" class="walk-status walk-status-engine"></div>
+        </div>
       </div>
+
+      <div id="bridgePrompt" class="bridge-prompt" style="display:none;"></div>
 
       <div class="board">
         <p>Arraste as palavras para os quadrados:</p>
@@ -69,273 +106,245 @@
       </div>
       <div id="word-bank"></div>
 
+      <div class="statusline" id="statusLine" style="display:none;">
+        <span class="muted">Status:</span>
+        <span id="statusBox"></span>
+        <span id="statusDue"></span>
+        <span id="statusRepeat"></span>
+        <span id="statusMode"></span>
+      </div>
+
       <div id="audio-controls">
-        <button id="playAudioEn" class="btn btn-orange">🔊 Ouvir em Inglês</button>
-        <button id="revealBtn" class="btn btn-orange">👁️ Revelar Tradução</button>
-        <button id="playAudioPt" class="btn btn-orange">🔊 Ouvir em Português</button>
+        <button id="playAudioEn" class="btn btn-orange"><i class="fa fa-volume-up"></i> Ouvir em Inglês</button>
+        <button id="revealBtn" class="btn btn-orange"><i class="fa fa-eye"></i> Revelar Tradução</button>
+        <button id="playAudioPt" class="btn btn-orange"><i class="fa fa-headphones"></i> Ouvir em Português</button>
       </div>
 
       <div class="feedback" id="feedback">
         <div id="sentenceEn"></div>
         <div id="sentencePt"></div>
       </div>
+
+      <div class="panel" id="speakLabPanel" style="display:none; text-align:left; margin-top:18px;">
+        <div class="title">Laboratório de fala</div>
+        <div class="small">Treino seguro: fale sem nota punitiva. O app mede aproximação, não perfeição.</div>
+        <button id="startRecBtn" class="btn btn-primary" style="width:100%; margin-top:10px;"><i class="fa fa-microphone"></i> Falar agora</button>
+        <button id="retryRecBtn" class="btn btn-soft" style="width:100%; margin-top:8px;"><i class="fa fa-redo"></i> Tentar novamente</button>
+        <button id="micPermissionBtn" class="btn btn-soft" style="width:100%; margin-top:8px;"><i class="fa fa-lock-open"></i> Autorizar microfone</button>
+        <div id="speechStatus" class="small" style="margin-top:10px;">Microfone parado.</div>
+        <div id="speechHeard" style="margin-top:10px;"></div>
+        <div id="speechEval" style="margin-top:10px;"></div>
+      </div>
+
+      <div class="panel" id="patternPanel" style="display:none; text-align:left; margin-top:18px;">
+        <div class="title">Construtor de frases</div>
+        <div class="small">Modelo base para o brasileiro montar frases sem travar.</div>
+        <div id="patternFrame" style="margin-top:8px;"></div>
+        <div id="patternTips" class="small" style="margin-top:8px;"></div>
+        <button id="generateVariationBtn" class="btn btn-primary" style="width:100%; margin-top:10px;"><i class="fa fa-magic"></i> Gerar variação prática</button>
+        <div id="variationBox" style="margin-top:10px;"></div>
+      </div>
     </div>
 
     <aside id="sidebar">
-      <h2 id="madeCountLabel">Frases feitas: 0</h2>
-      <h2>Histórico</h2>
+      <div style="margin-bottom:16px;">
+        <div id="madeCountLabel" style="font-size:2rem; font-weight:800; color:var(--blue-1); font-family:'Space Grotesk',sans-serif; line-height:1;">0</div>
+        <div style="font-size:0.78rem; color:var(--grey-txt); font-weight:600; text-transform:uppercase; letter-spacing:0.6px; margin-top:2px;">frases concluídas</div>
+      </div>
+
+      <h2>📊 Resumo</h2>
       <div id="score">Frases vistas: 0</div>
+      <div id="srsStats"></div>
+
+      <h2>🔍 Análise de Erros</h2>
+      <div class="panel" id="errorSummaryPanel">
+        <div class="title">Painel</div>
+        <div class="small">Captura erros reais (drops errados) e gera estatística automática.</div>
+        <button id="refreshAnalysisBtn" class="btn btn-primary" style="width:100%; margin-top:10px;"><i class="fa fa-sync-alt"></i> Atualizar Análise</button>
+        <button id="resetErrorsBtn" class="btn btn-soft" style="width:100%; margin-top:8px;"><i class="fa fa-trash-alt"></i> Zerar Erros</button>
+      </div>
+
+      <div class="panel" id="errorTypePanel">
+        <div class="title">Top Tipos de Erro</div>
+        <div id="errorTypeTable"></div>
+      </div>
+
+      <div class="panel" id="errorPhrasePanel">
+        <div class="title">Top Frases com Erro</div>
+        <div id="errorPhraseTable"></div>
+      </div>
+
+      <div class="panel" id="errorWordPanel">
+        <div class="title">Palavras Mais Erradas</div>
+        <div id="errorWordTable"></div>
+      </div>
+
+      <div class="panel" id="seldonPanel">
+        <div class="title">🤖 Motor Seldon</div>
+        <div class="small">Prevê o que deve vir agora: medo de falar, lacuna estrutural, revisão vencida e chance de consolidar.</div>
+        <div id="predictionBox" style="margin-top:8px;"></div>
+      </div>
+
+      <div class="panel" id="missionPanel">
+        <div class="title">🎯 Missão do dia</div>
+        <div id="missionBox" class="small">Carregue frases para começar.</div>
+      </div>
+
+      <div class="panel" id="brCoachPanel">
+        <div class="title">🇧🇷 Coach do brasileiro</div>
+        <div id="brCoachBox" class="small">O foco aqui é falar com segurança, sem esperar perfeição.</div>
+      </div>
+
+      <div class="panel" id="favoritesPanel">
+        <div class="title">⭐ Frases favoritas</div>
+        <div id="favoritesBox" class="small">Nenhuma frase marcada ainda.</div>
+      </div>
+
+      <div class="panel" id="groupsPanel">
+        <div class="title">📂 Meus Grupos</div>
+        <div class="small" style="margin-bottom:10px;">Selecione frases do banco para treinar como grupo focado.</div>
+        <div id="groupsList"></div>
+        <button id="newGroupBtn" class="btn btn-primary" style="width:100%; margin-top:10px;"><i class="fa fa-plus"></i> Novo grupo</button>
+      </div>
+
+      <div class="panel" id="vaultPanel">
+        <div class="title">🔒 Cofre de progresso</div>
+        <div class="small">Todo o histórico vive só neste navegador. Exporte para não depender dele.</div>
+        <div id="vaultStatus" class="vault-status"></div>
+        <button id="vaultExportBtn" class="btn btn-primary" style="width:100%; margin-top:10px;"><i class="fa fa-download"></i> Exportar tudo (JSON)</button>
+        <div class="vault-row">
+          <button id="vaultMergeBtn" class="btn btn-soft"><i class="fa fa-upload"></i> Restaurar</button>
+          <button id="vaultReplaceBtn" class="btn btn-soft"><i class="fa fa-exchange-alt"></i> Substituir</button>
+        </div>
+        <input type="file" id="vaultImportInput" accept=".json" hidden />
+        <div class="vault-divider">Base para análise</div>
+        <div class="vault-row vault-row-3">
+          <button id="vaultPhrasesBtn" class="btn btn-soft" title="Agregado por frase, pronto para IQR e z-score">Frases</button>
+          <button id="vaultAttemptsBtn" class="btn btn-soft" title="Uma linha por tentativa">Tentativas</button>
+          <button id="vaultErrorsBtn" class="btn btn-soft" title="Uma linha por erro">Erros</button>
+        </div>
+      </div>
+
+      <h2>🕒 Histórico</h2>
       <ul id="history"></ul>
-      <button id="savePdfBtn" class="btn btn-primary" style="width:100%; margin-top:10px;">💾 Salvar em PDF</button>
+      <button id="savePdfBtn" class="btn btn-soft" style="width:100%; margin-top:10px;"><i class="fa fa-file-pdf"></i> Salvar em PDF</button>
     </aside>
   </div>
 
-  <footer>© 2025 Igarapé Digital – Todos os direitos reservados</footer>
+  <footer>© 2025 Igarapé Digital · Todos os direitos reservados</footer>
+
+  <!-- ═══════════════════════════════════════════
+       MODAL DE GRUPOS — com Seleção Massiva
+  ═══════════════════════════════════════════ -->
+  <div id="groupModal" role="dialog" aria-modal="true">
+    <div class="group-modal-box">
+      <div class="group-modal-header">
+        <h3 id="groupModalTitle">📂 Novo Grupo</h3>
+        <button class="group-modal-close" id="groupModalClose"><i class="fa fa-times"></i></button>
+      </div>
+      <div class="group-modal-body">
+        <input type="text" class="group-name-field" id="groupNameInput" placeholder="Nome do grupo (ex: Sonova, Verbos, Frases difíceis...)" maxlength="40" />
+
+        <!-- ══ SELEÇÃO MASSIVA DE FRASES ══ -->
+        <div class="range-select-bar">
+          <button class="range-btn" id="range1to25" title="Selecionar frases 1 a 25">01–25</button>
+          <button class="range-btn" id="range26to50" title="Selecionar frases 26 a 50">26–50</button>
+          <button class="range-btn" id="range51to75" title="Selecionar frases 51 a 75">51–75</button>
+          <button class="range-btn" id="range76to100" title="Selecionar frases 76 a 100">76–100</button>
+          <button class="range-btn" id="rangeSelectAll" title="Selecionar todas visíveis">✓ Todas</button>
+          <button class="range-btn range-btn-danger" id="rangeDeselectAll" title="Desmarcar todas">✕ Limpar</button>
+        </div>
+        <div class="range-custom-row">
+          <span>De</span>
+          <input type="number" id="rangeFrom" min="1" value="1" />
+          <span>até</span>
+          <input type="number" id="rangeTo" min="1" value="100" />
+          <button class="range-btn" id="rangeApplyCustom">Aplicar</button>
+        </div>
+
+        <div class="group-search-wrap" style="margin-top:10px;">
+          <i class="fa fa-search"></i>
+          <input type="text" class="group-search" id="groupSearchInput" placeholder="Buscar frase..." />
+        </div>
+        <div class="group-sentence-counter" id="groupCounter">0 selecionadas</div>
+        <div class="group-sentence-list" id="groupSentenceList"></div>
+        <div class="group-modal-actions">
+          <button class="btn btn-soft" id="groupCancelBtn"><i class="fa fa-times"></i> Cancelar</button>
+          <button class="btn btn-primary" id="groupSaveBtn"><i class="fa fa-save"></i> Salvar grupo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="groupModeBadge"></div>
+
+  <!-- ═══════════════════════════════════════════
+       MODO BOLSO — tela preta, botões grandes
+  ═══════════════════════════════════════════ -->
+  <div id="pocketOverlay">
+    <button id="pocketClose" class="pocket-close" aria-label="Sair do Modo Bolso"><i class="fa fa-times"></i></button>
+    <div class="pocket-body">
+      <div class="pocket-eyebrow">Caminhada</div>
+      <div id="pocketEn" class="pocket-en"></div>
+      <div id="pocketPt" class="pocket-pt"></div>
+    </div>
+    <div class="pocket-controls">
+      <button id="pocketPrev" class="pocket-btn" aria-label="Frase anterior"><i class="fa fa-backward"></i></button>
+      <button id="pocketRepeat" class="pocket-btn" aria-label="Repetir frase"><i class="fa fa-redo"></i></button>
+      <button id="pocketPlay" class="pocket-btn pocket-btn-main" aria-label="Pausar ou continuar"><i class="fa fa-pause"></i></button>
+      <button id="pocketNext" class="pocket-btn" aria-label="Próxima frase"><i class="fa fa-forward"></i></button>
+    </div>
+    <div class="pocket-hint">Toque na tela para acordar os controles. A leitura continua com a tela apagada.</div>
+  </div>
+
+  <div id="modeBadges" class="mode-badges"></div>
+
+  <div id="swUpdateBar" class="sw-update">
+    <span>Uma versão nova do app está pronta.</span>
+    <button id="swUpdateBtn">Atualizar agora</button>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="walk-engine.js"></script>
+  <script src="bridge-mode.js"></script>
+  <script src="board-ux.js"></script>
+  <script src="data-vault.js"></script>
 
   <script>
-    let sentences = [], currentIndex = 0, currentWords = [], dragged = null;
-    let history = [], translationCache = {};
-    let textEn = "", textPt = "";
-    let madeCount = 0;
+    // ── Registro do Service Worker (offline para a caminhada) ──
+    // Só faz sentido sob http/https. Em file:// é ignorado.
+    (function () {
+      if (!("serviceWorker" in navigator) || location.protocol === "file:") return;
 
-    function loadMadeCount() {
-      const stored = localStorage.getItem('madeCount');
-      madeCount = stored ? parseInt(stored) : 0;
-      document.getElementById('madeCountLabel').textContent = 'Frases feitas: ' + madeCount;
-    }
-
-    function saveMadeCount() {
-      localStorage.setItem('madeCount', madeCount);
-    }
-
-    function incrementMadeCount() {
-      madeCount++;
-      saveMadeCount();
-      document.getElementById('madeCountLabel').textContent = 'Frases feitas: ' + madeCount;
-    }
-
-    function renderSidebar() {
-      document.getElementById("score").textContent = "Frases vistas: " + history.length;
-      const ul = document.getElementById("history");
-      ul.innerHTML = "";
-      history.slice().reverse().forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.en} | ${item.pt || ""}`;
-        ul.appendChild(li);
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").then(function (reg) {
+          reg.addEventListener("updatefound", function () {
+            var novo = reg.installing;
+            if (!novo) return;
+            novo.addEventListener("statechange", function () {
+              if (novo.state === "installed" && navigator.serviceWorker.controller) {
+                var bar = document.getElementById("swUpdateBar");
+                var btn = document.getElementById("swUpdateBtn");
+                if (bar) bar.classList.add("show");
+                if (btn) btn.onclick = function () {
+                  novo.postMessage("SKIP_WAITING");
+                  location.reload();
+                };
+              }
+            });
+          });
+        }).catch(function () { /* sem offline; o app segue normal */ });
       });
-    }
 
-    function saveHistory(en, pt) {
-      history.push({ en, pt });
-      localStorage.setItem('history', JSON.stringify(history));
-      renderSidebar();
-    }
-
-    function speak(txt, lang = 'en-US', rate = 1) {
-      const utter = new SpeechSynthesisUtterance(txt);
-      utter.lang = lang;
-      utter.rate = rate;
-      window.speechSynthesis.speak(utter);
-    }
-
-    function loadSentence(idx) {
-      textEn = sentences[idx];
-      textPt = "";
-      currentWords = textEn.split(" ");
-      document.getElementById("sentenceEn").textContent = "";
-      document.getElementById("sentencePt").textContent = "";
-      setupBoard();
-      document.getElementById("feedback").style.display = "none";
-      document.getElementById("playAudioEn").onclick = () => speak(textEn);
-      setTimeout(() => speak(textEn), 300);
-      sessionStorage.setItem('currentIndex', currentIndex);
-    }
-
-    function setupBoard() {
-      const slots = document.getElementById("slots"), bank = document.getElementById("word-bank");
-      slots.innerHTML = "";
-      bank.innerHTML = "";
-      currentWords.forEach((_, i) => {
-        const slot = document.createElement("div");
-        slot.className = "slot";
-        slot.dataset.index = i;
-        const hint = document.createElement("span");
-        hint.className = "hint-icon";
-        hint.textContent = "🛈";
-        hint.title = "Dica";
-        slot.appendChild(hint);
-        slot.ondragover = e => e.preventDefault();
-        slot.ondrop = () => {
-          if (!dragged) return;
-          const correctWord = currentWords[slot.dataset.index];
-          if (dragged.textContent === correctWord) {
-            if (slot.querySelector(".word")) bank.appendChild(slot.querySelector(".word"));
-            slot.appendChild(dragged);
-            checkComplete();
-          } else {
-            dragged.classList.add("incorrect");
-            setTimeout(() => dragged.classList.remove("incorrect"), 500);
-          }
-        };
-        slots.appendChild(slot);
-      });
-      [...currentWords].sort(() => 0.5 - Math.random()).forEach(w => {
-        const el = document.createElement("div");
-        el.className = "word";
-        el.textContent = w;
-        el.draggable = true;
-        el.ondragstart = () => dragged = el;
-        bank.appendChild(el);
-      });
-    }
-
-    function checkComplete() {
-      const slots = [...document.querySelectorAll(".slot")];
-      if (slots.every(s => s.querySelector(".word"))) {
-        incrementMadeCount();
-        document.getElementById("sentenceEn").innerHTML = `
-      <span id="copyEnText" style="color: var(--blue-1); font-weight: bold;">EN: ${textEn}</span>
-      <button class="copy-btn" onclick="copyText('copyEnText')" title="Copiar">
-        <i class="bi bi-clipboard"></i>
-      </button>
-`;
-        document.getElementById("feedback").style.display = "block";
-        document.getElementById("revealBtn").onclick = async () => {
-          document.getElementById("revealBtn").disabled = true;
-          let pt = translationCache[textEn];
-          if (!pt) {
-            try {
-              const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(textEn)}`;
-              const res = await fetch(url);
-              const data = await res.json();
-              pt = data[0][0][0];
-              translationCache[textEn] = pt;
-            } catch {
-              pt = "Tradução indisponível";
-            }
-          }
-          document.getElementById("sentencePt").innerHTML = `
-      <span id="copyPtText" style="color: var(--blue-1); font-weight: bold;">PT: ${pt}</span>
-      <button class="copy-btn" onclick="copyText('copyPtText')" title="Copiar">
-        <i class="bi bi-clipboard"></i>
-      </button>
-`;
-          document.getElementById("playAudioPt").onclick = () => speak(pt, 'pt-BR', 1.1);
-          saveHistory(textEn, pt);
-          document.getElementById("revealBtn").disabled = false;
-        };
-      }
-    }
-
-	document.addEventListener('DOMContentLoaded', () => {
-	  const savedSentences = localStorage.getItem('sentences');
-	  const savedIndex = localStorage.getItem('currentIndex');
-	  const savedHistory = localStorage.getItem('history');
-
-	  history = savedHistory ? JSON.parse(savedHistory) : [];
-	  renderSidebar(); // Sempre renderiza o histórico
-
-	  if (savedSentences) {
-	    sentences = JSON.parse(savedSentences);
-	    currentIndex = savedIndex ? parseInt(savedIndex) : 0;
-	    loadSentence(currentIndex);
-	    document.getElementById("nextBtn").style.display = 'inline-block';
-	    document.getElementById("clearBtn").style.display = 'inline-block';
-	  }
-
-	  loadMadeCount();
-	});
-
-	document.getElementById("loadOnlineBtn").onclick = () => {
-	  fetch("https://raw.githubusercontent.com/andersonoab/aprender_ingles/main/frases_unicas_1000.txt")
-	    .then(res => res.text())
-	    .then(txt => {
-	      txt = txt.replace(/^\uFEFF/, '');
-	      sentences = txt.trim().split(/\r?\n/).filter(Boolean);
-	
-	      // Embaralha todas as frases
-	      sentences.sort(() => 0.5 - Math.random());
-	
-	      // Escolhe um índice aleatório para começar
-	      currentIndex = Math.floor(Math.random() * sentences.length);
-	
-	      localStorage.setItem('sentences', JSON.stringify(sentences));
-	      localStorage.setItem('currentIndex', currentIndex.toString());
-	
-	      loadSentence(currentIndex);
-	      renderSidebar();
-	
-	      document.getElementById("nextBtn").style.display = "inline-block";
-	      document.getElementById("clearBtn").style.display = "inline-block";
-	    });
-	};
-
-
-	document.getElementById("fileInput").onchange = function () {
-	  const file = this.files[0];
-	  if (!file) return;
-	
-	  const reader = new FileReader();
-	  reader.onload = e => {
-	    const txt = e.target.result.replace(/^\uFEFF/, '');
-	
-	    // Divide e embaralha as frases
-	    sentences = txt.trim().split(/\r?\n/).filter(Boolean);
-	    sentences.sort(() => 0.5 - Math.random());
-	
-	    // Escolhe uma frase aleatória da lista
-	    currentIndex = Math.floor(Math.random() * sentences.length);
-	
-	    localStorage.setItem('sentences', JSON.stringify(sentences));
-	    localStorage.setItem('currentIndex', currentIndex.toString());
-	
-	    // NÃO APAGAR O HISTÓRICO MAIS
-	    loadSentence(currentIndex);
-	    renderSidebar();
-	
-	    // Exibe os botões de navegação
-	    document.getElementById("nextBtn").style.display = 'inline-block';
-	    document.getElementById("clearBtn").style.display = 'inline-block';
-	  };
-	
-	  reader.readAsText(file, "UTF-8");
-	};
-
-
-
-    document.getElementById("nextBtn").onclick = () => {
-      currentIndex = (currentIndex + 1) % sentences.length;
-      loadSentence(currentIndex);
-    };
-
-    document.getElementById("clearBtn").onclick = () => {
-      history = [];
-      localStorage.removeItem('history');
-      renderSidebar();
-    };
-
-    function copyText(elementId) {
-      const text = document.getElementById(elementId).textContent.replace(/^EN: |^PT: /, '');
-      navigator.clipboard.writeText(text).then(() => {
-        console.log("Copiado:", text);
-      });
-    }
-    
-    document.getElementById("savePdfBtn").onclick = () => {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF({ unit: "pt", format: "a4" });
-      let y = 40;
-      doc.setFontSize(16);
-      doc.text("Histórico de Frases", 40, y);
-      y += 30;
-      history.forEach((h, i) => {
-        doc.setFontSize(12);
-        doc.text(`${i + 1}. ${h.en} | ${h.pt || ""}`, 40, y);
-        y += 20;
-        if (y > 780) { doc.addPage(); y = 40; }
-      });
-      doc.save("historico_frases.pdf");
-    };
+      // Saída de emergência: rode no console para remover o SW.
+      window.__desinstalarSW = function () {
+        navigator.serviceWorker.getRegistrations().then(function (rs) {
+          rs.forEach(function (r) { r.unregister(); });
+          caches.keys().then(function (ks) { ks.forEach(function (k) { caches.delete(k); }); });
+          console.log("Service worker removido. Recarregue a página.");
+        });
+      };
+    })();
   </script>
 </body>
 </html>
