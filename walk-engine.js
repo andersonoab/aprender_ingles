@@ -1,22 +1,60 @@
 /* ═══════════════════════════════════════════════════════════════
-   WALK ENGINE — Motor de Caminhada com Tela Desligada
+   WALK ENGINE v2 — Motor de Caminhada
    Lousa da Fluência · Igarapé Digital
+   Alvo primário: Android / Chrome
 
-   Problema que este módulo resolve:
-   O Wake Lock MANTÉM a tela ligada. Ele é o oposto do que você quer.
-   Para ouvir com a tela desligada, o navegador precisa ser reconhecido
-   pelo sistema operacional como uma SESSÃO DE MÍDIA ATIVA. Isso só
-   acontece com um HTMLAudioElement tocando PCM real + MediaSession API.
+   O QUE MUDOU EM RELAÇÃO À v1 E POR QUÊ
 
-   Estratégias empilhadas:
-   1. Âncora de mídia: <audio> em loop com WAV real (PCM de baixíssima
-      amplitude) gerado em memória. Mantém a sessão viva entre as falas.
-   2. MediaSession: metadados + controles na tela de bloqueio
-      (anterior / repetir / pausar / próxima) e no fone bluetooth.
-   3. Voz MP3: busca o áudio como arquivo real. Media element toca com
-      a tela bloqueada; speechSynthesis não toca no iOS bloqueado.
-   4. Fallback automático para speechSynthesis se o MP3 falhar.
-   5. Modo Bolso: overlay preto, botões grandes, evita toque acidental.
+   1. A cadeia de áudio não depende mais de setTimeout.
+      Chrome estrangula timer de página oculta para 1x/s e, depois de
+      5 minutos, para 1x/min. A v1 avançava de frase com
+      setTimeout(200ms) e se socorria com setInterval(4000ms): os dois
+      caem no mesmo estrangulamento. Agora o que move a corrente é o
+      evento "ended" de um elemento de mídia, que dispara normalmente
+      em página oculta enquanto houver áudio tocando.
+
+   2. As pausas entre frases também são mídia, não timer.
+      Um WAV de silêncio real é tocado com playbackRate ajustado.
+      Assim nenhum elo da corrente é um timer.
+
+   3. Ping-pong de dois elementos de voz (A/B).
+      Enquanto A toca, B pré-carrega a próxima fala. Latência de rede
+      na rua deixa de abrir buraco na leitura.
+
+   4. mp3Broken virou falha com recuperação, não sentença perpétua.
+      Na v1, uma única falha de rede desligava o canal MP3 pelo resto
+      da sessão e jogava tudo no speechSynthesis — que no Android é
+      justamente o canal que não toca em segundo plano. Agora há
+      contagem de falhas consecutivas e reabilitação automática.
+
+   5. stopSpeaking() zera onended/onerror ANTES de mexer no src.
+      Na v1 o load() com src vazio disparava um erro sintético que caía
+      no onerror ainda ligado e reiniciava a fala. Era o áudio fantasma
+      depois de pausar ou pular.
+
+   6. pause() não pausa mais a âncora de mídia.
+      Manter a âncora tocando é o que impede o Chrome de congelar a
+      aba, e é o que garante que o botão play da tela de bloqueio ainda
+      consiga ressuscitar a leitura.
+
+   7. Com a tela apagada, o avanço de frase não reconstrói a interface.
+      loadSentence() refaz tabuleiro, painéis, predição, missão e
+      análise de erros. Isso não serve para nada quando ninguém está
+      olhando. Agora a interface é sincronizada quando a página volta
+      a ficar visível.
+
+   8. Política de tela explícita e escolhível: "manter acesa" (Wake
+      Lock, re-adquirido ao voltar da tela de bloqueio) ou "deixar
+      apagar" (sessão de mídia sustenta o áudio).
+
+   INCERTEZA DECLARADA
+   O Chrome decide se uma aba está "audível" por limiar de potência.
+   A âncora de silêncio quase absoluto pode ficar abaixo desse limiar.
+   Aqui ela é gerada em -50 dBFS a 40 Hz: inaudível na prática, mas com
+   energia suficiente para registrar. Não tenho como garantir o limiar
+   exato, que varia por versão do Chrome. Na prática isso importa pouco,
+   porque durante a caminhada a própria voz mantém a aba audível; a
+   âncora só cobre os intervalos curtos.
 
    Não altera app.js. Sobrescreve funções globais por composição.
 ═══════════════════════════════════════════════════════════════ */
@@ -24,34 +62,49 @@
 window.WalkEngine = (function () {
   "use strict";
 
-  const PREF_KEY = "walkEngine_v1";
+  const PREF_KEY = "walkEngine_v2";
+  const LEGACY_KEY = "walkEngine_v1";
 
   const defaults = {
-    screenOff: true,      // true = deixa a tela apagar (não pede Wake Lock)
+    screenAwake: false,   // true = Wake Lock (tela acesa) | false = deixa apagar
     voice: "auto",        // auto | mp3 | tts
     repeatEn: 2,          // repetições em inglês antes do português
     includePt: true,      // fala a tradução
-    gapMs: 500,           // pausa entre frases
+    gapMs: 600,           // pausa entre frases
     rate: 0.98            // velocidade da fala
   };
+
+  const MAX_TTS_CHARS = 190;   // acima disso o endpoint MP3 trunca
+  const MP3_FAIL_LIMIT = 3;    // falhas seguidas antes de degradar
+  const MP3_RETRY_MS = 60000;  // tempo até tentar reabilitar o MP3
 
   let prefs = Object.assign({}, defaults);
 
   const state = {
     running: false,
     paused: false,
-    mp3Broken: false,
+    mp3Fails: 0,
+    mp3DownSince: 0,
     unlocked: false,
-    seqToken: 0
+    seqToken: 0,
+    wakeLock: null,
+    suppressAutoStart: false,
+    pendingCard: null
   };
 
-  let keepEl = null;      // âncora de mídia (loop infinito)
-  let voiceEl = null;     // reprodutor das falas em MP3
+  let keepEl = null;            // âncora de mídia, nunca pausada em uso
+  let voiceA = null;
+  let voiceB = null;
+  let active = null;            // elemento tocando agora
+  let idle = null;              // elemento pré-carregando
+  let keepUrl = null;
+  let silenceUrl = null;
   let artworkUrl = null;
-  let heartbeat = null;
+  let watchdog = null;          // rede de segurança, fora do caminho crítico
 
   const originals = {
     requestWakeLock: window.requestWakeLock,
+    releaseWakeLock: window.releaseWakeLock,
     startNoSleep: window.startNoSleep,
     stopNoSleep: window.stopNoSleep,
     playGuidedReading: window.playGuidedReading
@@ -60,11 +113,27 @@ window.WalkEngine = (function () {
   /* ── Preferências ─────────────────────────────────────────── */
 
   function loadPrefs() {
+    let raw = {};
     try {
-      const raw = JSON.parse(localStorage.getItem(PREF_KEY) || "{}");
-      prefs = Object.assign({}, defaults, raw);
+      raw = JSON.parse(localStorage.getItem(PREF_KEY) || "null");
+      if (!raw) {
+        // Migra a chave antiga: screenOff era o inverso de screenAwake.
+        const old = JSON.parse(localStorage.getItem(LEGACY_KEY) || "{}");
+        raw = {
+          screenAwake: old.screenOff === false,
+          voice: old.voice,
+          repeatEn: old.repeatEn,
+          includePt: old.includePt,
+          gapMs: old.gapMs,
+          rate: old.rate
+        };
+      }
     } catch {
-      prefs = Object.assign({}, defaults);
+      raw = {};
+    }
+    prefs = Object.assign({}, defaults);
+    for (const k of Object.keys(defaults)) {
+      if (raw && raw[k] !== undefined && raw[k] !== null) prefs[k] = raw[k];
     }
   }
 
@@ -75,23 +144,15 @@ window.WalkEngine = (function () {
   function setPref(key, value) {
     prefs[key] = value;
     savePrefs();
-    if (key === "screenOff") {
-      if (value) {
-        try { if (typeof releaseWakeLock === "function") releaseWakeLock(); } catch {}
-      } else if (state.running) {
-        try { originals.requestWakeLock && originals.requestWakeLock(); } catch {}
-      }
-    }
+    if (key === "screenAwake") applyScreenPolicy();
+    if (key === "voice") { state.mp3Fails = 0; state.mp3DownSince = 0; }
     renderStatus();
   }
 
-  /* ── WAV real gerado em memória ───────────────────────────── */
-  // Silêncio absoluto é descartado por alguns sistemas. Aqui geramos
-  // PCM verdadeiro: seno de 40 Hz com amplitude de 8/32768 (inaudível
-  // em fone e alto-falante, mas suficiente para o SO manter a sessão).
+  /* ── Geração de PCM real em memória ───────────────────────── */
 
-  function buildKeepAliveWav(seconds = 2, sampleRate = 8000) {
-    const frames = seconds * sampleRate;
+  function makeWav(seconds, sampleRate, sampleAt) {
+    const frames = Math.round(seconds * sampleRate);
     const bytes = 44 + frames * 2;
     const buf = new ArrayBuffer(bytes);
     const view = new DataView(buf);
@@ -114,16 +175,32 @@ window.WalkEngine = (function () {
     ascii(36, "data");
     view.setUint32(40, frames * 2, true);
 
-    const amp = 8;
     for (let i = 0; i < frames; i++) {
-      const sample = Math.round(amp * Math.sin((2 * Math.PI * 40 * i) / sampleRate));
-      view.setInt16(44 + i * 2, sample, true);
+      view.setInt16(44 + i * 2, sampleAt(i, sampleRate), true);
     }
 
     return URL.createObjectURL(new Blob([buf], { type: "audio/wav" }));
   }
 
-  /* ── Capa para a tela de bloqueio ─────────────────────────── */
+  // Âncora: seno de 40 Hz a cerca de -50 dBFS. Inaudível na prática,
+  // com energia suficiente para o Chrome tratar a aba como audível.
+  function buildKeepAliveWav() {
+    if (keepUrl) return keepUrl;
+    const amp = 96;
+    keepUrl = makeWav(2, 8000, (i, sr) =>
+      Math.round(amp * Math.sin((2 * Math.PI * 40 * i) / sr))
+    );
+    return keepUrl;
+  }
+
+  // Silêncio de 1 s. Pausas menores saem por playbackRate.
+  function buildSilenceWav() {
+    if (silenceUrl) return silenceUrl;
+    silenceUrl = makeWav(1, 8000, () => 0);
+    return silenceUrl;
+  }
+
+  /* ── Capa para a notificação de mídia ─────────────────────── */
 
   function buildArtwork() {
     if (artworkUrl) return artworkUrl;
@@ -162,28 +239,41 @@ window.WalkEngine = (function () {
     }
   }
 
-  /* ── Desbloqueio de áudio (precisa de gesto do usuário) ───── */
+  /* ── Desbloqueio de áudio (exige gesto do usuário) ────────── */
+
+  function mkAudio() {
+    const el = document.createElement("audio");
+    el.setAttribute("playsinline", "");
+    el.preload = "auto";
+    el.crossOrigin = null;
+    document.body.appendChild(el);
+    return el;
+  }
 
   function unlock() {
     if (state.unlocked) return;
     try {
       if (!keepEl) {
-        keepEl = document.createElement("audio");
+        keepEl = mkAudio();
         keepEl.src = buildKeepAliveWav();
         keepEl.loop = true;
-        keepEl.volume = 0.03;
-        keepEl.setAttribute("playsinline", "");
-        keepEl.preload = "auto";
-        document.body.appendChild(keepEl);
+        keepEl.volume = 1;
       }
-      if (!voiceEl) {
-        voiceEl = document.createElement("audio");
-        voiceEl.setAttribute("playsinline", "");
-        voiceEl.preload = "auto";
-        voiceEl.volume = 1;
-        document.body.appendChild(voiceEl);
-      }
+      if (!voiceA) { voiceA = mkAudio(); voiceA.volume = 1; }
+      if (!voiceB) { voiceB = mkAudio(); voiceB.volume = 1; }
+      active = voiceA;
+      idle = voiceB;
+
       keepEl.play().catch(() => {});
+      // Toca e para os dois elementos de voz dentro do gesto do usuário.
+      // Sem isso o Android bloqueia a primeira reprodução programática.
+      [voiceA, voiceB].forEach((el) => {
+        try {
+          el.src = buildSilenceWav();
+          el.play().then(() => el.pause()).catch(() => {});
+        } catch {}
+      });
+
       state.unlocked = true;
     } catch {}
   }
@@ -215,70 +305,110 @@ window.WalkEngine = (function () {
     set("previoustrack", () => step(-1));
     set("seekforward", () => step(1));
     set("seekbackward", () => repeat());
-    set("stop", () => { if (typeof toggleWalkMode === "function" && walkMode) toggleWalkMode(); });
+    set("stop", () => {
+      if (typeof toggleWalkMode === "function" && walkMode) toggleWalkMode();
+    });
   }
 
-  /* ── Falas ────────────────────────────────────────────────── */
+  /* ── Canal de voz ─────────────────────────────────────────── */
 
-  function ttsUrls(text, lang) {
+  function mp3Available() {
+    if (prefs.voice === "tts") return false;
+    if (prefs.voice === "mp3") return true;
+    if (state.mp3Fails < MP3_FAIL_LIMIT) return true;
+    // Degradado: tenta reabilitar depois de um tempo de descanso.
+    if (Date.now() - state.mp3DownSince > MP3_RETRY_MS) {
+      state.mp3Fails = 0;
+      state.mp3DownSince = 0;
+      renderStatus();
+      return true;
+    }
+    return false;
+  }
+
+  function ttsUrl(text, lang) {
     const q = encodeURIComponent(text);
-    const tl = lang.startsWith("pt") ? "pt-BR" : "en-US";
-    return [
-      `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=${tl}&q=${q}`,
-      `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${tl}&q=${q}`
-    ];
+    const tl = String(lang).startsWith("pt") ? "pt-BR" : "en-US";
+    return `https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=${tl}&q=${q}`;
   }
 
-  function playMp3(text, lang, rate) {
+  function detachMedia(el) {
+    if (!el) return;
+    el.onended = null;
+    el.onerror = null;
+    el.onstalled = null;
+    el.oncanplay = null;
+  }
+
+  // Solta o elemento sem disparar erro sintético no onerror.
+  function hardStop(el) {
+    if (!el) return;
+    detachMedia(el);
+    try {
+      el.pause();
+      el.removeAttribute("src");
+      el.load();
+    } catch {}
+  }
+
+  function swapVoiceEls() {
+    const tmp = active;
+    active = idle;
+    idle = tmp;
+  }
+
+  // Pré-carrega no elemento ocioso enquanto o outro toca.
+  function preload(url, rate) {
+    if (!idle || !url) return;
+    try {
+      detachMedia(idle);
+      idle.pause();
+      idle.src = url;
+      idle.playbackRate = clampRate(rate);
+      idle.load();
+    } catch {}
+  }
+
+  function clampRate(r) {
+    return Math.min(2.5, Math.max(0.5, r || 1));
+  }
+
+  // Reproduz uma URL no elemento ativo. Resolve pelo evento "ended",
+  // que é o único elo da corrente. Nenhum timer no caminho crítico.
+  function playOn(el, url, rate) {
     return new Promise((resolve) => {
-      if (!voiceEl || state.mp3Broken || !text) return resolve(false);
+      if (!el || !url) return resolve(false);
 
-      const urls = ttsUrls(text, lang);
-      let attempt = 0;
       let settled = false;
-      let guard = null;
-
       const finish = (ok) => {
         if (settled) return;
         settled = true;
-        clearTimeout(guard);
-        voiceEl.onended = null;
-        voiceEl.onerror = null;
+        detachMedia(el);
         resolve(ok);
       };
 
-      const tryUrl = () => {
-        if (attempt >= urls.length) return finish(false);
-        const url = urls[attempt++];
-        voiceEl.onended = () => finish(true);
-        voiceEl.onerror = () => tryUrl();
-        try {
-          voiceEl.src = url;
-          voiceEl.playbackRate = Math.min(1.6, Math.max(0.6, rate || 1));
-          voiceEl.load();
-          const p = voiceEl.play();
-          if (p && p.catch) p.catch(() => tryUrl());
-        } catch {
-          tryUrl();
-        }
-      };
+      el.onended = () => finish(true);
+      el.onerror = () => finish(false);
 
-      // Se em 6 s nada tocou, considera o canal MP3 indisponível.
-      guard = setTimeout(() => {
-        if (!voiceEl.duration || voiceEl.paused) {
-          state.mp3Broken = true;
-          renderStatus();
-          finish(false);
+      try {
+        if (el.src !== url) {
+          el.src = url;
+          el.load();
         }
-      }, 6000);
-
-      tryUrl();
+        el.playbackRate = clampRate(rate);
+        el.currentTime = 0;
+        const p = el.play();
+        if (p && p.catch) p.catch(() => finish(false));
+      } catch {
+        finish(false);
+      }
     });
   }
 
   function playTts(text, lang, rate) {
     return new Promise((resolve) => {
       try {
+        window.speechSynthesis.cancel();
         const utter = new SpeechSynthesisUtterance(text);
         utter.lang = lang;
         utter.rate = rate;
@@ -291,29 +421,81 @@ window.WalkEngine = (function () {
     });
   }
 
-  async function say(text, lang, rate) {
-    if (!text) return false;
-    const wantMp3 = prefs.voice === "mp3" || (prefs.voice === "auto" && !state.mp3Broken);
-    if (wantMp3) {
-      const ok = await playMp3(text, lang, rate);
-      if (ok) return true;
+  // Pausa como mídia: playbackRate encurta o silêncio de 1 s.
+  function silence(ms) {
+    const secs = Math.max(0.15, Math.min(3, (ms || 0) / 1000));
+    swapVoiceEls();
+    return playOn(active, buildSilenceWav(), 1 / secs);
+  }
+
+  async function say(item, nextItem) {
+    if (item.silence) return silence(item.silence);
+    if (!item.text) return false;
+
+    const usable = mp3Available() && item.text.length <= MAX_TTS_CHARS;
+
+    if (usable) {
+      const url = ttsUrl(item.text, item.lang);
+      swapVoiceEls();
+      // Enquanto este toca, o outro elemento já busca o próximo.
+      const ok = playOn(active, url, item.rate);
+      if (nextItem && nextItem.text && nextItem.text.length <= MAX_TTS_CHARS) {
+        preload(ttsUrl(nextItem.text, nextItem.lang), nextItem.rate);
+      } else if (nextItem && nextItem.silence) {
+        preload(buildSilenceWav(), 1);
+      }
+      const result = await ok;
+      if (result) {
+        state.mp3Fails = 0;
+        return true;
+      }
+      state.mp3Fails += 1;
+      if (state.mp3Fails >= MP3_FAIL_LIMIT && !state.mp3DownSince) {
+        state.mp3DownSince = Date.now();
+        renderStatus();
+      }
       if (prefs.voice === "mp3") return false;
     }
-    return playTts(text, lang, rate);
+
+    // Fallback honesto: no Android o speechSynthesis é suspenso em
+    // segundo plano. Só serve com a tela acesa e o app em primeiro plano.
+    return playTts(item.text, item.lang, item.rate);
   }
 
   function stopSpeaking() {
     try { window.speechSynthesis.cancel(); } catch {}
-    try { if (voiceEl) { voiceEl.pause(); voiceEl.removeAttribute("src"); voiceEl.load(); } } catch {}
+    hardStop(voiceA);
+    hardStop(voiceB);
   }
 
-  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  /* ── Fila de leitura de uma frase ─────────────────────────── */
 
-  /* ── Ciclo de leitura guiada (substitui o do app.js) ──────── */
+  function buildQueue(card, pt) {
+    const q = [];
+    const reps = Math.max(1, prefs.repeatEn);
+    for (let i = 0; i < reps; i++) {
+      q.push({ text: card.en, lang: "en-US", rate: prefs.rate - i * 0.04 });
+    }
+    if (prefs.includePt) {
+      q.push({ text: pt || "Tradução indisponível", lang: "pt-BR", rate: 1.02 });
+      q.push({ text: card.en, lang: "en-US", rate: prefs.rate - 0.02 });
+    }
+    q.push({ silence: prefs.gapMs });
+    return q;
+  }
+
+  /* ── Ciclo principal ──────────────────────────────────────── */
 
   async function guidedReading(card) {
     card = card || currentCard;
     if (!card || !card.en) return;
+
+    // Chamada de cortesia vinda do loadSentence que nós mesmos
+    // disparamos: o ciclo já está correndo, não duplica.
+    if (state.suppressAutoStart) {
+      state.suppressAutoStart = false;
+      return;
+    }
     if (state.paused) return;
 
     unlock();
@@ -321,36 +503,83 @@ window.WalkEngine = (function () {
     const mine = ++state.seqToken;
 
     const pt = await getPtTranslationForCard(card);
-    if (token !== autoReadToken || !autoReadMode || mine !== state.seqToken) return;
+    const alive = () =>
+      token === autoReadToken &&
+      autoReadMode &&
+      mine === state.seqToken &&
+      !state.paused;
+
+    if (!alive()) return;
 
     updateMetadata(card.en, pt);
     renderPocket(card.en, pt);
+    armWatchdog();
 
-    const alive = () => token === autoReadToken && autoReadMode && mine === state.seqToken && !state.paused;
-
-    for (let i = 0; i < Math.max(1, prefs.repeatEn); i++) {
+    const queue = buildQueue(card, pt);
+    for (let i = 0; i < queue.length; i++) {
       if (!alive()) return;
-      await say(card.en, "en-US", prefs.rate - i * 0.04);
+      await say(queue[i], queue[i + 1]);
     }
-
-    if (prefs.includePt) {
-      if (!alive()) return;
-      await say(pt || "Tradução indisponível", "pt-BR", 1.02);
-      if (!alive()) return;
-      await say(card.en, "en-US", prefs.rate - 0.02);
-    }
-
-    if (!alive()) return;
-    await wait(prefs.gapMs);
     if (!alive()) return;
 
+    advance();
+  }
+
+  // Avança sem reconstruir a interface quando ninguém está olhando.
+  function advance() {
     const next = pickSequentialAutoReadCard(1);
-    if (!next || next.en === card.en) {
+    if (!next || next.en === (currentCard && currentCard.en)) {
       autoReadToken += 1;
-      setTimeout(() => guidedReading(card), 200);
+      guidedReading(currentCard);
       return;
     }
-    loadSentence(next);
+
+    if (document.visibilityState === "visible") {
+      state.suppressAutoStart = true;   // loadSentence chamaria de novo
+      loadSentence(next);
+      autoReadToken += 1;
+      guidedReading(next);
+    } else {
+      // Estado mínimo, sem tocar no DOM pesado.
+      currentCard = next;
+      textEn = next.en;
+      textPt = next.pt || "";
+      currentWords = String(next.en).split(" ").filter(Boolean);
+      const idx = sentences.findIndex((s) => s.en === next.en);
+      currentCardIndex = idx >= 0 ? idx : 0;
+      state.pendingCard = next;
+      autoReadToken += 1;
+      guidedReading(next);
+    }
+  }
+
+  // Ao voltar para a tela, coloca a interface no card certo.
+  function syncUiIfPending() {
+    const card = state.pendingCard;
+    if (!card) return;
+    state.pendingCard = null;
+    try {
+      state.suppressAutoStart = true;
+      loadSentence(card);
+    } catch {}
+  }
+
+  /* ── Rede de segurança (fora do caminho crítico) ──────────── */
+
+  function armWatchdog() {
+    if (watchdog) clearTimeout(watchdog);
+    // Se em 45 s nada tiver avançado, reergue o ciclo. Este timer pode
+    // ser estrangulado; ele é seguro adicional, não o mecanismo.
+    watchdog = setTimeout(() => {
+      if (!state.running || state.paused || !autoReadMode) return;
+      const quietMp3 = (!voiceA || voiceA.paused) && (!voiceB || voiceB.paused);
+      const quietTts = !window.speechSynthesis.speaking && !window.speechSynthesis.pending;
+      try { if (keepEl && keepEl.paused) keepEl.play().catch(() => {}); } catch {}
+      if (quietMp3 && quietTts && currentCard) {
+        autoReadToken += 1;
+        guidedReading(currentCard);
+      }
+    }, 45000);
   }
 
   /* ── Controles ────────────────────────────────────────────── */
@@ -361,8 +590,16 @@ window.WalkEngine = (function () {
     state.paused = false;
     stopSpeaking();
     autoReadToken += 1;
-    loadSentence(card);
-    if (!autoReadMode) setTimeout(() => guidedReading(card), 150);
+    if (document.visibilityState === "visible") {
+      state.suppressAutoStart = true;
+      loadSentence(card);
+    } else {
+      currentCard = card;
+      textEn = card.en;
+      state.pendingCard = card;
+    }
+    guidedReading(card);
+    renderPocketButtons();
   }
 
   function repeat() {
@@ -370,13 +607,17 @@ window.WalkEngine = (function () {
     state.paused = false;
     stopSpeaking();
     autoReadToken += 1;
-    setTimeout(() => guidedReading(currentCard), 120);
+    guidedReading(currentCard);
+    renderPocketButtons();
   }
 
   function pause() {
     state.paused = true;
+    autoReadToken += 1;
     stopSpeaking();
-    try { if (keepEl) keepEl.pause(); } catch {}
+    // A âncora NÃO é pausada: é ela que impede o Chrome de congelar a
+    // aba e é o que permite o play da tela de bloqueio voltar a valer.
+    try { if (keepEl && keepEl.paused) keepEl.play().catch(() => {}); } catch {}
     if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "paused";
     renderStatus();
     renderPocketButtons();
@@ -388,51 +629,68 @@ window.WalkEngine = (function () {
     try { if (keepEl) keepEl.play().catch(() => {}); } catch {}
     if ("mediaSession" in navigator) navigator.mediaSession.playbackState = "playing";
     autoReadToken += 1;
-    setTimeout(() => guidedReading(currentCard), 120);
+    guidedReading(currentCard);
     renderStatus();
     renderPocketButtons();
   }
 
-  /* ── Start / Stop (substituem startNoSleep / stopNoSleep) ── */
+  /* ── Política de tela ─────────────────────────────────────── */
+
+  async function acquireWakeLock() {
+    if (!("wakeLock" in navigator) || !navigator.wakeLock || !navigator.wakeLock.request) return false;
+    if (document.visibilityState !== "visible") return false;
+    try {
+      state.wakeLock = await navigator.wakeLock.request("screen");
+      state.wakeLock.addEventListener("release", () => { state.wakeLock = null; });
+      return true;
+    } catch {
+      state.wakeLock = null;
+      return false;
+    }
+  }
+
+  async function dropWakeLock() {
+    try { if (state.wakeLock) await state.wakeLock.release(); } catch {}
+    state.wakeLock = null;
+  }
+
+  async function applyScreenPolicy() {
+    if (prefs.screenAwake && state.running) {
+      await acquireWakeLock();
+    } else {
+      await dropWakeLock();
+    }
+    renderStatus();
+  }
+
+  /* ── Start / Stop ─────────────────────────────────────────── */
 
   function start() {
     loadPrefs();
     state.running = true;
     state.paused = false;
-    state.mp3Broken = false;
+    state.mp3Fails = 0;
+    state.mp3DownSince = 0;
 
     unlock();
     bindMediaControls();
     try { if (keepEl) keepEl.play().catch(() => {}); } catch {}
 
-    if (prefs.screenOff) {
-      try { if (typeof releaseWakeLock === "function") releaseWakeLock(); } catch {}
-    }
-
-    if (heartbeat) clearInterval(heartbeat);
-    heartbeat = setInterval(() => {
-      if (!state.running || state.paused) return;
-      // A âncora de mídia às vezes é pausada pelo sistema. Reergue.
-      try { if (keepEl && keepEl.paused) keepEl.play().catch(() => {}); } catch {}
-      try { if (window.speechSynthesis.paused) window.speechSynthesis.resume(); } catch {}
-      // Nada tocando e nada na fila = ciclo morreu. Reinicia.
-      const idleTts = !window.speechSynthesis.speaking && !window.speechSynthesis.pending;
-      const idleMp3 = !voiceEl || voiceEl.paused;
-      if (autoReadMode && idleTts && idleMp3 && currentCard) {
-        autoReadToken += 1;
-        guidedReading(currentCard);
-      }
-    }, 4000);
-
+    applyScreenPolicy();
+    armWatchdog();
     renderStatus();
   }
 
   function stop() {
     state.running = false;
     state.paused = false;
-    if (heartbeat) { clearInterval(heartbeat); heartbeat = null; }
+    state.pendingCard = null;
+    if (watchdog) { clearTimeout(watchdog); watchdog = null; }
+
     stopSpeaking();
-    try { if (keepEl) { keepEl.pause(); } } catch {}
+    try { if (keepEl) keepEl.pause(); } catch {}
+    dropWakeLock();
+
     if ("mediaSession" in navigator) {
       try {
         navigator.mediaSession.playbackState = "none";
@@ -494,58 +752,95 @@ window.WalkEngine = (function () {
       : '<i class="fa fa-pause"></i>';
   }
 
-  /* ── Status na tela ───────────────────────────────────────── */
+  /* ── Status e sincronização de controles ──────────────────── */
+
+  function canvasWakeLock() {
+    return "wakeLock" in navigator && !!navigator.wakeLock;
+  }
 
   function renderStatus() {
-    const box = document.getElementById("walkEngineStatus");
-    if (!box) return;
+    const degraded = state.mp3Fails >= MP3_FAIL_LIMIT;
 
-    const canal = state.mp3Broken
-      ? "voz do sistema (MP3 indisponível agora)"
+    const canal = degraded
+      ? "voz do sistema (canal MP3 em descanso, volta sozinho)"
       : prefs.voice === "tts" ? "voz do sistema"
-      : prefs.voice === "mp3" ? "voz MP3"
-      : "voz MP3 com fallback automático";
+      : prefs.voice === "mp3" ? "só MP3"
+      : "MP3 com retorno automático";
 
-    const tela = prefs.screenOff
-      ? "a tela pode apagar: o áudio segue pela sessão de mídia"
-      : "a tela fica acesa (Wake Lock)";
+    let tela;
+    if (prefs.screenAwake) {
+      tela = canvasWakeLock()
+        ? (state.wakeLock ? "tela travada acesa" : "tela acesa solicitada")
+        : "este navegador não permite travar a tela acesa";
+    } else {
+      tela = "a tela pode apagar: o áudio segue pela sessão de mídia";
+    }
 
-    box.innerHTML = state.running
-      ? `<strong>Caminhada ativa.</strong> Canal: ${canal}. Agora ${tela}. Controles disponíveis na tela de bloqueio e no fone.`
-      : `Caminhada pronta. Configuração atual: ${canal}; ${tela}.`;
+    const alerta = (prefs.voice === "tts" && !prefs.screenAwake)
+      ? " Atenção: a voz do sistema não toca com a tela apagada no Android. Use MP3 ou deixe a tela acesa."
+      : "";
 
-    const sw = document.getElementById("walkScreenOff");
-    if (sw) sw.checked = !!prefs.screenOff;
+    const box = document.getElementById("walkEngineStatus");
+    if (box) {
+      box.innerHTML = state.running
+        ? `<strong>Caminhada ativa.</strong> Voz: ${canal}. Tela: ${tela}. Os controles aparecem na notificação e no fone.${alerta}`
+        : `Caminhada pronta. Voz: ${canal}; ${tela}.${alerta}`;
+    }
+
+    document.querySelectorAll("[data-screen-policy]").forEach((b) => {
+      const on = b.getAttribute("data-screen-policy") === "awake";
+      b.classList.toggle("seg-on", on === !!prefs.screenAwake);
+      b.setAttribute("aria-pressed", String(on === !!prefs.screenAwake));
+    });
+
     const vs = document.getElementById("walkVoiceSelect");
     if (vs) vs.value = prefs.voice;
     const rp = document.getElementById("walkRepeatSelect");
     if (rp) rp.value = String(prefs.repeatEn);
     const pt = document.getElementById("walkIncludePt");
     if (pt) pt.checked = !!prefs.includePt;
+
+    const opts = document.getElementById("walkOptions");
+    if (opts) opts.style.display = state.running ? "flex" : "none";
+    if (box) box.style.display = state.running ? "block" : "none";
   }
 
-  /* ── Ligações com o app.js (composição, sem editar o arquivo) */
+  /* ── Instalação por composição ────────────────────────────── */
 
   function install() {
     loadPrefs();
 
+    // O app.js pede Wake Lock direto; aqui a decisão passa pela política.
     window.requestWakeLock = async function () {
-      if (prefs.screenOff) {
-        renderStatus();
-        return false;
-      }
-      return originals.requestWakeLock ? originals.requestWakeLock() : false;
+      if (!prefs.screenAwake) { renderStatus(); return false; }
+      const ok = await acquireWakeLock();
+      renderStatus();
+      return ok;
     };
 
+    window.releaseWakeLock = async function () { await dropWakeLock(); };
     window.startNoSleep = start;
     window.stopNoSleep = stop;
     window.playGuidedReading = guidedReading;
 
-    // Desbloqueio de áudio no primeiro toque, em fase de captura,
-    // antes de qualquer await quebrar o gesto do usuário.
+    // Desbloqueio no primeiro gesto, em fase de captura, antes que
+    // qualquer await quebre a associação com o gesto do usuário.
     const onFirstTouch = () => unlock();
     document.addEventListener("pointerdown", onFirstTouch, { capture: true, once: true });
     document.addEventListener("click", onFirstTouch, { capture: true, once: true });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState !== "visible") return;
+      if (!state.running) return;
+      if (prefs.screenAwake) acquireWakeLock();
+      syncUiIfPending();
+      try { if (keepEl && keepEl.paused && !state.paused) keepEl.play().catch(() => {}); } catch {}
+      renderStatus();
+    });
+
+    window.addEventListener("pagehide", () => {
+      try { if (!state.running) { if (keepUrl) URL.revokeObjectURL(keepUrl); if (silenceUrl) URL.revokeObjectURL(silenceUrl); } } catch {}
+    });
 
     document.addEventListener("DOMContentLoaded", wireUi);
     if (document.readyState !== "loading") wireUi();
@@ -557,12 +852,14 @@ window.WalkEngine = (function () {
       if (el) el.addEventListener(ev, fn);
     };
 
-    bind("walkScreenOff", "change", (e) => setPref("screenOff", e.target.checked));
-    bind("walkIncludePt", "change", (e) => setPref("includePt", e.target.checked));
-    bind("walkVoiceSelect", "change", (e) => {
-      state.mp3Broken = false;
-      setPref("voice", e.target.value);
+    document.querySelectorAll("[data-screen-policy]").forEach((b) => {
+      b.addEventListener("click", () => {
+        setPref("screenAwake", b.getAttribute("data-screen-policy") === "awake");
+      });
     });
+
+    bind("walkIncludePt", "change", (e) => setPref("includePt", e.target.checked));
+    bind("walkVoiceSelect", "change", (e) => setPref("voice", e.target.value));
     bind("walkRepeatSelect", "change", (e) => setPref("repeatEn", parseInt(e.target.value, 10) || 2));
 
     bind("pocketModeBtn", "click", openPocket);

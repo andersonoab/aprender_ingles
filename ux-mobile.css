@@ -1,0 +1,335 @@
+/* ═══════════════════════════════════════════════════════════════
+   UX MOBILE — complemento de estilo
+   Lousa da Fluência · Igarapé Digital
+   Carregar DEPOIS de style.css
+═══════════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────
+   FOLHA DE AÇÕES AGRUPADA
+─────────────────────────────────────────────── */
+
+.action-sheet {
+  display: none;
+  margin-top: 14px;
+  padding: 4px 0 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-md);
+}
+
+.sheet-head {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sheet-grip {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 42px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.sheet-title {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--ink-2);
+  flex: 1;
+}
+
+.sheet-close {
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  color: var(--ink-2);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.sheet-close:active { transform: scale(0.94); }
+
+.sheet-group { padding: 14px 16px 4px; }
+.sheet-group + .sheet-group { border-top: 1px solid var(--border); }
+
+.sheet-group-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #64748b;
+}
+.sheet-group-title i { color: var(--blue); font-size: 0.8rem; }
+
+.sheet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+/* Botões dentro da folha ocupam a célula inteira e ganham altura de toque */
+.sheet-grid .btn,
+.sheet-grid .toggle {
+  width: 100%;
+  min-height: 46px;
+  justify-content: flex-start;
+}
+
+.sheet-grid .opt-row { grid-column: 1 / -1; }
+.sheet-grid .toggle { grid-column: 1 / -1; gap: 10px; white-space: nowrap; }
+.sheet-group .opt-row,
+.sheet-group .walk-status { grid-column: 1 / -1; margin-top: 10px; }
+
+/* O véu existe apenas onde a folha realmente flutua. No desktop o
+   painel fica no fluxo da página: sem position, o z-index dele não
+   vale, e o véu acabava desfocando o cabeçalho e a barra lateral. */
+.sheet-backdrop { display: none; }
+
+/* No celular a folha sobe pela base, com rolagem própria */
+@media (max-width: 720px) {
+  .sheet-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(10, 14, 26, 0.5);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--t-md) var(--ease);
+  }
+  .sheet-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .action-sheet {
+    position: fixed;
+    z-index: 61;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    max-height: 78vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--r-xl) var(--r-xl) 0 0;
+    border-width: 1px 0 0;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    transform: translateY(102%);
+    transition: transform var(--t-md) var(--ease);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.22);
+  }
+  .action-sheet.open { transform: translateY(0); }
+
+  .sheet-head {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding-top: 18px;
+    background: var(--surface);
+    border-radius: var(--r-xl) var(--r-xl) 0 0;
+  }
+
+  .sheet-grid { grid-template-columns: 1fr 1fr; }
+  .sheet-grid .btn { min-height: 52px; font-size: 0.82rem; }
+  .sheet-grid .toggle { grid-column: 1 / -1; }
+
+  body.sheet-open { overflow: hidden; }
+}
+
+/* ───────────────────────────────────────────────
+   TABULEIRO DE TOQUE
+─────────────────────────────────────────────── */
+
+.board-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-2);
+}
+
+.board-progress {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #64748b;
+}
+
+.board-progress.is-done { color: var(--green); }
+
+.board-bar-actions { display: inline-flex; align-items: center; gap: 8px; }
+
+.board-replay {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--green);
+  border: 0;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  transition: all var(--t) var(--ease);
+}
+.board-replay:active { transform: scale(0.95); }
+
+/* Estado concluído: o quadro inteiro confirma o acerto */
+.slot.slot-done {
+  border-style: solid;
+  border-color: rgba(16, 185, 129, 0.55);
+  background: #ecfdf5;
+}
+.slot.slot-done .word {
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #047857;
+}
+.slot.slot-done .hint { display: none; }
+
+.board-undo {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+}
+.board-undo:hover:not(:disabled) { background: #e0e7ff; border-color: var(--blue); }
+.board-undo:active:not(:disabled) { transform: scale(0.95); }
+.board-undo:disabled { opacity: 0.4; cursor: default; }
+
+/* Alvo seguinte: sem isto o toque não tem para onde apontar */
+.slot.slot-next {
+  border-style: solid;
+  border-color: var(--blue);
+  background: #dbeafe;
+  box-shadow: var(--sh-glow);
+}
+.slot.slot-next::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  transform: translateX(-50%);
+  animation: slotPulse 1.4s var(--ease) infinite;
+}
+
+@keyframes slotPulse {
+  0%, 100% { opacity: 0.35; transform: translateX(-50%) scale(1); }
+  50%      { opacity: 1;    transform: translateX(-50%) scale(1.5); }
+}
+
+.word.tappable { cursor: pointer; }
+.word.tappable:active { transform: scale(0.93); }
+
+/* Alvos de toque de verdade no celular */
+@media (max-width: 720px) {
+  .dropzone { gap: 8px; }
+  .slot {
+    min-height: 54px;
+    min-width: 84px;
+    flex: 1 1 96px;
+    font-size: 0.92rem;
+  }
+  #word-bank { gap: 9px; margin-top: 18px; }
+  .word {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 96px;
+    padding: 10px 16px;
+    font-size: 0.92rem;
+  }
+  .slot:hover { transform: none; }
+}
+
+/* ───────────────────────────────────────────────
+   SEGMENTADO DE POLÍTICA DE TELA
+─────────────────────────────────────────────── */
+
+.seg-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 100%;
+}
+
+.seg-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.seg {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-pill);
+}
+
+.seg button {
+  flex: 1;
+  min-height: 42px;
+  padding: 8px 10px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: all var(--t) var(--ease);
+}
+.seg button i { margin-right: 6px; }
+.seg button.seg-on {
+  color: #fff;
+  background: var(--blue);
+  box-shadow: var(--sh-blue);
+}
+
+body.walk-mode .seg { background: #1e293b; border-color: #334155; }
+body.walk-mode .seg button { color: #94a3b8; }
+body.walk-mode .seg button.seg-on { color: #fff; background: var(--blue); }
+body.walk-mode .sheet-group-title { color: #94a3b8; }
+
+@media (prefers-reduced-motion: reduce) {
+  .action-sheet, .sheet-backdrop, .board-undo, .word.tappable { transition: none; }
+  .slot.slot-next::after { animation: none; }
+}

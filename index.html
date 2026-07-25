@@ -2,20 +2,13 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lousa da Fluência</title>
-  <meta name="description" content="Monte frases em inglês, treine com repetição espaçada e ouça em caminhada com a tela desligada." />
-  <meta name="theme-color" content="#2563eb" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" href="icon-192.png" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Lousa" />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="ux-mobile.css" />
 </head>
 
 <body>
@@ -69,10 +62,18 @@
             </label>
           </div>
 
-          <div class="opt-row" id="walkOptions">
-            <label class="opt-item opt-check">
-              <input type="checkbox" id="walkScreenOff" checked /> Deixar a tela apagar
-            </label>
+          <div class="opt-row" id="walkOptions" style="display:none;">
+            <div class="seg-wrap">
+              <span class="seg-label">Durante a caminhada</span>
+              <div class="seg" role="group" aria-label="Comportamento da tela">
+                <button type="button" data-screen-policy="off" aria-pressed="true">
+                  <i class="fa fa-moon"></i> Deixar apagar
+                </button>
+                <button type="button" data-screen-policy="awake" aria-pressed="false">
+                  <i class="fa fa-lightbulb"></i> Manter acesa
+                </button>
+              </div>
+            </div>
             <label class="opt-item">
               Voz
               <select id="walkVoiceSelect">
@@ -207,24 +208,6 @@
         <button id="newGroupBtn" class="btn btn-primary" style="width:100%; margin-top:10px;"><i class="fa fa-plus"></i> Novo grupo</button>
       </div>
 
-      <div class="panel" id="vaultPanel">
-        <div class="title">🔒 Cofre de progresso</div>
-        <div class="small">Todo o histórico vive só neste navegador. Exporte para não depender dele.</div>
-        <div id="vaultStatus" class="vault-status"></div>
-        <button id="vaultExportBtn" class="btn btn-primary" style="width:100%; margin-top:10px;"><i class="fa fa-download"></i> Exportar tudo (JSON)</button>
-        <div class="vault-row">
-          <button id="vaultMergeBtn" class="btn btn-soft"><i class="fa fa-upload"></i> Restaurar</button>
-          <button id="vaultReplaceBtn" class="btn btn-soft"><i class="fa fa-exchange-alt"></i> Substituir</button>
-        </div>
-        <input type="file" id="vaultImportInput" accept=".json" hidden />
-        <div class="vault-divider">Base para análise</div>
-        <div class="vault-row vault-row-3">
-          <button id="vaultPhrasesBtn" class="btn btn-soft" title="Agregado por frase, pronto para IQR e z-score">Frases</button>
-          <button id="vaultAttemptsBtn" class="btn btn-soft" title="Uma linha por tentativa">Tentativas</button>
-          <button id="vaultErrorsBtn" class="btn btn-soft" title="Uma linha por erro">Erros</button>
-        </div>
-      </div>
-
       <h2>🕒 Histórico</h2>
       <ul id="history"></ul>
       <button id="savePdfBtn" class="btn btn-soft" style="width:100%; margin-top:10px;"><i class="fa fa-file-pdf"></i> Salvar em PDF</button>
@@ -297,54 +280,9 @@
     <div class="pocket-hint">Toque na tela para acordar os controles. A leitura continua com a tela apagada.</div>
   </div>
 
-  <div id="modeBadges" class="mode-badges"></div>
-
-  <div id="swUpdateBar" class="sw-update">
-    <span>Uma versão nova do app está pronta.</span>
-    <button id="swUpdateBtn">Atualizar agora</button>
-  </div>
-
   <script src="app.js"></script>
   <script src="walk-engine.js"></script>
   <script src="bridge-mode.js"></script>
-  <script src="board-ux.js"></script>
-  <script src="data-vault.js"></script>
-
-  <script>
-    // ── Registro do Service Worker (offline para a caminhada) ──
-    // Só faz sentido sob http/https. Em file:// é ignorado.
-    (function () {
-      if (!("serviceWorker" in navigator) || location.protocol === "file:") return;
-
-      window.addEventListener("load", function () {
-        navigator.serviceWorker.register("sw.js").then(function (reg) {
-          reg.addEventListener("updatefound", function () {
-            var novo = reg.installing;
-            if (!novo) return;
-            novo.addEventListener("statechange", function () {
-              if (novo.state === "installed" && navigator.serviceWorker.controller) {
-                var bar = document.getElementById("swUpdateBar");
-                var btn = document.getElementById("swUpdateBtn");
-                if (bar) bar.classList.add("show");
-                if (btn) btn.onclick = function () {
-                  novo.postMessage("SKIP_WAITING");
-                  location.reload();
-                };
-              }
-            });
-          });
-        }).catch(function () { /* sem offline; o app segue normal */ });
-      });
-
-      // Saída de emergência: rode no console para remover o SW.
-      window.__desinstalarSW = function () {
-        navigator.serviceWorker.getRegistrations().then(function (rs) {
-          rs.forEach(function (r) { r.unregister(); });
-          caches.keys().then(function (ks) { ks.forEach(function (k) { caches.delete(k); }); });
-          console.log("Service worker removido. Recarregue a página.");
-        });
-      };
-    })();
-  </script>
+  <script src="ux-mobile.js"></script>
 </body>
 </html>
