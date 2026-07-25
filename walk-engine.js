@@ -70,8 +70,17 @@ window.WalkEngine = (function () {
     voice: "auto",        // auto | mp3 | tts
     repeatEn: 2,          // repetições em inglês antes do português
     includePt: true,      // fala a tradução
-    gapMs: 600,           // pausa entre frases
-    rate: 0.98            // velocidade da fala
+    pace: "normal",       // rapido | normal | pausado
+    gapMs: 250,           // pausa entre frases
+    rate: 1.0             // velocidade da fala
+  };
+
+  // Ritmo controla pausa e velocidade juntas: para quem escuta, é a
+  // mesma percepção. Um seletor em vez de dois.
+  const PACE = {
+    rapido:  { gapMs: 110, rate: 1.12 },
+    normal:  { gapMs: 250, rate: 1.0 },
+    pausado: { gapMs: 700, rate: 0.9 }
   };
 
   const MAX_TTS_CHARS = 190;   // acima disso o endpoint MP3 trunca
@@ -135,14 +144,22 @@ window.WalkEngine = (function () {
     for (const k of Object.keys(defaults)) {
       if (raw && raw[k] !== undefined && raw[k] !== null) prefs[k] = raw[k];
     }
+    applyPace();
   }
 
   function savePrefs() {
     try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch {}
   }
 
+  function applyPace() {
+    const p = PACE[prefs.pace] || PACE.normal;
+    prefs.gapMs = p.gapMs;
+    prefs.rate = p.rate;
+  }
+
   function setPref(key, value) {
     prefs[key] = value;
+    if (key === "pace") applyPace();
     savePrefs();
     if (key === "screenAwake") applyScreenPolicy();
     if (key === "voice") { state.mp3Fails = 0; state.mp3DownSince = 0; }
@@ -358,14 +375,16 @@ window.WalkEngine = (function () {
   }
 
   // Pré-carrega no elemento ocioso enquanto o outro toca.
-  function preload(url, rate) {
+  // Não define playbackRate aqui: load() reseta, e o playOn já define.
+  function preload(url) {
     if (!idle || !url) return;
     try {
       detachMedia(idle);
       idle.pause();
-      idle.src = url;
-      idle.playbackRate = clampRate(rate);
-      idle.load();
+      if (idle.src !== url) {
+        idle.src = url;
+        idle.load();
+      }
     } catch {}
   }
 
@@ -394,9 +413,13 @@ window.WalkEngine = (function () {
         if (el.src !== url) {
           el.src = url;
           el.load();
+        } else if (el.currentTime > 0.01) {
+          // Só rebobina quando de fato já tocou. Mexer em currentTime
+          // com o buffer ainda vazio derrubava a reprodução e jogava
+          // a fala inteira no fallback, com atraso visível.
+          try { el.currentTime = 0; } catch {}
         }
         el.playbackRate = clampRate(rate);
-        el.currentTime = 0;
         const p = el.play();
         if (p && p.catch) p.catch(() => finish(false));
       } catch {
@@ -421,15 +444,27 @@ window.WalkEngine = (function () {
     });
   }
 
-  // Pausa como mídia: playbackRate encurta o silêncio de 1 s.
-  function silence(ms) {
-    const secs = Math.max(0.15, Math.min(3, (ms || 0) / 1000));
-    swapVoiceEls();
-    return playOn(active, buildSilenceWav(), 1 / secs);
+  function preloadFor(nextItem) {
+    if (!nextItem) return;
+    if (nextItem.text && nextItem.text.length <= MAX_TTS_CHARS) {
+      preload(ttsUrl(nextItem.text, nextItem.lang));
+    } else if (nextItem.silence) {
+      preload(buildSilenceWav());
+    }
   }
 
   async function say(item, nextItem) {
-    if (item.silence) return silence(item.silence);
+    // A pausa é mídia, não timer: playbackRate encurta o silêncio de 1 s.
+    // É durante ela que o elemento ocioso baixa a primeira fala da
+    // frase seguinte. Era aqui que estava o buraco entre uma e outra.
+    if (item.silence) {
+      const secs = Math.max(0.1, Math.min(3, item.silence / 1000));
+      swapVoiceEls();
+      const done = playOn(active, buildSilenceWav(), 1 / secs);
+      preloadFor(nextItem);
+      return done;
+    }
+
     if (!item.text) return false;
 
     const usable = mp3Available() && item.text.length <= MAX_TTS_CHARS;
@@ -439,11 +474,7 @@ window.WalkEngine = (function () {
       swapVoiceEls();
       // Enquanto este toca, o outro elemento já busca o próximo.
       const ok = playOn(active, url, item.rate);
-      if (nextItem && nextItem.text && nextItem.text.length <= MAX_TTS_CHARS) {
-        preload(ttsUrl(nextItem.text, nextItem.lang), nextItem.rate);
-      } else if (nextItem && nextItem.silence) {
-        preload(buildSilenceWav(), 1);
-      }
+      preloadFor(nextItem);
       const result = await ok;
       if (result) {
         state.mp3Fails = 0;
@@ -470,7 +501,7 @@ window.WalkEngine = (function () {
 
   /* ── Fila de leitura de uma frase ─────────────────────────── */
 
-  function buildQueue(card, pt) {
+  function buildQueue(card, pt, nextCard) {
     const q = [];
     const reps = Math.max(1, prefs.repeatEn);
     for (let i = 0; i < reps; i++) {
@@ -481,6 +512,11 @@ window.WalkEngine = (function () {
       q.push({ text: card.en, lang: "en-US", rate: prefs.rate - 0.02 });
     }
     q.push({ silence: prefs.gapMs });
+    // Item fantasma: nunca é tocado, serve só para que a pausa saiba
+    // o que pré-carregar. É o que elimina a espera entre as frases.
+    if (nextCard && nextCard.en) {
+      q.push({ ghost: true, text: nextCard.en, lang: "en-US", rate: prefs.rate });
+    }
     return q;
   }
 
@@ -515,8 +551,17 @@ window.WalkEngine = (function () {
     renderPocket(card.en, pt);
     armWatchdog();
 
-    const queue = buildQueue(card, pt);
+    // Aquece a tradução da próxima frase agora, enquanto esta toca.
+    // Sem isto, o fetch acontecia depois da pausa, em série com a
+    // reconstrução da interface, e o silêncio ficava longo.
+    const nextCard = pickSequentialAutoReadCard(1);
+    if (nextCard && nextCard.en !== card.en) {
+      try { getPtTranslationForCard(nextCard); } catch {}
+    }
+
+    const queue = buildQueue(card, pt, nextCard);
     for (let i = 0; i < queue.length; i++) {
+      if (queue[i].ghost) break;          // fantasma nunca é tocado
       if (!alive()) return;
       await say(queue[i], queue[i + 1]);
     }
@@ -795,6 +840,8 @@ window.WalkEngine = (function () {
 
     const vs = document.getElementById("walkVoiceSelect");
     if (vs) vs.value = prefs.voice;
+    const pc = document.getElementById("walkPaceSelect");
+    if (pc) pc.value = prefs.pace;
     const rp = document.getElementById("walkRepeatSelect");
     if (rp) rp.value = String(prefs.repeatEn);
     const pt = document.getElementById("walkIncludePt");
@@ -860,6 +907,7 @@ window.WalkEngine = (function () {
 
     bind("walkIncludePt", "change", (e) => setPref("includePt", e.target.checked));
     bind("walkVoiceSelect", "change", (e) => setPref("voice", e.target.value));
+    bind("walkPaceSelect", "change", (e) => setPref("pace", e.target.value));
     bind("walkRepeatSelect", "change", (e) => setPref("repeatEn", parseInt(e.target.value, 10) || 2));
 
     bind("pocketModeBtn", "click", openPocket);

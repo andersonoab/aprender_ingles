@@ -75,6 +75,14 @@
               </div>
             </div>
             <label class="opt-item">
+              Ritmo
+              <select id="walkPaceSelect">
+                <option value="rapido">rápido</option>
+                <option value="normal">normal</option>
+                <option value="pausado">pausado</option>
+              </select>
+            </label>
+            <label class="opt-item">
               Voz
               <select id="walkVoiceSelect">
                 <option value="auto">MP3 com fallback</option>
@@ -280,9 +288,11 @@
     <div class="pocket-hint">Toque na tela para acordar os controles. A leitura continua com a tela apagada.</div>
   </div>
 
+  <script src="storage-guard.js"></script>
   <script src="app.js"></script>
   <script src="walk-engine.js"></script>
   <script src="bridge-mode.js"></script>
   <script src="ux-mobile.js"></script>
+  <script src="data-loader.js"></script>
 </body>
 </html>

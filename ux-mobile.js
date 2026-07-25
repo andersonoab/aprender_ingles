@@ -53,7 +53,7 @@ window.UxMobile = (function () {
       key: "dados",
       label: "Dados",
       icon: "fa-database",
-      ids: ["clearBtn"]
+      ids: ["clearBtn", "storageManagerBtn"]
     }
   ];
 
