@@ -566,3 +566,90 @@ body.walk-mode .sheet-group-title { color: #94a3b8; }
   .action-sheet, .sheet-backdrop, .board-undo, .word.tappable { transition: none; }
   .slot.slot-next::after { animation: none; }
 }
+
+/* ───────────────────────────────────────────────
+   BOTÃO LATERAL DE PRÓXIMA FRASE
+   Redondo, com anel branco, dentro da faixa que o
+   tabuleiro reserva para ele.
+─────────────────────────────────────────────── */
+
+.board { position: relative; }
+
+/* A faixa reservada impede que o último quadrado fique embaixo do
+   botão. Sem isto ele parece sobreposição acidental, não controle. */
+.board.has-next-arrow { padding-right: 78px; }
+
+.next-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  z-index: 5;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  font-size: 1.05rem;
+  color: #fff;
+  background: var(--blue);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+  transform: translateY(-50%);
+  transition: background var(--t) var(--ease),
+              box-shadow var(--t) var(--ease),
+              transform var(--t) var(--ease);
+}
+
+.next-arrow.is-on { display: flex; }
+.next-arrow:hover { transform: translateY(-50%) scale(1.08); }
+.next-arrow:active { transform: translateY(-50%) scale(0.94); }
+
+/* Rótulo em balão: aparece ao passar o mouse e diz o que o botão faz.
+   No toque não há hover, por isso o ícone sozinho já é seta para a
+   direita, que é o sinal universal de avançar. */
+.next-arrow::after {
+  content: "Próxima frase";
+  position: absolute;
+  right: calc(100% + 10px);
+  padding: 5px 10px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.92);
+  border-radius: var(--r-md);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t) var(--ease);
+}
+.next-arrow:hover::after { opacity: 1; }
+
+/* Frase fechada: o botão confirma que dá para seguir. */
+.next-arrow.is-ready {
+  background: var(--green);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+  animation: arrowReady 1.5s var(--ease) 2;
+}
+
+@keyframes arrowReady {
+  0%, 100% { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45); }
+  50%      { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45),
+                         0 0 0 11px rgba(16, 185, 129, 0.16); }
+}
+
+@media (max-width: 720px) {
+  .board.has-next-arrow { padding-right: 66px; }
+  .next-arrow { right: 10px; width: 48px; height: 48px; }
+  .next-arrow::after { display: none; }
+}
+
+body.walk-mode .next-arrow { border-color: #0f172a; }
+
+@media (prefers-reduced-motion: reduce) {
+  .next-arrow { transition: none; }
+  .next-arrow.is-ready { animation: none; }
+}

@@ -252,6 +252,69 @@ window.UxMobile = (function () {
     document.getElementById("boardReplayBtn").addEventListener("click", () => sayEnglish(0.9));
   }
 
+  /* ── Seta lateral de avanço ───────────────────────────────────
+     O botão "Próxima Frase" mora no topo. Depois de montar a frase
+     ele está fora do campo de visão, e o gesto mais repetido do app
+     custa uma rolagem inteira só para ser alcançado.
+
+     A seta abaixo fica presa à borda direita do tabuleiro: o olho já
+     está ali quando a frase fecha, então o atalho nasce onde a
+     atenção termina. Não reimplementa navegação — dispara o botão
+     original, que carrega toda a lógica de SRS, histórico e grupo.
+  ─────────────────────────────────────────────────────────────── */
+
+  function ensureNextArrow() {
+    const board = document.querySelector(".board");
+    if (!board) return null;
+
+    let arrow = document.getElementById("nextArrow");
+    if (arrow) {
+      // O tabuleiro pode ser remontado: garante que a seta continue dentro.
+      if (arrow.parentElement !== board) board.appendChild(arrow);
+      return arrow;
+    }
+
+    arrow = document.createElement("button");
+    arrow.type = "button";
+    arrow.id = "nextArrow";
+    arrow.className = "next-arrow";
+    arrow.setAttribute("aria-label", "Próxima frase");
+    arrow.setAttribute("title", "Próxima frase");
+    arrow.innerHTML = '<i class="fa fa-chevron-right"></i>';
+    arrow.addEventListener("click", () => {
+      const top = document.getElementById("nextBtn");
+      if (!top) return;
+      buzz(12);
+      setMenu(false);
+      top.click();
+    });
+    board.appendChild(arrow);
+    return arrow;
+  }
+
+  // O tabuleiro reserva a faixa da seta. Sem isto o último quadrado
+  // encosta nela e o botão parece um defeito de sobreposição.
+  function reserveArrowSpace(on) {
+    const board = document.querySelector(".board");
+    if (board) board.classList.toggle("has-next-arrow", !!on);
+  }
+
+  // Só faz sentido enquanto houver frases carregadas: o app.js mantém
+  // o botão do topo oculto até a carga terminar.
+  function syncNextArrow() {
+    const arrow = document.getElementById("nextArrow");
+    const top = document.getElementById("nextBtn");
+    if (!arrow || !top) return;
+    const usavel = top.style.display !== "none";
+    arrow.classList.toggle("is-on", usavel);
+    reserveArrowSpace(usavel);
+  }
+
+  function arrowReady(on) {
+    const arrow = document.getElementById("nextArrow");
+    if (arrow) arrow.classList.toggle("is-ready", !!on);
+  }
+
   /* ── Fala ao concluir ─────────────────────────────────────── */
 
   let solvedFor = null;   // frase que já teve o áudio de conclusão
@@ -273,6 +336,7 @@ window.UxMobile = (function () {
     if (board) board.classList.add("solved");
     slots().forEach((s) => s.classList.add("slot-done"));
     buzz([14, 50, 14, 50, 20]);
+    arrowReady(true);
 
     if (solvedFor === textEn) return;
     solvedFor = textEn;
@@ -332,6 +396,9 @@ window.UxMobile = (function () {
   function decorateBoard() {
     solvedFor = null;
     ensureBoardBar();
+    ensureNextArrow();
+    arrowReady(false);
+    syncNextArrow();
     wireTapFallback();
     watchBoard();
     refreshBoard();
@@ -384,6 +451,14 @@ window.UxMobile = (function () {
       });
 
       decorateBoard();
+
+      // A carga das frases revela o botão do topo depois do boot:
+      // observar o atributo mantém a seta em sincronia sem sondagem.
+      const top = document.getElementById("nextBtn");
+      if (top) {
+        new MutationObserver(syncNextArrow)
+          .observe(top, { attributes: true, attributeFilter: ["style"] });
+      }
     };
 
     document.addEventListener("DOMContentLoaded", boot);
@@ -392,5 +467,5 @@ window.UxMobile = (function () {
 
   install();
 
-  return { setMenu, undoLast, refreshBoard, buildMenu };
+  return { setMenu, undoLast, refreshBoard, buildMenu, syncNextArrow };
 })();
