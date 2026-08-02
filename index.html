@@ -294,5 +294,21 @@
   <script src="bridge-mode.js"></script>
   <script src="ux-mobile.js"></script>
   <script src="data-loader.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       REGISTRO DO SERVICE WORKER
+       Sem isto, nada era guardado em cache e o app não abria
+       fora de cobertura. O registro é tolerante: se o navegador
+       não suportar, apenas ignora e o app segue online.
+  ═══════════════════════════════════════════════════════════ -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js").catch(function (e) {
+          console.warn("Falha ao registrar o service worker:", e);
+        });
+      });
+    }
+  </script>
 </body>
 </html>

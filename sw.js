@@ -11,18 +11,20 @@
    Para trocar de versão: incremente CACHE_VERSION.
 ═══════════════════════════════════════════════════════════════ */
 
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const CACHE_NAME = `lousa-${CACHE_VERSION}`;
 
 const APP_SHELL = [
   "./",
   "./index.html",
   "./style.css",
+  "./ux-mobile.css",
+  "./storage-guard.js",
   "./app.js",
   "./walk-engine.js",
   "./bridge-mode.js",
-  "./data-vault.js",
-  "./board-ux.js",
+  "./ux-mobile.js",
+  "./data-loader.js",
   "./frases_unicas_1000.txt",
   "./manifest.webmanifest",
   "./icon-192.png",

@@ -38,6 +38,11 @@ window.DataLoader = (function () {
   const URL_FRASES =
     "https://raw.githubusercontent.com/andersonoab/aprenderIngles/refs/heads/main/frases_unicas_1000.txt";
 
+  // Cópia embutida, servida da própria origem. O service worker guarda
+  // este arquivo, então ele funciona SEM internet. É o alicerce offline:
+  // se a busca online falhar, caímos aqui e o drag-drop segue de pé.
+  const URL_LOCAL = "./frases_unicas_1000.txt";
+
   const originals = {
     parse: window.parseTxtToSentences
   };
@@ -194,16 +199,15 @@ window.DataLoader = (function () {
     try {
       res = await fetch(url, { cache: "no-store" });
     } catch (e) {
-      say('<strong>Não consegui alcançar o arquivo.</strong> ' +
-          'Sem conexão, ou a rede bloqueou o acesso ao GitHub. ' +
-          'Detalhe: ' + esc(e && e.message ? e.message : String(e)), "erro");
-      return;
+      say('<i class="fa fa-wifi"></i> Sem conexão com o GitHub. ' +
+          'Carregando a cópia embutida (funciona offline)…', "info");
+      return loadLocal();
     }
 
     if (!res.ok) {
-      say(`<strong>O servidor respondeu ${res.status}.</strong> ` +
-          `Confira se o arquivo continua no repositório com o mesmo nome e se o branch é <code>main</code>.`, "erro");
-      return;
+      say(`<i class="fa fa-exclamation-triangle"></i> O servidor respondeu ${res.status}. ` +
+          `Carregando a cópia embutida (funciona offline)…`, "info");
+      return loadLocal();
     }
 
     const txt = await res.text();
@@ -260,6 +264,44 @@ window.DataLoader = (function () {
     reader.readAsText(file, "UTF-8");
   }
 
+  // Carrega a cópia embutida, servida da própria origem. Como o
+  // service worker guarda esse arquivo, esta rota funciona offline.
+  async function loadLocal() {
+    let res;
+    try {
+      res = await fetch(URL_LOCAL);
+    } catch (e) {
+      say("<strong>Não achei a cópia embutida das frases.</strong> " +
+          "Verifique se <code>frases_unicas_1000.txt</code> está na mesma pasta do app.", "erro");
+      return;
+    }
+    if (!res || !res.ok) {
+      say("<strong>A cópia embutida não pôde ser lida.</strong> " +
+          "Abra o app uma vez com internet para o cache offline se formar.", "erro");
+      return;
+    }
+    const txt = await res.text();
+    let list;
+    try {
+      list = parse(txt);
+    } catch (e) {
+      say("<strong>Falha ao interpretar a cópia embutida.</strong> " + esc(e.message), "erro");
+      return;
+    }
+    if (!list.length) {
+      say("<strong>Nenhuma frase reconhecida na cópia embutida.</strong>", "erro");
+      return;
+    }
+    try {
+      install(list);
+    } catch (e) {
+      say("<strong>As frases foram lidas, mas a montagem falhou.</strong> " + esc(e.message), "erro");
+      console.error("DataLoader:", e);
+      return;
+    }
+    say(reportHtml(lastReport) + ' <span class="loader-sample">(cópia offline)</span>', "ok");
+  }
+
   /* ── Instalação ───────────────────────────────────────────── */
 
   function boot() {
@@ -275,13 +317,22 @@ window.DataLoader = (function () {
         if (f) loadFile(f);
       };
     }
+
+    // Primeiro boot sem frases guardadas: carrega a cópia embutida
+    // sozinho, para o drag-drop já estar pronto — inclusive offline.
+    // Roda depois de um tique, dando tempo ao app.js de restaurar o
+    // que estiver salvo; só age se ainda não houver frase alguma.
+    setTimeout(function () {
+      const has = window._sentences && window._sentences.length;
+      if (!has) loadLocal();
+    }, 60);
   }
 
   document.addEventListener("DOMContentLoaded", boot);
   if (document.readyState !== "loading") boot();
 
   return {
-    loadOnline, loadFile, parse,
+    loadOnline, loadLocal, loadFile, parse,
     get report() { return lastReport; },
     get url() { return URL_FRASES; }
   };
