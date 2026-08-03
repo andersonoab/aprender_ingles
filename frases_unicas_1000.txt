@@ -1,3 +1,83 @@
+Would you like soup or salad? | Você gostaria de sopa ou salada?
+You can choose soup or salad with your meal. | Você pode escolher sopa ou salada com sua refeição.
+Do you want a cup of coffee? | Você quer uma xícara de café?
+Can I have an apple? | Posso pegar uma maçã?
+What are you doing after work? | O que você vai fazer depois do trabalho?
+Did you finish the report? | Você terminou o relatório?
+Would you send it to me? | Você poderia enviar isso para mim?
+Could you open it for me? | Você poderia abrir isso para mim?
+Don't you want to come with us? | Você não quer vir conosco?
+I'm going to call you later. | Vou ligar para você mais tarde.
+I want to talk to you about the deadline. | Quero conversar com você sobre o prazo.
+Let me know when you're ready. | Avise-me quando estiver pronto.
+Turn it off before you leave. | Desligue isso antes de sair.
+Pick it up and put it away. | Pegue isso e guarde.
+Take it easy on your day off. | Relaxe no seu dia de folga.
+The knight arrived at night. | O cavaleiro chegou à noite.
+I knew the new manager. | Eu conhecia o novo gerente.
+Please write the right answer. | Por favor, escreva a resposta correta.
+I can see the sea from here. | Consigo ver o mar daqui.
+She ate eight strawberries. | Ela comeu oito morangos.
+I want two tickets, too. | Eu também quero dois ingressos.
+Our team won one game. | Nosso time ganhou um jogo.
+These four chairs are for us. | Estas quatro cadeiras são para nós.
+Can you hear me from here? | Você consegue me ouvir daqui?
+I know there is no problem. | Eu sei que não há nenhum problema.
+They're waiting over there with their manager. | Eles estão esperando ali com o gerente deles.
+I don't know whether the weather will improve. | Não sei se o tempo vai melhorar.
+We aren't allowed to read the message aloud. | Não temos permissão para ler a mensagem em voz alta.
+She bought a pair of ripe pears. | Ela comprou um par de peras maduras.
+The wind blew the blue papers away. | O vento levou os papéis azuis.
+I felt weak all week. | Eu me senti fraco durante toda a semana.
+He rode his bike down the road. | Ele andou de bicicleta pela estrada.
+She ate a piece of cake in peace. | Ela comeu um pedaço de bolo em paz.
+The tale was about a fox with a long tail. | A história era sobre uma raposa com uma cauda longa.
+Which witch lives in that house? | Qual bruxa mora naquela casa?
+I know the answer. | Eu sei a resposta.
+Please knock before you enter. | Por favor, bata antes de entrar.
+The knight wrote the wrong name. | O cavaleiro escreveu o nome errado.
+Wrap the gift carefully. | Embrulhe o presente com cuidado.
+My wrist still hurts. | Meu pulso ainda dói.
+Comb your hair before the meeting. | Penteie o cabelo antes da reunião.
+The lamb climbed the hill. | O cordeiro subiu a colina.
+Listen to the whistle. | Escute o apito.
+The castle is on a small island. | O castelo fica em uma pequena ilha.
+She is an honest person. | Ela é uma pessoa honesta.
+I left the receipt on the desk. | Deixei o recibo sobre a mesa.
+We have a meeting on Wednesday. | Temos uma reunião na quarta-feira.
+The ship carried three sheep. | O navio transportava três ovelhas.
+Please sit in this seat. | Por favor, sente-se neste assento.
+I live nearby, but I leave early. | Eu moro perto, mas saio cedo.
+Fill the cup and tell me how you feel. | Encha a xícara e diga como você se sente.
+Don't slip when you go to sleep. | Não escorregue quando for dormir.
+I heard a bit of the beat. | Ouvi um trecho da batida.
+The fool jumped into the full pool. | O tolo pulou na piscina cheia.
+Pull the chair closer to the pool. | Puxe a cadeira para mais perto da piscina.
+Luke, look at the blue book. | Luke, olhe para o livro azul.
+The fan is inside the van. | O ventilador está dentro da van.
+This vest is the best one for winter. | Este colete é o melhor para o inverno.
+Think before you put it in the sink. | Pense antes de colocar isso na pia.
+Three birds landed in the tree. | Três pássaros pousaram na árvore.
+The glass fell on the grass. | O copo caiu na grama.
+Turn on the light and look to the right. | Acenda a luz e olhe para a direita.
+The chip is very cheap. | O chip é muito barato.
+Don't put soap in the soup. | Não coloque sabão na sopa.
+One man spoke to ten men. | Um homem falou com dez homens.
+Put the cap beside the cup. | Coloque o boné ao lado da xícara.
+The bed is in bad condition. | A cama está em más condições.
+I recorded a new record for the training. | Gravei um novo registro para o treinamento.
+Please present the present to her. | Por favor, entregue o presente a ela.
+They conduct research on workplace conduct. | Eles realizam pesquisas sobre conduta no ambiente de trabalho.
+I read the report yesterday, and I'll read it again today. | Li o relatório ontem e vou lê-lo novamente hoje.
+Wind the rope before the wind gets stronger. | Enrole a corda antes que o vento fique mais forte.
+I object to that object on the desk. | Eu me oponho àquele objeto sobre a mesa.
+A tear rolled down her face when the paper began to tear. | Uma lágrima desceu pelo rosto dela quando o papel começou a rasgar.
+He took a bow while holding a bow. | Ele fez uma reverência enquanto segurava um arco.
+The bass player caught a bass. | O baixista pescou um robalo.
+A minute detail can take a minute to explain. | Um detalhe minúsculo pode levar um minuto para ser explicado.
+The content creator was content with the result. | O criador de conteúdo ficou satisfeito com o resultado.
+The employee received a permit to permit access. | O funcionário recebeu uma autorização para permitir o acesso.
+
 This ship is very old. | Este navio é muito velho.
 The sheep are eating grass. | As ovelhas estão comendo grama.
 I want to leave early today. | Quero sair cedo hoje.
