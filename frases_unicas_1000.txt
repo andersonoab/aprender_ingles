@@ -1,3 +1,211 @@
+This ship is very old. | Este navio é muito velho.
+The sheep are eating grass. | As ovelhas estão comendo grama.
+I want to leave early today. | Quero sair cedo hoje.
+They live near the beach. | Eles moram perto da praia.
+Please sit on this seat. | Por favor, sente-se neste assento.
+My feet don't fit in these shoes. | Meus pés não cabem nestes sapatos.
+The soup is too hot to eat. | A sopa está quente demais para comer.
+She felt the heat of the sun. | Ela sentiu o calor do sol.
+Fill the glass with water. | Encha o copo com água.
+I feel much better now. | Eu me sinto muito melhor agora.
+He is a rich man. | Ele é um homem rico.
+We need to reach the top. | Precisamos alcançar o topo.
+This phone is really cheap. | Este telefone é muito barato.
+A small chip fell off the plate. | Um pequeno pedaço se soltou do prato.
+The bin is full of paper. | A lixeira está cheia de papel.
+I ate a bowl of beans. | Comi uma tigela de feijão.
+Each child got a gift. | Cada criança ganhou um presente.
+My arm has an itch. | Meu braço está coçando.
+The river is very deep. | O rio é muito fundo.
+Take a dip in the pool. | Dê um mergulho na piscina.
+I sleep eight hours a night. | Durmo oito horas por noite.
+Don't slip on the wet floor. | Não escorregue no chão molhado.
+The green grass looks fresh. | A grama verde parece fresca.
+He had a big grin on his face. | Ele estava com um grande sorriso no rosto.
+I like red wine with dinner. | Gosto de vinho tinto no jantar.
+Grapes grow on a vine. | As uvas crescem na videira.
+He wore a warm vest. | Ele usava um colete quente.
+The sun sets in the west. | O sol se põe no oeste.
+The vet checked my dog. | O veterinário examinou meu cachorro.
+My clothes got wet in the rain. | Minhas roupas ficaram molhadas na chuva.
+We watched a funny video. | Assistimos a um vídeo engraçado.
+Please open the window. | Por favor, abra a janela.
+I want to visit Vienna. | Quero visitar Viena.
+The view from the hill is wonderful. | A vista da colina é maravilhosa.
+We work very hard every week. | Trabalhamos muito toda semana.
+The waiter brought the wine. | O garçom trouxe o vinho.
+Seven visitors came on Wednesday. | Sete visitantes vieram na quarta-feira.
+The village is west of the river. | A vila fica a oeste do rio.
+She has a lovely voice. | Ela tem uma voz linda.
+The wind was very strong. | O vento estava muito forte.
+We voted in the last election. | Votamos na última eleição.
+The van waited by the wall. | A van esperou perto do muro.
+Everyone loves a warm welcome. | Todo mundo gosta de uma recepção calorosa.
+The vase was full of white flowers. | O vaso estava cheio de flores brancas.
+We drove the van to the valley. | Dirigimos a van até o vale.
+Water flowed over the vast field. | A água correu pelo vasto campo.
+I think it will rain today. | Acho que vai chover hoje.
+I think the sink is broken. | Acho que a pia está quebrada.
+I have three brothers. | Tenho três irmãos.
+A bird sat in the tree. | Um pássaro pousou na árvore.
+The ice is very thin. | O gelo está muito fino.
+He bought a can made of tin. | Ele comprou uma lata feita de estanho.
+Thank you for your help. | Obrigado pela sua ajuda.
+I hurt my thumb. | Machuquei meu polegar.
+She has a sore throat. | Ela está com dor de garganta.
+There are a thousand stars. | Há mil estrelas.
+I'm very thirsty. | Estou com muita sede.
+We walked down a narrow path. | Caminhamos por uma trilha estreita.
+I'm good at math. | Sou bom em matemática.
+Open your mouth wide. | Abra bem a boca.
+Brush your teeth twice a day. | Escove os dentes duas vezes por dia.
+Both boys are tall. | Os dois meninos são altos.
+My birthday is next month. | Meu aniversário é no próximo mês.
+Eating fruit is healthy. | Comer frutas é saudável.
+There is nothing on the table. | Não há nada na mesa.
+Thursday is the fourth day. | Quinta-feira é o quarto dia.
+The north wind is cold. | O vento norte é frio.
+He thought about the answer. | Ele pensou na resposta.
+This is my house. | Esta é minha casa.
+That car is fast. | Aquele carro é rápido.
+They arrived on a sunny day. | Eles chegaram em um dia ensolarado.
+My mother cooks every day. | Minha mãe cozinha todos os dias.
+My father drives a truck. | Meu pai dirige um caminhão.
+I have an older brother. | Tenho um irmão mais velho.
+We live together in the city. | Moramos juntos na cidade.
+The weather is nice today. | O tempo está agradável hoje.
+Give me another chance. | Dê-me outra chance.
+Those shoes are new. | Aqueles sapatos são novos.
+These apples are sweet. | Estas maçãs são doces.
+Breathe in slowly. | Inspire devagar.
+The fabric feels smooth. | O tecido é macio.
+Put your clothes in the drawer. | Coloque suas roupas na gaveta.
+She is taller than me. | Ela é mais alta do que eu.
+There is a dog in the yard. | Há um cachorro no quintal.
+Then we went home. | Então fomos para casa.
+Either answer is fine. | Qualquer uma das respostas serve.
+The other book is mine. | O outro livro é meu.
+They gathered with their family. | Eles se reuniram com a família.
+He wears a black hat. | Ele usa um chapéu preto.
+We are at the door. | Estamos na porta.
+Turn off the heat. | Desligue o aquecimento.
+I want to eat now. | Quero comer agora.
+The house is on a hill. | A casa fica em uma colina.
+She felt ill yesterday. | Ela se sentiu doente ontem.
+Her hair is long and dark. | O cabelo dela é longo e escuro.
+Fresh air is good for you. | O ar fresco faz bem para você.
+Hold my hand, please. | Segure minha mão, por favor.
+This is an old photo. | Esta é uma foto antiga.
+My heart beats fast. | Meu coração bate rápido.
+She studies art at school. | Ela estuda arte na escola.
+The mountain is very high. | A montanha é muito alta.
+I hope you are happy. | Espero que você esteja feliz.
+We walked home together. | Voltamos para casa juntos.
+The coffee is still hot. | O café ainda está quente.
+I am hungry and tired. | Estou com fome e cansado.
+He hit his head on the door. | Ele bateu a cabeça na porta.
+Please help him. | Por favor, ajude-o.
+Happy people laugh a lot. | Pessoas felizes riem muito.
+The cat sat on the mat. | O gato se sentou no tapete.
+I cut my finger. | Cortei meu dedo.
+Wear a warm cap. | Use um boné quente.
+Fill the cup with coffee. | Encha a xícara com café.
+That was a bad idea. | Aquela foi uma má ideia.
+A flower has a bud. | Uma flor tem um botão.
+He ran to catch the bus. | Ele correu para pegar o ônibus.
+Let's go for a run. | Vamos correr.
+The truck is on the track. | O caminhão está na pista.
+My uncle lives nearby. | Meu tio mora por perto.
+The bat flew in the dark. | O morcego voou no escuro.
+I like tea, but not coffee. | Gosto de chá, mas não de café.
+He has a lot of luck. | Ele tem muita sorte.
+The lock is broken. | A fechadura está quebrada.
+She sang a happy song. | Ela cantou uma música alegre.
+The sun is very bright. | O sol está muito forte.
+A duck swam in the pond. | Um pato nadou na lagoa.
+My hands are full. | Minhas mãos estão cheias.
+The hut is made of wood. | A cabana é feita de madeira.
+He drank a glass of milk. | Ele bebeu um copo de leite.
+That man is my neighbor. | Aquele homem é meu vizinho.
+Ten men worked all day. | Dez homens trabalharam o dia todo.
+I feel bad about the mistake. | Eu me sinto mal pelo erro.
+Go to bed early tonight. | Vá dormir cedo hoje.
+She said she was tired. | Ela disse que estava cansada.
+He is a very sad person. | Ele é uma pessoa muito triste.
+I had a good day. | Tive um bom dia.
+My head hurts a little. | Minha cabeça dói um pouco.
+Write with this pen. | Escreva com esta caneta.
+Fry the eggs in the pan. | Frite os ovos na frigideira.
+We reached the end of the road. | Chegamos ao fim da estrada.
+Bring bread and butter. | Traga pão e manteiga.
+There are ten apples. | Há dez maçãs.
+His skin has a nice tan. | A pele dele tem um bronzeado bonito.
+Please set the table. | Por favor, ponha a mesa.
+The cat sat by the fire. | O gato se sentou perto do fogo.
+I will lend you a book. | Vou lhe emprestar um livro.
+They own a lot of land. | Eles possuem muitas terras.
+Let's make a bet. | Vamos fazer uma aposta.
+The old men rested on the bench. | Os idosos descansaram no banco.
+Please pull the door open. | Por favor, puxe a porta para abri-la.
+The children swam in the pool. | As crianças nadaram na piscina.
+The glass is full of juice. | O copo está cheio de suco.
+Don't be a fool. | Não seja bobo.
+Look at the moon tonight. | Olhe para a lua hoje à noite.
+My foot hurts a lot. | Meu pé dói muito.
+The food smells great. | A comida está com um cheiro ótimo.
+I read a good book. | Li um bom livro.
+We cook dinner every night. | Preparamos o jantar todas as noites.
+The soup is served with a spoon. | A sopa é servida com uma colher.
+Put the box on the shelf. | Coloque a caixa na prateleira.
+The room is very clean. | O quarto está muito limpo.
+Wool keeps you warm. | A lã mantém você aquecido.
+He will come home soon. | Ele voltará para casa em breve.
+She put sugar in the tea. | Ela colocou açúcar no chá.
+Would you like some water? | Você gostaria de um pouco de água?
+The wolf ran through the wood. | O lobo correu pela floresta.
+Push the cart to the door. | Empurre o carrinho até a porta.
+Cool water tastes good. | A água fresca é gostosa.
+The moon rose over the pool. | A lua surgiu sobre a piscina.
+Cut the bread with a knife. | Corte o pão com uma faca.
+I know the answer. | Eu sei a resposta.
+She hurt her knee. | Ela machucou o joelho.
+Please knock before you enter. | Por favor, bata antes de entrar.
+We waited for an hour. | Esperamos por uma hora.
+He is an honest man. | Ele é um homem honesto.
+I ate half of the cake. | Comi metade do bolo.
+Let's take a quiet walk. | Vamos dar um passeio tranquilo.
+We can talk later. | Podemos conversar depois.
+Could you help me? | Você poderia me ajudar?
+Listen to the music. | Escute a música.
+The old castle is huge. | O castelo antigo é enorme.
+They live on an island. | Eles moram em uma ilha.
+Comb your hair. | Penteie o cabelo.
+The lamb is very small. | O cordeiro é bem pequeno.
+He can climb the wall. | Ele consegue escalar o muro.
+Please write your name. | Por favor, escreva seu nome.
+That answer is wrong. | Aquela resposta está errada.
+Sign here, please. | Assine aqui, por favor.
+I have no doubt about it. | Não tenho nenhuma dúvida sobre isso.
+She walked to school. | Ela foi caminhando para a escola.
+We watched a movie. | Assistimos a um filme.
+He jumped over the fence. | Ele pulou por cima da cerca.
+They cooked a big meal. | Eles prepararam uma grande refeição.
+I washed the dishes. | Lavei a louça.
+She played the piano. | Ela tocou piano.
+We cleaned the room. | Limpamos o quarto.
+He opened the door. | Ele abriu a porta.
+They called me twice. | Eles me ligaram duas vezes.
+I listened to the news. | Escutei as notícias.
+She wanted more time. | Ela queria mais tempo.
+We needed some help. | Precisávamos de ajuda.
+He decided to stay. | Ele decidiu ficar.
+They started the game. | Eles começaram o jogo.
+I visited my aunt. | Visitei minha tia.
+The class ended early. | A aula terminou cedo.
+She counted the money. | Ela contou o dinheiro.
+We painted the wall. | Pintamos a parede.
+He fixed the car. | Ele consertou o carro.
+They loved the show. | Eles adoraram o espetáculo.
 I focused on delivering the best results. | Eu foquei em entregar os melhores resultados.
 We worked hard for our customers. | Nós trabalhamos duro pelos nossos clientes.
 I appreciated the team effort. | Eu valorizei o esforço do time.
